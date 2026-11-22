@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Crafts</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="My Crafts">
+<meta name="theme-color" content="#f6f6f6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Cormorant+Garamond:wght@600&family=DM+Serif+Display&family=Fredoka:wght@500&family=Nunito:wght@400;700&family=Patrick+Hand&family=Playfair+Display:wght@600&family=Quicksand:wght@600&family=Shrikhand&display=swap" rel="stylesheet">
+<style>
+/* VOICE: whimsical, cosy, gentle encouragement, never nagging
+IDEA: a hand-stitched scrapbook: dashed stitching, a yarn strand, tabs like fabric labels
+PICTURE: picture grids of saved ideas, a wall of supplies, finished makes
+COLOUR and TYPE: set by the chosen theme (default: olive, dusty rose, chestnut, wine); fonts per theme
+LAYOUT: craft name top right, big tabs, chips row, masonry grid; details open in sheets */
+:root{color-scheme:light;--bg:#f7f0ea;--card:#fffaf6;--ink:#3a2520;--soft:#7d6058;--olive:#837f26;--rose:#b88896;--brown:#78412c;--wine:#943d47;--roseTint:#f3e3e5;--oliveTint:#edebd5;--line:#e4cfd0;--on1:#fff6f1;--on2:#fffbe9;--fh:Fredoka,sans-serif;--fb:Nunito,system-ui,sans-serif;--fd:Caveat,cursive;--bw:1.5px;--bs:dashed}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg) var(--pat);min-height:100vh;color:var(--ink);font:16px/1.55 var(--fb);overflow-x:clip;transition:background .3s}
+button,input,select,textarea{font-family:var(--fb)}
+.top{position:sticky;top:0;z-index:5;background:var(--bg) var(--pat);box-shadow:0 1px 0 var(--line);padding-bottom:4px;padding:12px max(4vw,14px) 0}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:12px;max-width:1240px;margin:auto}
+.hleft{display:flex;align-items:center;gap:10px;flex:1 1 auto;min-width:0}
+.hright{display:flex;align-items:center;gap:6px;flex:none}
+.iconbtn{border:0;background:none;padding:0;cursor:pointer;width:50px;height:50px;display:grid;place-items:center}
+.iconbtn svg{width:50px;height:50px}
+.greet{margin:0;font:700 16px var(--fb);color:var(--brown);line-height:1.2}
+.q{font-size:18px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.streak{flex:none;font:700 13px var(--fb);background:var(--oliveTint);color:var(--ink);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.sbtn2{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--card);color:var(--brown);display:grid;place-items:center;cursor:pointer}
+.sbtn2.on{background:var(--olive);color:var(--on2)}
+.spanel{max-width:1240px;margin:8px auto 0;background:var(--card);border-radius:18px;padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.spanel input[type=range]{width:140px;accent-color:var(--olive);min-height:0;padding:0;border:0;background:none}
+.decor{flex:none;width:48px;height:48px}
+.tabwrap{position:relative;max-width:1240px;margin:8px auto 0}
+.tabwrap .tabs{margin-top:0}
+.lights{position:absolute;left:0;right:0;top:-6px;height:30px;pointer-events:none;z-index:2}
+.craftbtn{display:flex;align-items:center;gap:10px;border:0;background:none;cursor:pointer;color:var(--brown);padding:4px 0;min-height:44px}
+.craftbtn b{font:500 30px/1.05 var(--fh)}
+.hand{font-family:var(--fd);font-size:21px;color:var(--rose);margin:0;line-height:1.25}
+.hand.big{font-size:23px;color:var(--brown)}
+.tabs{display:flex;gap:6px;max-width:1240px;margin:8px auto 0;border-bottom:3px solid var(--wine)}
+.tab{flex:1 1 0;border:0;background:var(--card);font:700 clamp(14px,2.3vw,19px)/1.15 var(--fb);color:var(--soft);padding:10px 4px 9px;border-radius:18px 18px 0 0;min-height:70px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center}
+.tab svg{width:26px;height:26px}
+.tab[aria-selected=true]{background:var(--wine);color:var(--on1)}
+.strand{display:block;width:100%;height:12px;max-width:1240px;margin:0 auto;color:var(--rose)}
+main{padding:16px max(3vw,14px) 90px;max-width:1240px;margin:12px auto 40px;background:color-mix(in srgb,var(--bg) 86%,transparent);border-radius:24px;width:calc(100% - 2*max(3vw,10px))}
+.gbox{background:var(--card);padding:4px 12px;border-radius:14px}
+.craftbtn{background:var(--card)!important;padding:4px 16px!important;border-radius:999px}
+.iconbtn{background:var(--card);border-radius:50%}
+.decor{background:var(--card);border-radius:50%;padding:4px}
+.syncpill{flex:none;border:0;cursor:pointer;font:700 13px var(--fb);background:var(--oliveTint);color:var(--ink);padding:6px 12px;border-radius:999px;white-space:nowrap;min-height:34px}
+.syncpill.warn{background:var(--wine);color:var(--on1)}
+.tpat{display:block;height:64px;border-radius:12px;margin:-4px -4px 4px}
+.bar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px;scrollbar-width:none;flex:1 1 280px}
+.chips.wrap{flex-wrap:wrap;overflow:visible}
+.chip{flex:none;display:inline-flex;align-items:center;gap:6px;border:var(--bw) var(--bs) var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 14px;font:700 14px var(--fb);min-height:42px;cursor:pointer}
+.chip.cap1{text-transform:capitalize}
+.chip[aria-pressed=true]{background:var(--olive);border:1.5px solid var(--olive);color:var(--on2)}
+.chip.sm{min-height:30px;padding:3px 10px;font-size:13px;cursor:default}
+.chip.big{font-size:17px;padding:10px 20px;min-height:50px}
+.stabs{margin-bottom:12px}
+.n{font:700 12px var(--fb);opacity:.7}
+.btn{border:1.5px solid var(--brown);background:transparent;color:var(--brown);border-radius:14px;padding:9px 16px;font:700 15px var(--fb);min-height:44px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.btn.primary{background:var(--wine);border-color:var(--wine);color:var(--on1)}
+.btn.olive{background:var(--olive);border-color:var(--olive);color:var(--on2)}
+.btn.ghost{border-color:transparent;color:var(--soft)}
+.btn.light{border-color:var(--on2);color:var(--on2)}
+.btn.small{min-height:38px;padding:5px 12px;font-size:14px}
+:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.sub{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center;margin:0 0 14px}
+.tog{display:flex;align-items:center;gap:10px;font:700 15px var(--fb);margin:14px 0;cursor:pointer}
+.sub .tog{margin:0}
+.tog input,.step input,.hr input[type=checkbox]{width:22px;height:22px;accent-color:var(--olive);flex:none;margin:0}
+.masonry{columns:4 155px;column-gap:14px}
+@media(max-width:600px){.masonry{column-gap:10px}.tile{margin-bottom:10px}}
+.masonry.sm{columns:3 130px;column-gap:10px}
+.tile{display:block;width:100%;break-inside:avoid;margin:0 0 14px;padding:0;border:0;background:var(--card);border-radius:18px;overflow:hidden;text-align:left;color:inherit;cursor:pointer;position:relative}
+.tile.on{outline:3px solid var(--olive)}
+.m{position:relative;display:block;width:100%}
+.m.plain{border:0;padding:0;background:none;cursor:pointer}
+.tile img,.tile svg.art,.m img,.m svg.art{display:block;width:100%;height:auto}
+.badge{position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:4px;background:rgba(255,250,245,.92);color:#5a3a30;font:700 12px var(--fb);padding:4px 9px;border-radius:999px}
+.badge svg{width:14px;height:14px}
+.play{position:absolute;inset:0;margin:auto;width:52px;height:52px;border-radius:50%;background:rgba(255,250,245,.93);display:grid;place-items:center}
+.play.s{inset:auto;top:38px;left:38px;width:34px;height:34px}
+.cap{display:block;padding:10px 12px 12px}.cap b{font:700 15px/1.3 var(--fb);display:block}
+.dots{display:flex;gap:4px;margin-top:6px;align-items:center;flex-wrap:wrap}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 1.5px var(--card),0 0 0 2.5px var(--line);flex:none}
+.tag{display:inline-block;font:700 12px var(--fb);color:var(--wine);background:var(--roseTint);padding:3px 9px;border-radius:999px}
+.tag.olive{color:var(--ink);background:var(--oliveTint)}
+.small{font-size:13px;color:var(--soft)}
+h2.h{font:500 22px var(--fh);color:var(--brown);margin:8px 0}
+.sheet h2{font:500 27px/1.15 var(--fh);color:var(--brown);margin:4px 0 8px;text-wrap:balance}
+h3{font:500 18px var(--fh);color:var(--wine);margin:22px 0 8px;display:flex;align-items:center;gap:6px}
+.plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:14px}
+.pcard{display:flex;gap:14px;text-align:left;background:var(--card);border:var(--bw) var(--bs) var(--line);border-radius:20px;padding:12px;color:inherit;font:inherit;cursor:pointer}
+.pm{flex:none;width:100px;height:100px;border-radius:14px;overflow:hidden}
+.pm>img,.pm>svg{width:100%;height:100%;object-fit:cover;display:block}
+.pb{flex:1;display:flex;flex-direction:column;gap:6px}.pb b{font:500 18px/1.2 var(--fh);color:var(--brown)}
+.prog{height:12px;background:var(--oliveTint);border-radius:999px;overflow:hidden}
+.prog.big{height:18px}
+.prog i{display:block;height:100%;background:var(--olive) repeating-linear-gradient(90deg,transparent 0 9px,rgba(255,255,255,.28) 9px 11px);border-radius:999px}
+.next{background:var(--roseTint);border-radius:14px;padding:8px 12px;font-weight:700;font-size:15px}
+.next small{font:700 12px var(--fb);color:var(--wine);display:block}
+.next.unsure{background:var(--oliveTint);font-weight:400}
+.next.unsure small{color:var(--olive)}
+.nextbox{background:var(--roseTint);border-radius:18px;padding:14px 16px;margin:14px 0}
+.nextbox small{font:700 13px var(--fb);color:var(--wine);display:block;margin-bottom:4px}
+.nextbox .nt{font:500 21px/1.25 var(--fh);color:var(--ink);margin:0 0 10px}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px}
+.yarn{background:var(--card);border:var(--bw) var(--bs) var(--line);border-radius:20px;padding:12px 10px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;font:inherit;color:inherit;cursor:pointer;position:relative}
+.yarn.on{border:2px solid var(--olive);background:var(--oliveTint)}
+.yarn b{font:700 15px/1.25 var(--fb)}
+.ym{width:100%;aspect-ratio:1;display:grid;place-items:center}
+.ym img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+.ym svg{width:100%;height:100%}
+.tick{position:absolute;top:8px;right:8px;background:var(--olive);color:var(--on2);border-radius:50%;width:28px;height:28px;display:grid;place-items:center}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.sw{border:1.5px solid transparent;background:var(--card);border-radius:16px;padding:8px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;font:700 13px var(--fb);color:var(--ink);cursor:pointer;min-width:86px;max-width:130px;text-align:center}
+.sw.on{border-color:var(--olive);background:var(--oliveTint)}
+.sw.add{border:var(--bw) var(--bs) var(--line);justify-content:center;color:var(--soft);min-height:92px}
+.sw img{width:56px;height:56px;object-fit:cover;border-radius:50%}
+.year{background:var(--olive);color:var(--on2);border-radius:22px;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.year .hand{color:var(--on2);opacity:.85;font-size:23px}
+.stats{display:flex;gap:20px;font:700 15px var(--fb)}.stats b{font:500 32px var(--fh);margin-right:5px}
+.overlay{position:fixed;inset:0;background:rgba(30,18,14,.5);display:flex;align-items:flex-end;justify-content:center;z-index:20}
+.overlay[hidden]{display:none}
+.sheet{background:var(--bg);width:min(780px,100%);max-height:93vh;overflow:auto;border-radius:26px 26px 0 0;padding:16px max(4vw,18px) 34px}
+@media(min-width:800px){.overlay{align-items:center}.sheet{border-radius:26px}}
+.x{position:sticky;top:0;float:right;z-index:3;width:44px;height:44px;border-radius:50%;border:0;background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer;margin:0 0 4px 8px}
+.x.bk{float:left;margin:0 8px 4px 0}
+.hero{border-radius:20px;overflow:hidden;margin:4px 0 14px;background:var(--card);clear:both}
+.hero img,.hero video,.hero>svg,.hero .m svg{width:100%;max-height:55vh;object-fit:contain;display:block}
+.hero.sm img,.hero.sm video{max-height:240px}
+.ph{background:var(--card);border:var(--bw) var(--bs) var(--line);border-radius:16px;min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:10px;color:var(--soft);font-size:14px;flex:1 1 170px;text-align:center}
+.ph img{width:100%;max-height:180px;object-fit:cover;border-radius:10px}
+.row{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px}
+.row.wrap{flex-wrap:wrap}
+.th{flex:none;width:110px;border:0;padding:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;position:relative}
+.th>img,.th>svg{width:110px;height:110px;object-fit:cover;border-radius:14px;display:block}
+.th span{display:block;font-size:13px;margin-top:4px;line-height:1.3;font-weight:700}
+.th.add{height:110px;border:var(--bw) var(--bs) var(--line);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--soft)}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.note{background:var(--oliveTint);border-radius:14px;padding:12px 14px;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:15px}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.acts.end{justify-content:flex-end;margin-top:26px;border-top:var(--bw) var(--bs) var(--line);padding-top:14px}
+label.f{display:block;font:700 14px var(--fb);margin:16px 0 6px}
+input:not([type=checkbox]):not([type=file]),select,textarea{width:100%;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);min-height:44px}
+input[type=color]{padding:4px;height:48px;max-width:120px}
+select.sel{width:auto;min-width:140px}
+.err{color:var(--wine);font-weight:700;font-size:14px;margin:6px 0 0;min-height:1em}
+.step{display:flex;gap:8px;align-items:center;padding:6px 6px 6px 12px;border-radius:14px;background:var(--card);margin:6px 0}
+.step label{flex:1;margin:0;font:700 15px var(--fb);cursor:pointer;padding:6px 0}
+.step.done label{text-decoration:line-through;color:var(--soft)}
+.step.first{box-shadow:inset 0 0 0 2px var(--wine)}
+.mini{border:0;background:transparent;color:var(--soft);cursor:pointer;padding:4px 8px;border-radius:8px;min-width:38px;min-height:38px;display:inline-grid;place-items:center;font:700 13px var(--fb)}
+.addrow{display:flex;gap:8px;margin-top:8px}
+.setgrid{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;align-items:start}
+.snav{display:flex;flex-direction:column;gap:8px;background:var(--card);border-radius:20px;padding:8px}
+.sbtn{display:flex;align-items:center;gap:10px;border:0;background:transparent;color:var(--soft);font:700 17px var(--fb);padding:12px 14px;border-radius:14px;cursor:pointer;text-align:left;min-height:52px}
+.sbtn svg{width:24px;height:24px;flex:none}
+.sbtn[aria-pressed=true]{background:var(--wine);color:var(--on1)}
+.clist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:14px}
+.crow{position:relative;display:flex;flex-direction:column;align-items:center;background:var(--card);border:var(--bw) var(--bs) var(--line);border-radius:22px;padding:10px 8px 6px}
+.crow.on{border:2.5px solid var(--wine);background:var(--roseTint)}
+.crow.dragging{opacity:.8;transform:scale(1.04);box-shadow:0 10px 24px rgba(0,0,0,.18);z-index:2}
+.handle{position:absolute;top:6px;left:6px;touch-action:none;cursor:grab;color:var(--soft);display:grid;place-items:center;width:44px;height:44px}
+.cpick{display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;color:inherit;text-align:center;cursor:pointer;padding:8px 4px 2px;width:100%}
+.cpick b{display:block;font:500 20px/1.2 var(--fh);color:var(--brown)}
+.arrows{display:flex;justify-content:center;width:100%}
+.lrow{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:0;border-bottom:var(--bw) var(--bs) var(--line);padding:14px 16px;color:inherit;font:inherit;cursor:pointer}
+.lrow:first-child{border-radius:16px 16px 0 0}.lrow:last-child{border-radius:0 0 16px 16px;border-bottom:0}.lrow:only-child{border-radius:16px}
+.lrow b{font:700 16px var(--fb);display:block}
+.lrow .r{text-align:right;flex:none;max-width:45%}
+@media(max-width:600px){.setgrid{grid-template-columns:96px minmax(0,1fr);gap:12px}.snav{padding:6px}.sbtn{flex-direction:column;font-size:13px;padding:10px 4px;text-align:center;gap:4px}.clist{grid-template-columns:repeat(auto-fill,minmax(min(100%,120px),1fr));gap:10px}.cpick b{font-size:16px}}
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.theme{border:2px solid;border-radius:20px;padding:14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:8px;font:inherit}
+.theme b{font-size:19px;font-weight:500}
+.tsw{display:flex;gap:6px}.tsw i{width:26px;height:26px;border-radius:50%;display:block}
+.ttag{align-self:flex-start;font:700 12px var(--fb);padding:3px 9px;border-radius:999px}
+.tmini{display:flex;gap:6px;border:1.5px solid;border-radius:12px;padding:8px}.tmini i{height:10px;border-radius:5px;display:block;flex:1}
+.hr{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;align-items:center;background:var(--card);border-radius:16px;padding:12px 14px;margin:8px 0}
+.hr label{display:flex;align-items:center;gap:8px;font:700 14px var(--fb);cursor:pointer}
+.hr .small{grid-column:2}
+.hr.off input:not([type=checkbox]){opacity:.5}
+.empty{text-align:center;padding:30px 16px;display:flex;flex-direction:column;align-items:center;background:var(--card);border:var(--bw) var(--bs) var(--line);border-radius:22px}
+.empty h3{justify-content:center}
+.sug{display:grid;gap:10px}
+.sg{display:flex;gap:12px;background:var(--card);border-radius:16px;padding:10px;align-items:center}
+.sgm{flex:none;width:86px;height:86px;border:0;padding:0;border-radius:12px;overflow:hidden;cursor:pointer}
+.sgm>img,.sgm>svg{width:100%;height:100%;object-fit:cover;display:block}
+.why{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 8px}
+.yhero{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr);gap:18px;align-items:center;clear:both}
+.ybig img{width:100%;border-radius:16px;display:block}
+.kitems{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.kitems li{display:flex;align-items:center;gap:8px;background:var(--card);border-radius:12px;padding:4px 6px 4px 14px;font-weight:700}
+.kitems li span{flex:1}
+.info{background:var(--roseTint);border-radius:16px;padding:4px 16px 14px}
+.stats3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.stats3 div{background:var(--roseTint);border-radius:16px;padding:12px 8px;text-align:center}
+.stats3 b{display:block;font:500 28px var(--fh);color:var(--wine)}.stats3 span{font-size:13px}
+.collage{columns:3 120px;column-gap:10px;margin:14px 0}
+.ci{break-inside:avoid;margin-bottom:10px;border-radius:12px;overflow:hidden;border:5px solid var(--card)}
+.ci:nth-child(odd){transform:rotate(-1.5deg)}.ci:nth-child(even){transform:rotate(1.2deg)}
+.ci img,.ci svg{display:block;width:100%;height:auto}
+.pdfv canvas{display:block;margin:0 0 10px;border-radius:8px;background:#fff}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,40px);opacity:0;background:var(--brown);color:var(--bg);padding:12px 18px;border-radius:14px;font:700 15px var(--fb);z-index:30;pointer-events:none;transition:.25s;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.box{background:var(--card);border-radius:18px;padding:4px 16px 16px;margin:10px 0}
+.quick{display:flex;gap:8px;flex:1 1 320px}
+.find{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px;background:var(--card);border-radius:16px;padding:10px 12px}
+.find b{font:700 14px var(--fb);color:var(--brown);margin-right:4px}
+.ut{break-inside:avoid;margin:0 0 14px;background:var(--card);border-radius:18px;overflow:hidden}
+.ut .tile{margin:0;border-radius:0}
+.sortrow{display:flex;flex-wrap:wrap;gap:6px;padding:4px 10px 12px}
+.sortrow .chip{min-height:34px;padding:4px 10px;font-size:13px}
+.sortrow small{flex-basis:100%;font:700 12px var(--fb);color:var(--soft)}
+.palcard{background:var(--card);border-radius:18px;overflow:hidden;break-inside:avoid;margin:0 0 14px}
+.palcard .cols{display:flex;height:90px}.palcard .cols i{flex:1}
+.palcard .pb2{padding:10px 12px}
+.banner{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:var(--roseTint);border-radius:20px;padding:12px 16px;margin:0 0 14px}
+.banner .hand{color:var(--wine)}
+.banner .sw4{display:flex;gap:4px}.banner .sw4 i{width:30px;height:30px;border-radius:8px;display:block}
+.prog{position:relative}
+.prog.yp{overflow:visible}
+.pball{position:absolute;top:50%;transform:translateY(-50%);width:22px;height:22px;pointer-events:none}
+.pball svg{width:22px;height:22px}
+.shelf{display:flex;gap:12px;overflow-x:auto;padding:4px 2px 10px}
+.stk{flex:none;width:96px;text-align:center;font:700 12px/1.25 var(--fb)}
+.stk .sc{width:74px;height:74px;margin:0 auto 4px;border-radius:50%;display:grid;place-items:center;background:var(--oliveTint);border:3px dashed var(--olive);color:var(--olive)}
+.stk .sc svg{width:34px;height:34px}
+.stk.off{opacity:.42}.stk.off .sc{border-color:var(--line);background:transparent;color:var(--soft)}
+.wheel{position:relative;width:min(100%,620px);aspect-ratio:1;margin:10px auto;border-radius:50%;background:conic-gradient(from 0deg,#e8a3a3,#ead39b,#c7d79b,#9bd7c0,#9bbbd7,#b9a3d7,#d7a3c6,#e8a3a3);}
+.wheel::after{content:'';position:absolute;inset:16%;border-radius:50%;background:var(--bg)}
+.wb{position:absolute;transform:translate(-50%,-50%);z-index:1;border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;font:700 11px var(--fb);color:var(--ink);width:70px}
+.wb svg,.wb img{width:54px;height:54px;border-radius:50%;object-fit:cover}
+.tree{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding-left:8px}
+.branch{display:flex;align-items:center;gap:10px;border-left:3px dashed var(--olive);padding:6px 0 6px 14px;position:relative}
+.branch::before{content:'';position:absolute;left:0;top:50%;width:12px;border-top:3px dashed var(--olive)}
+.branch .th>img,.branch .th>svg{width:70px;height:70px}.branch .th{width:auto;display:flex;align-items:center;gap:10px}
+.board{position:relative;height:min(70vh,600px);background:var(--card) radial-gradient(circle,var(--line) 1px,transparent 1.5px) 0 0/22px 22px;border-radius:18px;overflow:hidden;touch-action:none}
+.bi{position:absolute;width:30%;max-width:170px;background:#fff;padding:6px 6px 22px;border-radius:4px;box-shadow:0 3px 10px rgba(0,0,0,.15);cursor:grab;touch-action:none;user-select:none}
+.bi.sm{width:16%;max-width:84px;padding:4px;background:transparent;box-shadow:none}
+.bi img,.bi svg{display:block;width:100%;height:auto;pointer-events:none;border-radius:2px}
+.bi span{position:absolute;bottom:3px;left:6px;right:6px;font:700 11px var(--fb);color:#3a2520;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bi.lift{z-index:5;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.occ{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:16px;padding:10px 12px;margin:8px 0}
+.od{flex:none;width:58px;height:58px;border-radius:14px;background:var(--wine);color:var(--on1);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.od b{font:500 24px var(--fh)}.od span{font:700 12px var(--fb)}
+.ob2{flex:1}.lk{border:0;background:none;padding:0;color:var(--wine);font:700 14px var(--fb);cursor:pointer;text-align:left}
+.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.sk{border:0;background:var(--card);border-radius:18px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;color:inherit;font:700 13px/1.25 var(--fb);text-align:center}
+.sk .sc{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;border:3px dashed var(--line);color:var(--soft)}
+.sk.on .sc{background:var(--olive);border:3px solid var(--olive);color:var(--on2)}
+.fxg{background:var(--card);border-radius:18px;padding:4px 16px 10px;margin:0 0 14px}
+.fxr{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:var(--bw) var(--bs) var(--line);cursor:pointer}
+.fxr:last-child{border-bottom:0}
+.fxr input{width:24px;height:24px;accent-color:var(--olive);flex:none;margin:2px 0 0}
+.fxr b{display:block;font:700 15px var(--fb)}.fxr span{font-size:13px;color:var(--soft)}
+.ob{max-width:760px;margin:10px auto;text-align:center}
+.ob .themes,.ob .clist,.ob .box{text-align:left}
+.obh{font:500 clamp(30px,5vw,44px)/1.1 var(--fh);color:var(--brown);margin:10px 0 6px;text-wrap:balance}
+.obdots{display:flex;gap:8px;justify-content:center;margin:6px 0 14px}.obdots i{width:10px;height:10px;border-radius:50%;background:var(--line)}.obdots i.on{background:var(--wine);width:26px;border-radius:5px}
+.obc{cursor:pointer;padding:14px 8px;font:inherit;color:inherit;gap:6px}
+.obc .cname{font:500 18px var(--fh);color:var(--brown)}
+.ob .acts{justify-content:center}
+.book{background:var(--card);border-radius:22px;padding:18px;min-height:420px;position:relative;perspective:1200px}
+.page{text-align:center}
+.page.flip{animation:flip .45s ease}
+@keyframes flip{from{transform:rotateY(-70deg);opacity:.2}to{transform:none;opacity:1}}
+.pol{display:inline-block;background:#fff;padding:10px 10px 34px;box-shadow:0 4px 14px rgba(0,0,0,.15);width:min(44%,240px);margin:10px;position:relative;vertical-align:top}
+.pol img,.pol svg{display:block;width:100%;height:auto}
+.pol span{position:absolute;left:10px;right:10px;bottom:8px;font:600 18px var(--fd);color:#3a2520;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pol::before{content:'';position:absolute;top:-10px;left:30%;width:40%;height:20px;background:repeating-linear-gradient(45deg,var(--rose) 0 6px,var(--roseTint) 6px 12px);opacity:.8;transform:rotate(-3deg)}
+.pol:nth-child(odd){transform:rotate(-2deg)}.pol:nth-child(even){transform:rotate(2deg)}
+.postimg{display:block;width:100%;max-width:420px;margin:0 auto;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:40}
+.trophy{position:fixed;inset:0;z-index:35;background:rgba(30,18,14,.55);display:grid;place-items:center;padding:20px}
+.trophy>div{background:var(--bg);border-radius:28px;padding:26px 24px;text-align:center;max-width:420px;width:100%}
+.trophy h2{font:500 30px/1.15 var(--fh);color:var(--brown);margin:8px 0}
+.storm{position:fixed;top:-80px;z-index:39;pointer-events:none;width:56px;height:56px;animation:fall 2.8s ease-in forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(540deg)}}
+body.fx-washi h2.h,body.fx-washi .sheet h2{position:relative;z-index:0;display:inline-block}
+body.fx-washi h2.h::before,body.fx-washi .sheet h2::before{content:'';position:absolute;left:-10px;top:55%;width:min(130px,80%);height:18px;transform:translateY(-50%) rotate(-3deg);background:repeating-linear-gradient(45deg,var(--rose) 0 6px,transparent 6px 12px),var(--roseTint);opacity:.6;z-index:-1;border-radius:2px;clip-path:polygon(2% 0,98% 6%,100% 50%,97% 100%,3% 94%,0 50%)}
+body.fx-polaroid .gtile{background:#fffefb;padding:8px 8px 0;border-radius:4px;box-shadow:0 3px 10px rgba(0,0,0,.14);color:#3a2520}
+body.fx-polaroid .gtile .cap{padding:8px 4px 12px;font-family:var(--fd)}
+body.fx-polaroid .gtile .cap b{font:600 20px var(--fd);color:#3a2520}
+body.fx-polaroid .gtile .small{color:#7d6058}
+body.fx-polaroid .gtile:nth-child(3n+1){transform:rotate(-1.5deg)}body.fx-polaroid .gtile:nth-child(3n+2){transform:rotate(1deg)}
+body.wig .strand path{animation:wig .7s ease}
+@keyframes wig{0%{transform:translateX(0)}30%{transform:translateX(-30px) scaleY(1.8)}60%{transform:translateX(20px) scaleY(.6)}100%{transform:translateX(0)}}
+.strand path{transform-box:fill-box;transform-origin:center}
+body.fxb[data-craft=painting]{--bs:solid;--bw:2px}
+body.fxb[data-craft=drawing],body.fxb[data-craft=colouring]{--bs:dotted;--bw:2.5px}
+body.fxb[data-craft=sewing],body.fxb[data-craft=embroidery]{--bs:dashed;--bw:2px}
+body.fxb[data-craft=weaving]{--bs:double;--bw:4px}
+body.fxb[data-craft=beading]{--bs:dotted;--bw:3.5px}
+@media(max-width:600px){.q,.streak,.hleft .decor{display:none}.greet{font-size:14px}.craftbtn b{font-size:22px!important}.iconbtn,.iconbtn svg{width:40px;height:40px}.sbtn2{width:38px;height:38px}}
+@media(prefers-reduced-motion:no-preference){.tile,.yarn{transition:transform .2s}.tile:hover,.yarn:hover{transform:rotate(-.8deg) translateY(-2px)}}
+@media(max-width:600px){.craftbtn b{font-size:25px}.tab{min-height:64px;border-radius:14px 14px 0 0;gap:3px}.tab svg{width:22px;height:22px}.tabs{gap:3px}.yhero{grid-template-columns:1fr}.ybig{max-width:170px;margin:auto}.pm{width:84px;height:84px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="hrow"><div class="hleft" id="hleft"></div><div class="hright"><button class="craftbtn" id="craftBtn" data-act="go-crafts" aria-label="Change craft"><b id="craftName">Crochet</b></button><button class="iconbtn" id="brandBall" data-act="egg" aria-label="Craft icon"></button></div></div>
+  <div id="soundPanel"></div>
+  <div class="tabwrap"><div id="lights"></div><nav class="tabs" id="tabs" role="tablist" aria-label="Sections"></nav></div>
+  <svg class="strand" id="strand" viewBox="0 0 400 12" preserveAspectRatio="none" aria-hidden="true"><path d="M-50 6 Q-25 0 0 6 T50 6 T100 6 T150 6 T200 6 T250 6 T300 6 T350 6 T400 6 T450 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/></svg>
+</header>
+<main id="main"></main>
+<div class="overlay" id="ov" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Details"></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9);
+const pad=n=>String(n).padStart(2,'0');
+const today=()=>{const t=new Date();return `${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`};
+const fmt=d=>new Date(d+'T00:00').toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'});
+const KEY='craftnook-v2';
+const CRAFTS=[['crochet','Crochet'],['painting','Painting'],['drawing','Drawing'],['colouring','Colouring'],['sewing','Sewing'],['weaving','Weaving'],['beading','Beading'],['embroidery','Machine embroidery']];
+const CC={crochet:'#b88896',painting:'#943d47',drawing:'#78412c',colouring:'#c9a23f',sewing:'#837f26',weaving:'#9aa77f',beading:'#6b3b52',embroidery:'#5b6f8c'};
+const EXTRA=['#a5573b','#5f7896','#8f9c62','#c99aa4','#6e4a3a','#c9a23f'];
+const DEFCATS={crochet:['Jumpers','Cardigans','Beanies','Scarves','Amigurumi','Blankets','Bags','Flowers'],painting:['Landscapes','Florals','Portraits','Techniques'],drawing:['Ink','Coloured','Characters','Practice'],colouring:['Books','Mandalas','Techniques'],sewing:['Tops','Skirts','Bags','Skills to learn'],weaving:['Wall hangings','Coasters','Rugs'],beading:['Bracelets','Necklaces','Earrings'],embroidery:['Designs to buy','Patches','Towels','Hoop art']};
+const SOURCES=['TikTok','Instagram','Pinterest','PDF pattern','Website','Etsy','Photo','Video','My own idea'];
+const FAMS={pink:'#d79aa8',red:'#b84a4f',orange:'#c4703f',yellow:'#d4b04a',green:'#8f9c62',blue:'#5f7896',purple:'#7b5170',brown:'#7a5240',cream:'#eee2cf',grey:'#9b9592',black:'#2f2a2a',multi:'conic-gradient(#943d47,#d4b04a,#8f9c62,#5f7896,#b88896,#943d47)'};
+const TYPES=['Acrylic','Cotton','Wool','Chenille','Velvet','Mohair','Blend','Other'];
+const KMAP={Jumpers:'jumper',Cardigans:'cardigan',Beanies:'beanie',Scarves:'scarf',Amigurumi:'bear',Blankets:'blanket',Bags:'bag',Flowers:'flower',Landscapes:'landscape',Florals:'flower',Techniques:'mushroom'};
+const TABKEYS=['ideas','projects','stash','gallery'];
+const DESC={ideas:'Saved pictures, videos and patterns',projects:'Things you are working on',stash:'Your supplies',gallery:'Finished work'};
+const svgPat=(w,h,body)=>`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}' viewBox='0 0 ${w} ${h}'>${body}</svg>`)}")`;
+const PAT={
+gingham:()=>svgPat(32,32,`<rect width='32' height='32' fill='#f6f6f6'/><rect width='16' height='32' fill='#aec0d9' opacity='.45'/><rect width='32' height='16' fill='#aec0d9' opacity='.45'/><rect width='16' height='16' fill='#7a9bc8' opacity='.35'/>`),
+nouveau:()=>{const fl=(x,y,s)=>[0,90,180,270].map(a=>`<ellipse cx='${x}' cy='${y-11*s}' rx='${5.5*s}' ry='${11*s}' transform='rotate(${a} ${x} ${y})'/>`).join('');return svgPat(96,96,`<rect width='96' height='96' fill='#1d1214'/><g fill='none' stroke='#8e936b' stroke-width='1.5' opacity='.55' stroke-linecap='round'><path d='M0 48C18 32 30 64 48 48S78 32 96 48'/><path d='M48 0C32 18 64 30 48 48S32 78 48 96'/><path d='M14 14q10 4 12 14M82 82q-10-4-12-14M82 14q-4 10-14 12M14 82q4-10 14-12'/></g><g fill='#8e936b' opacity='.5'><path d='M22 44q6-11 15-4q-7 9-15 4z'/><path d='M74 52q-6 11-15 4q7-9 15-4z'/><path d='M52 22q11 6 4 15q-9-7-4-15z'/><path d='M44 74q-11-6-4-15q9 7 4 15z'/></g><g fill='#8b4249' opacity='.9'>${fl(48,48,1)}${fl(0,0,.6)}${fl(96,0,.6)}${fl(0,96,.6)}${fl(96,96,.6)}</g><g fill='#f2c2be' opacity='.75'><circle cx='48' cy='48' r='4.5'/><circle cx='0' cy='0' r='3'/><circle cx='96' cy='0' r='3'/><circle cx='0' cy='96' r='3'/><circle cx='96' cy='96' r='3'/></g>`)},
+squiggle:()=>svgPat(32,84,`<rect width='32' height='84' fill='#421335'/><g fill='none' stroke='#ce8a8c' stroke-width='2' stroke-linecap='round' opacity='.38'><path d='M4 -2C5.2 14 2.8 26 4.4 42S3.2 70 4 86'/><path d='M12 -2C11 16 13.2 30 11.6 44S12.8 70 12 86'/><path d='M20 -2C21.3 12 19 28 20.5 40S19.2 72 20 86'/><path d='M28 -2C27 18 29 32 27.6 46S28.8 68 28 86'/></g>`),
+retro:mode=>svgPat(180,150,`<rect width='180' height='150' fill='${mode==='dark'?'#2a1a16':'#f4ddaf'}'/><g fill='none' stroke-width='7' opacity='${mode==='dark'?'.7':'.6'}'>${['#e74731','#ea742e','#ee9823','#e8738f','#68423b'].map((c,k)=>`<path d='M-10 ${92+k*7}Q35 ${72+k*7} 90 ${92+k*7}T190 ${92+k*7}' stroke='${mode==='dark'&&c==='#68423b'?'#a5674f':c}'/>`).join('')}</g>`),
+checker:()=>svgPat(48,48,`<rect width='48' height='48' fill='#2e0b1b'/><rect width='24' height='24' fill='#6b1a3e' opacity='.75'/><rect x='24' y='24' width='24' height='24' fill='#6b1a3e' opacity='.75'/><circle cx='24' cy='24' r='2' fill='#d8b59e' opacity='.35'/><circle cx='0' cy='0' r='2' fill='#d8b59e' opacity='.35'/><circle cx='48' cy='0' r='2' fill='#d8b59e' opacity='.35'/><circle cx='0' cy='48' r='2' fill='#d8b59e' opacity='.35'/><circle cx='48' cy='48' r='2' fill='#d8b59e' opacity='.35'/>`),
+leopard:()=>{const P=[[22,26,1,20],[72,18,.85,-30],[120,42,1.1,10],[42,76,.9,50],[98,88,1,-15],[18,122,.8,70],[68,126,1.05,-40],[126,118,.9,25]];return svgPat(144,144,`<rect width='144' height='144' fill='#110a0c'/>${P.map(([x,y,s,r])=>`<g transform='translate(${x} ${y}) rotate(${r}) scale(${s})'><path d='M-9-4q4-9 12-6q9 2 8 10q-1 9-10 9q-12-1-10-13z' fill='#d0891f' opacity='.55'/><g fill='none' stroke='#751737' stroke-width='4' stroke-linecap='round' opacity='.9'><path d='M-14 2q-3-12 8-17'/><path d='M3-16q12 1 14 10'/><path d='M14 8q-2 10-12 11'/><path d='M-6 16q-6-1-8-5'/></g></g>`).join('')}<g fill='#751737' opacity='.8'><circle cx='46' cy='44' r='3'/><circle cx='100' cy='56' r='2.5'/><circle cx='140' cy='80' r='3'/><circle cx='40' cy='104' r='2.5'/><circle cx='96' cy='130' r='3'/></g><g fill='#f5ced9' opacity='.18'><circle cx='60' cy='60' r='2'/><circle cx='112' cy='12' r='1.6'/><circle cx='10' cy='88' r='1.6'/></g>`)},
+wobble:()=>{const sq=(x,y)=>`<path transform='translate(${x} ${y})' d='M0 0Q8-3 16 0T32 0Q35 8 32 16T32 32Q24 35 16 32T0 32Q-3 24 0 16T0 0Z'/>`;return svgPat(64,64,`<rect width='64' height='64' fill='#140306'/><g fill='#6c040d'>${sq(0,0)}${sq(32,32)}${sq(64,0)}${sq(0,64)}${sq(64,64)}${sq(-32,32)}${sq(32,-32)}</g>`)}};
+const THEMES=[
+{id:'blueberry',name:'Blueberry picnic',pat:PAT.gingham,fh:'Quicksand',fb:'Nunito',fd:'Caveat',
+ light:{bg:'#f6f6f6',card:'#ffffff',ink:'#22324a',soft:'#566982',wine:'#4f72a6',olive:'#7a9bc8',brown:'#36547f',rose:'#7a9bc8',roseTint:'#e4ebf5',oliveTint:'#dfe8f3',line:'#cfdae9',on1:'#ffffff',on2:'#14233b'}},
+{id:'nouveau',name:'Velvet nouveau',pat:PAT.nouveau,fh:'Cormorant Garamond',fb:'Nunito',fd:'Caveat',
+ dark:{bg:'#1d1214',card:'#2a1b1e',ink:'#f6e3e1',soft:'#cfaeb0',wine:'#f2c2be',olive:'#8e936b',brown:'#f2c2be',rose:'#c9858c',roseTint:'#3a2326',oliveTint:'#2b2c20',line:'#4a3236',on1:'#3a1a1e',on2:'#15170b'}},
+{id:'plum',name:'Plum doodle',pat:PAT.squiggle,fh:'Patrick Hand',fb:'Nunito',fd:'Caveat',
+ dark:{bg:'#421335',card:'#521a42',ink:'#fbe9ee',soft:'#e2bcc7',wine:'#ce8a8c',olive:'#8f1558',brown:'#ecb3b5',rose:'#ce8a8c',roseTint:'#5e2150',oliveTint:'#5a1747',line:'#6a2a5a',on1:'#2b0d23',on2:'#ffffff'}},
+{id:'retro',name:'Retro 70s sunset',pat:PAT.retro,fh:'Shrikhand',fb:'Nunito',fd:'Caveat',
+ light:{bg:'#f4ddaf',card:'#fbefd6',ink:'#3d241f',soft:'#6b4a3f',wine:'#d23d26',olive:'#ee9823',brown:'#68423b',rose:'#e8738f',roseTint:'#f8d6c6',oliveTint:'#f7e3b5',line:'#e6c58f',on1:'#fff4e6',on2:'#3d241f'},
+ dark:{bg:'#2a1a16',card:'#3a2520',ink:'#f4ddaf',soft:'#d9b98d',wine:'#ea742e',olive:'#ee9823',brown:'#f4ddaf',rose:'#e8738f',roseTint:'#4a2c24',oliveTint:'#463018',line:'#563a30',on1:'#2a1a16',on2:'#2a1a16'}},
+{id:'orchard',name:'Vintage orchard',pat:PAT.checker,fh:'DM Serif Display',fb:'Nunito',fd:'Caveat',
+ dark:{bg:'#2e0b1b',card:'#45142d',ink:'#f5e6dc',soft:'#d8b59e',wine:'#a15c60',olive:'#837a35',brown:'#d8b59e',rose:'#bb7889',roseTint:'#561c38',oliveTint:'#3a3418',line:'#5e2843',on1:'#ffffff',on2:'#fff8e8'}},
+{id:'leopard',name:'Wild rose leopard',pat:PAT.leopard,fh:'Playfair Display',fb:'Nunito',fd:'Caveat',
+ dark:{bg:'#110a0c',card:'#1e1114',ink:'#f9e4ea',soft:'#d9b2be',wine:'#f5ced9',olive:'#d0891f',brown:'#f5ced9',rose:'#d0891f',roseTint:'#3a1424',oliveTint:'#2e2010',line:'#3b2228',on1:'#3a0d1f',on2:'#1a0d00'}},
+{id:'cherry',name:'Cherry wobble',pat:PAT.wobble,fh:'Fredoka',fb:'Nunito',fd:'Caveat',
+ dark:{bg:'#140306',card:'#22070d',ink:'#fde3e3',soft:'#e7aeb0',wine:'#f3afb0',olive:'#a50305',brown:'#f3afb0',rose:'#e46a6c',roseTint:'#3a0a12',oliveTint:'#2c0609',line:'#45121a',on1:'#3a0207',on2:'#ffffff'}}];
+const HFONTS=['Theme default','Quicksand','Cormorant Garamond','Patrick Hand','Shrikhand','DM Serif Display','Playfair Display','Fredoka','Caveat'];
+const FXGROUPS=[
+['Seasons and celebrations',[['seasonal','Seasonal decorations','Little decorations that change with the Australian seasons. In December, Christmas lights hang along the headings and the top corner icon becomes a Christmas tree strung with yarn.'],['birthday','Birthday surprise','A banner and confetti on your birthday. Add your birthday under "About you".'],['monthly','New month palette','For the first few days of each month, a colour palette to try.']]],
+['Decorations',[['washi','Washi tape headings','Strips of patterned tape behind headings.'],['polaroid','Polaroid portfolio','Portfolio photos look like polaroids.'],['wiggle','Wiggly yarn strand','The yarn under the tabs wiggles when you switch tabs.'],['borders','Craft borders','Card borders change with each craft: stitches for crochet and sewing, dots for drawing, solid for painting.'],['mascots','Craft mascots','A little character for each craft, shown in empty spaces and celebrations.'],['headicon','Choose your top corner icon','Pick the icon in the top right corner (below).'],['easter','Secret surprise','Something happens if you tap the top corner icon five times.']]],
+['Keeping you going',[['greeting','Hello greeting','A greeting with your name at the top.'],['streak','Craft streak','Counts the days in a row you make progress. It never nags.'],['confetti','Confetti for steps','A little burst of confetti when you tick off a small step.'],['trophy','Finished celebration','A trophy moment when a project is finished.'],['welcomeback','Welcome back notes','A friendly reminder of where you were up to when you open a project you haven\'t touched in two weeks.'],['stickers','Stickers','Stickers you earn as you make things, shown in the portfolio.'],['yarnprog','Yarn ball progress bars','A little yarn ball rolls along each progress bar.'],['monthshelf','Finished this month','A shelf at the top of the portfolio for this month\'s makes.']]],
+['Gifts',[['giftcal','Gift calendar','Birthdays and occasions coming up, linked to what you\'re making for them.']]],
+['Stash and supplies',[['stashbuster','Stash buster','Picks something from your stash and suggests ideas for it.'],['wheel','Colour wheel view','See your stash arranged by colour.'],['pairs','Goes nicely with','Suggests other supplies whose colours go well together.'],['lastused','Last used dates','Shows when you last used each supply, and lets you sort by longest unused.'],['family','Family tree','Shows every project made with a supply.']]],
+['Ideas and learning',[['someday','Soon and someday','Mark ideas as "soon" or "someday".'],['palettes','Colour palette cards','Make a colour palette from any idea\'s picture.'],['tutnotes','Tutorial notes','Notes on videos, like "3:20 the tricky bit".'],['moodboard','Mood boards','Arrange a project\'s pictures, yarn and photos by dragging them around.'],['skills','Skill badges','Earn a badge for each new technique you learn.']]],
+['Cosy extras',[['sounds','Cosy sounds','Rain, fireplace or café sounds while you craft.'],['playlist','Project playlists','Add a music playlist link to any project.']]],
+['Year in review',[['scrapbook','Scrapbook year in review','Flip through your year like a scrapbook.'],['insta','Instagram post','Turn your year in review into a picture to post on Instagram.']]]];
+const FXDEF=Object.fromEntries(FXGROUPS.flatMap(g=>g[1].map(r=>[r[0],true])));
+const PALS=[['Summer berries',['#943d47','#e8a3ad','#f4e0c8','#5f7896']],['Peach and plum',['#f2b591','#c46f6f','#6b3b52','#efe4d2']],['Autumn spice',['#a5573b','#c9a23f','#837f26','#efe2d0']],['Mushroom forest',['#6e4a3a','#b88896','#9aa77f','#eadcc6']],['Misty morning',['#9b9592','#c3cfd6','#5b6f8c','#f1ede6']],['Winter woollies',['#2c5753','#c98a9a','#eadcc6','#78412c']],['Frosty sage',['#9aa77f','#dfe6d6','#7b5170','#f7f3ea']],['Wattle season',['#d4b04a','#8f9c62','#f3ead0','#5f7896']],['Spring blossom',['#f4c0d1','#d79aa8','#a8c3a0','#fffaf2']],['Garden party',['#e0443e','#f2c14e','#6f9384','#f6efe2']],['Jacaranda',['#8d7bc4','#c7b8e8','#837f26','#f4f1f8']],['Christmas cheer',['#943d47','#3f6b45','#f2c14e','#f7f0ea']]];
+const SKILLS={crochet:['Magic ring','Single crochet','Double crochet','Treble crochet','Granny square','Changing colours','Bobble stitch','Invisible decrease','Working in the round','Joining squares','Corner to corner','Reading a chart','Amigurumi faces','Blocking'],sewing:['Threading the machine','Straight seam','Seam allowance','Pressing seams','Curved seam','Hemming','Zip','Invisible zip','Buttonhole','Darts','Elastic waistband','Reading a pattern'],painting:['Wet on wet','Wet on dry','Colour mixing','Gradient wash','Glazing','Dry brush','Blending','Masking fluid'],drawing:['Hatching','Cross-hatching','Stippling','Shading','Perspective','Proportions','Inking'],colouring:['Layering','Blending pencils','Burnishing','Gradients','Shadows','Highlights'],weaving:['Warping the loom','Tabby weave','Rya knots','Soumak','Weaving shapes','Finishing'],beading:['Stringing','Crimping','Wire wrapping','Peyote stitch','Brick stitch','Loom beading'],embroidery:['Hooping','Choosing stabiliser','Thread changes','Lettering','Appliqué','Towel embroidery','Patches','Freestanding lace']};
+const ICONS=[['ball','Craft ball'],['mascot','Mascot'],['heart','Heart'],['flower','Flower'],['star','Star']];
+
+const ic=p=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const IC={plus:ic('<path d="M12 5v14M5 12h14"/>'),x:ic('<path d="M6 6l12 12M18 6L6 18"/>'),check:ic('<path d="M5 12l5 5L20 7"/>'),back:ic('<path d="M15 6l-6 6 6 6"/>'),
+up:ic('<path d="M6 15l6-6 6 6"/>'),down:ic('<path d="M6 9l6 6 6-6"/>'),left:ic('<path d="M15 6l-6 6 6 6"/>'),right:ic('<path d="M9 6l6 6-6 6"/>'),
+palette:ic('<path d="M12 3a9 9 0 0 0 0 18c1.5 0 2-1 2-2s-1-2 0-3 3 0 4-1 3-3 3-6c0-3.5-4-6-9-6z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/>'),
+heading:ic('<path d="M6 4v16M18 4v16M6 12h12"/>'),
+download:ic('<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>'),
+music:ic('<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/>'),
+party:ic('<path d="M4 20l5-14 9 9z"/><path d="M14 4l1 2M19 6l-2 1M20 11l-2-.5M12 2v2"/>'),
+cloud:ic('<path d="M7 18h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 9a4.5 4.5 0 0 0 1 9z"/><path d="M12 12v6M9.5 15.5L12 18l2.5-2.5"/>'),
+trophy:ic('<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8M9 17h6"/>'),
+calendar:ic('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'),
+shuffle:ic('<path d="M4 7h3c5 0 5 10 10 10h3M4 17h3c2 0 3-1.5 4-3.5M14 9.5C15 8 16 7 17 7h3M18 4l3 3-3 3M18 14l3 3-3 3"/>'),
+star:ic('<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>'),
+board:ic('<rect x="3" y="3" width="18" height="18" rx="2"/><rect x="6" y="6" width="6" height="7"/><rect x="14" y="9" width="4" height="5"/><path d="M7 17h10"/>'),
+wheel:ic('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/>'),
+grid:ic('<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>'),grip:ic('<circle cx="9" cy="6" r="1.2"/><circle cx="15" cy="6" r="1.2"/><circle cx="9" cy="12" r="1.2"/><circle cx="15" cy="12" r="1.2"/><circle cx="9" cy="18" r="1.2"/><circle cx="15" cy="18" r="1.2"/>'),
+play:'<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#943d47"/></svg>',
+link:ic('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'),
+camera:ic('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>'),
+gift:ic('<rect x="4" y="9" width="16" height="11" rx="1"/><path d="M3 9h18M12 9v11M12 9c-2-4-6-4-6-1s6 1 6 1c2-4 6-4 6-1s-6 1-6 1"/>'),
+file:ic('<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/>'),video:ic('<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/>'),
+image:ic('<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>'),ext:ic('<path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/>'),
+sparkle:ic('<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>'),
+bulb:ic('<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>'),
+list:ic('<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2"/><circle cx="5" cy="18" r="1"/>'),
+basket:ic('<path d="M3 10h18l-2 10H5z"/><path d="M8 10l4-6 4 6M9 14v3M15 14v3"/>'),
+gear:ic('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>')};
+const TABICON={ideas:IC.bulb,projects:IC.list,stash:IC.basket,gallery:IC.image,settings:IC.gear};
+
+function shade(h,a){const n=parseInt((h||'#b88896').slice(1),16);const r=n>>16,g=n>>8&255,b=n&255;const f=a>0?c=>Math.round(c*(1-a)):c=>Math.round(c+(255-c)*-a);return '#'+[f(r),f(g),f(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+let bc=0;
+function ball(hex,size){const id='bc'+(bc++),dk=shade(hex,.3),lt=shade(hex,-.25);return `<svg viewBox="0 0 100 100" ${size?`width="${size}" height="${size}"`:''} aria-hidden="true"><ellipse cx="50" cy="89" rx="28" ry="4.5" fill="rgba(60,30,20,.13)"/><clipPath id="${id}"><circle cx="50" cy="50" r="34"/></clipPath><circle cx="50" cy="50" r="34" fill="${hex}"/><g clip-path="url(#${id})" fill="none" stroke="${dk}" stroke-width="2.4" stroke-linecap="round"><path d="M10 38Q50 52 92 32"/><path d="M8 54Q50 68 92 48"/><path d="M12 70Q50 82 90 64"/><path d="M38 10Q24 50 40 92"/><path d="M62 10Q78 50 60 92"/></g><path d="M30 31Q38 22 48 21" stroke="${lt}" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M80 66Q95 74 88 88Q84 95 93 97" fill="none" stroke="${hex}" stroke-width="3" stroke-linecap="round"/></svg>`}
+function kitSvg(hex,size){const dk=shade(hex,.3),lt=shade(hex,-.55);return `<svg viewBox="0 0 100 100" ${size?`width="${size}" height="${size}"`:''} aria-hidden="true"><ellipse cx="50" cy="89" rx="34" ry="4.5" fill="rgba(60,30,20,.13)"/><path d="M62 14l6 2-10 34h-5z" fill="#c9a48a"/><path d="M58 50h5l-1 6h-4z" fill="#6e4a3a"/><rect x="34" y="12" width="6" height="34" rx="3" fill="#8f9c62"/><path d="M34 12l3-7 3 7z" fill="#3a2520"/><rect x="16" y="40" width="68" height="46" rx="10" fill="${hex}"/><rect x="16" y="40" width="68" height="12" rx="6" fill="${dk}"/><rect x="42" y="47" width="16" height="9" rx="3" fill="${lt}"/><circle cx="30" cy="70" r="5" fill="${lt}"/><circle cx="46" cy="72" r="5" fill="${lt}" opacity=".8"/><circle cx="62" cy="70" r="5" fill="${lt}" opacity=".6"/></svg>`}
+const BODY='M30 30L42 24Q50 31 58 24L70 30L84 50L75 56L70 49V80H30V49L25 56L16 50Z';
+const G={
+cardigan:`<path d="${BODY}" fill="C2"/><path d="M50 29V80" stroke="C1" stroke-width="2" stroke-dasharray="3 3"/><circle cx="45" cy="44" r="1.8" fill="C1"/><circle cx="45" cy="56" r="1.8" fill="C1"/><circle cx="45" cy="68" r="1.8" fill="C1"/>`,
+jumper:`<path d="${BODY}" fill="C2"/><path d="M30 60H70M30 68H70" stroke="C1" stroke-width="2.5" opacity=".7"/>`,
+beanie:`<path d="M27 64Q27 32 50 32Q73 32 73 64Z" fill="C2"/><rect x="24" y="62" width="52" height="13" rx="5" fill="C2"/><path d="M30 66V72M38 66V72M46 66V72M54 66V72M62 66V72M70 66V72" stroke="C1" stroke-width="1.6" opacity=".6"/><circle cx="50" cy="27" r="9" fill="C2"/>`,
+scarf:`<path d="M20 36Q50 24 80 36V50Q50 38 20 50Z" fill="C2"/><path d="M58 44V82H71V42Z" fill="C2"/><path d="M58 74H71M58 66H71M30 36V48M42 32V44" stroke="C1" stroke-width="3"/>`,
+bear:`<circle cx="33" cy="33" r="9" fill="C2"/><circle cx="67" cy="33" r="9" fill="C2"/><circle cx="50" cy="52" r="23" fill="C2"/><circle cx="42" cy="48" r="2.6" fill="#2f2221"/><circle cx="58" cy="48" r="2.6" fill="#2f2221"/><ellipse cx="50" cy="58" rx="8" ry="6" fill="C1"/><circle cx="50" cy="56" r="2" fill="#2f2221"/>`,
+frog:`<circle cx="37" cy="34" r="9" fill="C2"/><circle cx="63" cy="34" r="9" fill="C2"/><ellipse cx="50" cy="55" rx="27" ry="20" fill="C2"/><circle cx="37" cy="33" r="4.2" fill="C1"/><circle cx="63" cy="33" r="4.2" fill="C1"/><circle cx="37" cy="33" r="1.9" fill="#2f2221"/><circle cx="63" cy="33" r="1.9" fill="#2f2221"/><path d="M40 59Q50 66 60 59" stroke="C1" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="31" cy="57" r="3" fill="#e8a3ad" opacity=".8"/><circle cx="69" cy="57" r="3" fill="#e8a3ad" opacity=".8"/>`,
+blanket:[0,1,2].flatMap(r=>[0,1,2].map(c=>`<rect x="${22+c*19}" y="${22+r*19}" width="17" height="17" rx="3" fill="C2" opacity="${(r+c)%2?.55:1}"/><circle cx="${30.5+c*19}" cy="${30.5+r*19}" r="3.6" fill="C1"/>`)).join(''),
+bag:`<path d="M37 42Q37 20 50 20Q63 20 63 42" fill="none" stroke="C2" stroke-width="5"/><path d="M24 40H76L70 82H30Z" fill="C2"/><path d="M27 54H73M28.5 66H71.5" stroke="C1" stroke-width="3" opacity=".7"/>`,
+flower:`<path d="M50 52V86M34 58V86M66 58V86" stroke="#837f26" stroke-width="2.6"/><path d="M50 76Q36 66 32 76Q42 82 50 76" fill="#837f26"/><path d="M40 28Q40 50 50 52Q60 50 60 28L55 35L50 26L45 35Z" fill="C2"/><path d="M25 38Q25 56 34 58Q43 56 43 38L39 44L34 36L29 44Z" fill="C2" opacity=".8"/><path d="M57 38Q57 56 66 58Q75 56 75 38L71 44L66 36L61 44Z" fill="C2" opacity=".8"/>`,
+landscape:`<circle cx="68" cy="32" r="9" fill="C2" opacity=".7"/><path d="M10 78Q30 46 50 64T90 54V90H10Z" fill="C2"/><path d="M10 86Q40 66 90 76V90H10Z" fill="C2" opacity=".6"/>`,
+mushroom:`<path d="M24 54Q24 26 50 26Q76 26 76 54Z" fill="C2"/><rect x="42" y="54" width="16" height="26" rx="7" fill="C2" opacity=".6"/><circle cx="38" cy="40" r="4.5" fill="C1"/><circle cx="56" cy="35" r="3.5" fill="C1"/><circle cx="64" cy="46" r="4" fill="C1"/>`,
+palette:`<path d="M50 22C28 22 16 38 16 54C16 72 32 80 44 75C50 73 47 64 54 62C63 60 66 71 75 65C86 56 82 22 50 22Z" fill="C2"/><circle cx="35" cy="43" r="5.5" fill="C1"/><circle cx="50" cy="36" r="5.5" fill="C1"/><circle cx="65" cy="43" r="5.5" fill="C1"/><circle cx="30" cy="58" r="5.5" fill="C1"/>`};
+function art(a){a=a||{k:'blanket',c1:'#f1e1e3',c2:'#b88896'};const h=a.h||100,g=(G[a.k]||G.palette).replace(/C1/g,a.c1).replace(/C2/g,a.c2);return `<svg class="art" viewBox="0 0 100 ${h}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100" height="${h}" fill="${a.c1}"/><rect x="5" y="5" width="90" height="${h-10}" rx="9" fill="none" stroke="${a.c2}" stroke-width="1.1" stroke-dasharray="3 2.5" opacity=".55"/><g transform="translate(0 ${(h-100)/2})">${g}</g><path d="M83 15l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z" fill="${a.c2}" opacity=".5"/><circle cx="17" cy="${h-16}" r="2" fill="${a.c2}" opacity=".45"/></svg>`}
+
+G.bookmark=`<path d="M34 20h32v60L50 67 34 80z" fill="C2"/><path d="M40 32h20M40 40h14" stroke="C1" stroke-width="3" stroke-linecap="round"/>`;
+const svgUrl=(s,w=400,h=400)=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s.replace('<svg ',`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" `));
+const loadImg=src=>new Promise(r=>{const im=new Image();im.onload=()=>r(im);im.onerror=()=>r(null);im.src=src});
+function face(cx,cy,s){return `<circle cx="${cx-9*s}" cy="${cy}" r="${3*s}" fill="#2f2221"/><circle cx="${cx+9*s}" cy="${cy}" r="${3*s}" fill="#2f2221"/><circle cx="${cx-8*s}" cy="${cy-1*s}" r="${1*s}" fill="#fff"/><circle cx="${cx+10*s}" cy="${cy-1*s}" r="${1*s}" fill="#fff"/><path d="M${cx-6*s} ${cy+7*s}Q${cx} ${cy+13*s} ${cx+6*s} ${cy+7*s}" stroke="#2f2221" stroke-width="${2.2*s}" fill="none" stroke-linecap="round"/><circle cx="${cx-17*s}" cy="${cy+7*s}" r="${4*s}" fill="#e8a3ad" opacity=".85"/><circle cx="${cx+17*s}" cy="${cy+7*s}" r="${4*s}" fill="#e8a3ad" opacity=".85"/>`}
+const MB={painting:h=>`<path d="M50 18C26 18 12 36 12 54C12 74 30 84 44 78C51 75 47 65 55 63C65 61 68 74 78 67C91 57 86 18 50 18Z" fill="${h}"/><circle cx="28" cy="42" r="5" fill="#f2c14e"/><circle cx="40" cy="28" r="5" fill="#8f9c62"/><circle cx="60" cy="27" r="5" fill="#5f7896"/>`,
+drawing:h=>`<rect x="30" y="12" width="40" height="10" rx="3" fill="#e8a3ad"/><path d="M30 22h40v50L50 94 30 72z" fill="${h}"/><path d="M30 72h40L50 94z" fill="#ecd2b4"/><path d="M45 88h10l-5 6z" fill="#2f2221"/>`,
+sewing:h=>`<path d="M64 30l12-20" stroke="#9b9592" stroke-width="2.5"/><circle cx="77" cy="9" r="4.5" fill="#f2c14e"/><ellipse cx="50" cy="60" rx="38" ry="30" fill="${h}"/><path d="M50 30v60M14 56q36 12 72 0" stroke="${shade(h,.3)}" stroke-width="2" fill="none"/>`,
+embroidery:h=>`<rect x="44" y="6" width="12" height="12" rx="3" fill="#c9a48a"/><circle cx="50" cy="54" r="36" fill="#fffaf2" stroke="#c9a48a" stroke-width="7"/><path d="M28 74q11-12 22 0t22 0" stroke="${h}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`,
+beading:h=>`<path d="M14 30q36-26 72 0" stroke="#9b9592" stroke-width="2.5" fill="none"/><circle cx="50" cy="56" r="36" fill="${h}"/><circle cx="50" cy="80" r="5" fill="${shade(h,.35)}"/>`};
+function mascot(c,size){const h=colorOf(c),inner=MB[c]?MB[c](h):`<circle cx="50" cy="54" r="36" fill="${h}"/><g fill="none" stroke="${shade(h,.3)}" stroke-width="2.4" stroke-linecap="round"><path d="M16 44Q50 56 84 40"/><path d="M38 20Q26 54 40 90"/><path d="M62 20Q74 54 60 90"/></g><path d="M84 70Q96 80 90 94" fill="none" stroke="${h}" stroke-width="3" stroke-linecap="round"/>`,fy={drawing:46,embroidery:48,beading:52}[c]||58;return `<svg viewBox="0 0 100 100" ${size?`width="${size}" height="${size}"`:''} aria-hidden="true">${inner}${face(50,fy,.85)}</svg>`}
+function xmasTree(h){return `<svg viewBox="0 0 100 100" aria-hidden="true"><rect x="45" y="82" width="10" height="12" rx="2" fill="#6e4a3a"/><path d="M50 12L72 42H62L80 64H66L88 86H12L34 64H20L38 42H28Z" fill="#3f6b45"/><path d="M36 38Q50 48 64 36M28 60Q50 72 72 58M20 80Q50 92 82 78" fill="none" stroke="${h}" stroke-width="3.5" stroke-linecap="round"/><circle cx="42" cy="52" r="3.4" fill="#e0443e"/><circle cx="62" cy="70" r="3.4" fill="#f2c14e"/><circle cx="34" cy="74" r="3.4" fill="#5f7896"/><circle cx="58" cy="48" r="3" fill="#e8a3ad"/><path d="M50 2l3 7 7.5.5-5.8 4.6 2 7.2-6.7-4.1-6.7 4.1 2-7.2-5.8-4.6 7.5-.5z" fill="#f2c14e"/><circle cx="84" cy="90" r="7" fill="${h}"/><path d="M79 88q5 3 10 0M80 92q4 2 8 0" stroke="${shade(h,.3)}" stroke-width="1.4" fill="none"/></svg>`}
+function lightsSvg(){const C=['#e0443e','#f2c14e','#3f9b5a','#4d7cc7'],still=matchMedia('(prefers-reduced-motion: reduce)').matches;return `<svg class="lights" width="100%" height="30" aria-hidden="true"><defs><pattern id="lp" width="180" height="30" patternUnits="userSpaceOnUse"><path d="M0 3 Q22.5 17 45 3 T90 3 T135 3 T180 3" fill="none" stroke="#3b4a2c" stroke-width="1.6"/>${C.map((c,k)=>{const x=22.5+k*45;return `<rect x="${x-2.5}" y="9" width="5" height="4" rx="1" fill="#4a4a4a"/><ellipse cx="${x}" cy="19" rx="4.6" ry="6.6" fill="${c}">${still?'':`<animate attributeName="opacity" values="${k%2?'.35;1;.35':'1;.35;1'}" dur="${1.4+k*.25}s" repeatCount="indefinite"/>`}</ellipse><ellipse cx="${x-1.5}" cy="16" rx="1.3" ry="2.2" fill="#fff" opacity=".6"/>`}).join('')}</pattern></defs><rect width="100%" height="30" fill="url(#lp)"/></svg>`}
+function season(){const o=S.season&&S.season!=='auto'?S.season:null;if(o)return o;const m=new Date().getMonth()+1;return m===12?'xmas':m<=2?'summer':m<=5?'autumn':m<=8?'winter':'spring'}
+function decorSvg(s){const D={autumn:`<path d="M30 20q14 4 12 18-14-2-12-18z" fill="#c4703f"/><path d="M58 40q14 6 10 20-14-4-10-20z" fill="#a5573b"/><path d="M20 56q12 8 6 20-12-8-6-20z" fill="#d4b04a"/>`,winter:[[30,30,10],[64,52,8],[30,72,7]].map(([x,y,r])=>`<g stroke="#8fb5d6" stroke-width="2.4" stroke-linecap="round"><path d="M${x-r} ${y}h${2*r}M${x} ${y-r}v${2*r}M${x-r*.7} ${y-r*.7}l${1.4*r} ${1.4*r}M${x+r*.7} ${y-r*.7}l${-1.4*r} ${1.4*r}"/></g>`).join(''),spring:[[34,34],[66,52],[34,72]].map(([x,y])=>`<g>${[0,72,144,216,288].map(a=>`<circle cx="${x+7*Math.cos(a*Math.PI/180)}" cy="${y+7*Math.sin(a*Math.PI/180)}" r="6" fill="#f4c0d1"/>`).join('')}<circle cx="${x}" cy="${y}" r="3.5" fill="#f2c14e"/></g>`).join(''),summer:`<circle cx="50" cy="50" r="16" fill="#f2c14e"/><g stroke="#f2c14e" stroke-width="4" stroke-linecap="round">${[0,45,90,135,180,225,270,315].map(a=>`<path d="M${50+24*Math.cos(a*Math.PI/180)} ${50+24*Math.sin(a*Math.PI/180)}L${50+32*Math.cos(a*Math.PI/180)} ${50+32*Math.sin(a*Math.PI/180)}"/>`).join('')}</g>`,xmas:`<path d="M50 14l6 14 15 1-11.5 9.5 4 15-13.5-8.5-13.5 8.5 4-15L29 29l15-1z" fill="#f2c14e"/><circle cx="28" cy="72" r="9" fill="#e0443e"/><circle cx="56" cy="78" r="8" fill="#3f6b45"/><circle cx="78" cy="68" r="7" fill="#4d7cc7"/>`};return `<svg class="decor" viewBox="0 0 100 100" aria-hidden="true">${D[s]||''}</svg>`}
+function headIcon(){const h=colorOf(S.craft);if(S.fx.seasonal&&season()==='xmas')return xmasTree(h);const k=S.fx.headicon?S.icon||'ball':'ball';if(k==='mascot'&&S.fx.mascots)return mascot(S.craft);if(k==='heart')return `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 84C20 64 12 48 14 34c2-14 18-22 30-14 3 2 5 4 6 6 1-2 3-4 6-6 12-8 28 0 30 14 2 14-6 30-36 50z" fill="${h}"/><path d="M28 34q4-8 12-8" stroke="#fff" stroke-width="4" fill="none" opacity=".5" stroke-linecap="round"/></svg>`;if(k==='flower')return `<svg viewBox="0 0 100 100" aria-hidden="true">${[0,72,144,216,288].map(a=>`<circle cx="${50+20*Math.cos((a-90)*Math.PI/180)}" cy="${50+20*Math.sin((a-90)*Math.PI/180)}" r="16" fill="${h}"/>`).join('')}<circle cx="50" cy="50" r="12" fill="#f2c14e"/></svg>`;if(k==='star')return `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8l12 26 28 3-21 19 6 28-25-14-25 14 6-28-21-19 28-3z" fill="${h}"/></svg>`;return ball(h)}
+const greeting=()=>{const h=new Date().getHours();return h<12?'Good morning':h<17?'Good afternoon':'Good evening'};
+const dayKey=(d=new Date())=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+function streak(){const set=new Set(S.days||[]);let n=0,d=new Date();if(!set.has(dayKey(d)))d.setDate(d.getDate()-1);while(set.has(dayKey(d))){n++;d.setDate(d.getDate()-1)}return n}
+function mark(){const k=dayKey();S.days=S.days||[];if(!S.days.includes(k)){S.days.push(k);if(S.days.length>400)S.days=S.days.slice(-400)}S.stats.best=Math.max(S.stats.best||0,streak())}
+const touch=p=>{p.updated=Date.now();mark()};
+function hsl(hex){const n=parseInt((hex||'#888888').slice(1),16);const r=(n>>16)/255,g=(n>>8&255)/255,b=(n&255)/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2;let h=0,s=0;if(mx!==mn){const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);h=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;h*=60}return [h,s,l]}
+function pairs(y){const [h,s,l]=hsl(y.hex);return D().yarns.filter(o=>o.kind!=='kit'&&o.id!==y.id).map(o=>{const [h2,s2,l2]=hsl(o.hex),dh=Math.min(Math.abs(h-h2),360-Math.abs(h-h2));let why='';if(s2<.2||l2>.86)why='Calm neutral';else if(s<.2||l>.86)why='Lets it shine';else if(dh<35)why='Close cousins';else if(dh>150)why='Bold opposites';else if(Math.abs(dh-120)<22)why='Bright trio';return why?{o,why}:null}).filter(Boolean).slice(0,6)}
+const ago=d=>{if(!d)return 'Not used yet';const days=Math.round((new Date(dayKey())-new Date(d+'T00:00'))/864e5);return days<=0?'Used today':days===1?'Used yesterday':days<30?`Used ${days} days ago`:days<365?`Used ${Math.round(days/30)} month${Math.round(days/30)>1?'s':''} ago`:'Used over a year ago'};
+function useYarns(ids){const d=D(),t=dayKey();ids.forEach(id=>{const y=find(d.yarns,id);if(!y)return;y.lastUsed=t;(y.members||[]).forEach(m=>{const z=find(d.yarns,m);if(z)z.lastUsed=t})})}
+function extract(src){return new Promise(res=>{const im=new Image();im.onload=()=>{try{const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d');x.drawImage(im,0,0,48,48);const d=x.getImageData(0,0,48,48).data,b={};for(let i=0;i<d.length;i+=4){const k=(d[i]>>5)+','+(d[i+1]>>5)+','+(d[i+2]>>5);const v=b[k]||(b[k]={n:0,r:0,g:0,b:0});v.n++;v.r+=d[i];v.g+=d[i+1];v.b+=d[i+2]}const top=Object.values(b).sort((p,q)=>q.n-p.n).map(v=>[v.r/v.n,v.g/v.n,v.b/v.n]),out=[];for(const c2 of top){if(out.every(o=>Math.hypot(o[0]-c2[0],o[1]-c2[1],o[2]-c2[2])>46))out.push(c2);if(out.length===5)break}res(out.map(c2=>'#'+c2.map(v=>Math.round(v).toString(16).padStart(2,'0')).join('')))}catch(e){res([])}};im.onerror=()=>res([]);im.src=src})}
+function srcOf(u){const h=u.toLowerCase();return h.includes('tiktok')?'TikTok':h.includes('instagram')?'Instagram':h.includes('pin.it')||h.includes('pinterest')?'Pinterest':h.includes('youtu')?'Video':h.includes('etsy')?'Etsy':h.includes('ravelry')?'Website':/\.pdf($|\?)/.test(h)?'PDF pattern':'Website'}
+function findLinks(c,cat){const base=c==='embroidery'?'machine embroidery':nameOf(c).toLowerCase(),extra=cat&&!['All','Unsorted','Palettes'].includes(cat)?' '+cat.toLowerCase():'',term=base+extra,q=encodeURIComponent(term),tag=term.replace(/[^a-z0-9]/gi,'').toLowerCase();const L=[['Pinterest',`https://www.pinterest.com/search/pins/?q=${q}`],['TikTok',`https://www.tiktok.com/search?q=${q}`],['Instagram',`https://www.instagram.com/explore/tags/${tag}/`],['YouTube',`https://www.youtube.com/results?search_query=${q}`]];if(c==='crochet'||c==='weaving')L.push(['Ravelry',`https://www.ravelry.com/patterns/search#craft=${c}${extra?'&query='+encodeURIComponent(extra.trim()):''}`]);L.push(['Etsy',`https://www.etsy.com/search?q=${q}${['crochet','sewing','embroidery'].includes(c)?'+pattern':''}`]);return L}
+function nextDate(o){const d=new Date(o.date+'T00:00'),t=new Date(dayKey()+'T00:00');if(o.yearly!==false){d.setFullYear(t.getFullYear());if(d<t)d.setFullYear(t.getFullYear()+1)}return d}
+function stickers(){const all=Object.values(S.crafts),gal=all.flatMap(c=>c.gallery),gifts=gal.filter(g=>g.gift).length,ideas=all.flatMap(c=>c.ideas).length,kits=all.flatMap(c=>c.yarns).filter(y=>y.kind==='kit').length,photos=all.flatMap(c=>c.projects).reduce((n,p)=>n+p.photos.length,0),sk=Object.values(S.skills||{}).reduce((n,o)=>n+Object.keys(o).length,0);
+ return [['First finish','Finish your first project',gal.length>=1,IC.trophy],['High five','Finish 5 projects',gal.length>=5,IC.star],['Ten out of ten','Finish 10 projects',gal.length>=10,IC.trophy],['Gift giver','Give something you made',gifts>=1,IC.gift],['Generous heart','Give 5 gifts',gifts>=5,IC.gift],['Idea collector','Save 10 ideas',ideas>=10,IC.bulb],['Kit keeper','Make a kit',kits>=1,IC.basket],['Step by step','Tick off 25 small steps',(S.stats.steps||0)>=25,IC.check],['On a roll','Make progress 7 days in a row',(S.stats.best||0)>=7,IC.sparkle],['Snap happy','Add 10 progress photos',photos>=10,IC.camera],['Quick learner','Earn 3 skill badges',sk>=3,IC.star]]}
+function confetti(force){if(!force&&!S.fx.confetti)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const c=document.createElement('canvas');c.className='confetti';document.body.appendChild(c);const W=c.width=innerWidth,H=c.height=innerHeight,x=c.getContext('2d'),cs=['wine','olive','rose','brown'].map(v=>getComputedStyle(document.documentElement).getPropertyValue('--'+v).trim()||'#943d47').concat(['#f2c14e']);const ps=Array.from({length:110},()=>({x:W/2+(Math.random()-.5)*W*.35,y:H*.4,vx:(Math.random()-.5)*13,vy:-Math.random()*13-4,r:Math.random()*7+4,c:cs[Math.floor(Math.random()*cs.length)],a:Math.random()*6,s:Math.random()>.5}));let t=0;(function f(){x.clearRect(0,0,W,H);ps.forEach(p=>{p.vy+=.36;p.x+=p.vx;p.y+=p.vy;p.a+=.15;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;if(p.s){x.beginPath();x.arc(0,0,p.r/1.7,0,7);x.fill()}else x.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);x.restore()});if(++t<120)requestAnimationFrame(f);else c.remove()})()}
+function storm(){const h=colorOf(S.craft),cols=[h,'#943d47','#837f26','#b88896','#c9a23f'];for(let k=0;k<26;k++){const s=document.createElement('div');s.className='storm';s.style.left=Math.random()*95+'vw';s.style.animationDelay=Math.random()*1.4+'s';s.innerHTML=ball(cols[k%cols.length]);document.body.appendChild(s);setTimeout(()=>s.remove(),4600)}toast('You found the secret yarn storm!')}
+let AC=null,snd=null;
+function noiseBuf(type){const len=AC.sampleRate*3,b=AC.createBuffer(1,len,AC.sampleRate),d=b.getChannelData(0);let last=0;for(let i=0;i<len;i++){const w=Math.random()*2-1;if(type==='brown'){last=(last+.02*w)/1.02;d[i]=last*3.5}else d[i]=w}return b}
+function stopSound(){if(!snd)return;clearTimeout(snd.t);snd.nodes.forEach(n=>{try{n.stop&&n.stop()}catch(_){}try{n.disconnect()}catch(_){}});snd=null}
+function playSound(kind){stopSound();if(kind==='off')return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume();const master=AC.createGain();master.gain.value=(S.vol??.5)*.7;master.connect(AC.destination);const nodes=[master];snd={nodes,master,kind,t:0};const loop=b=>{const s=AC.createBufferSource();s.buffer=b;s.loop=true;s.start();nodes.push(s);return s};const filt=(type,f,q)=>{const n=AC.createBiquadFilter();n.type=type;n.frequency.value=f;if(q)n.Q.value=q;nodes.push(n);return n};
+ if(kind==='rain'){loop(noiseBuf('white')).connect(filt('highpass',400)).connect(filt('lowpass',1500)).connect(master)}
+ if(kind==='fire'){loop(noiseBuf('brown')).connect(filt('lowpass',450)).connect(master);const wb=noiseBuf('white');const crack=()=>{if(!snd||snd.kind!=='fire')return;const n=AC.createBufferSource();n.buffer=wb;const g=AC.createGain(),bp=AC.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1500+Math.random()*2500;const t=AC.currentTime;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.25+Math.random()*.6,t+.004);g.gain.exponentialRampToValueAtTime(.001,t+.04+Math.random()*.08);n.connect(bp).connect(g).connect(master);n.start(t,Math.random()*2,.15);snd.t=setTimeout(crack,50+Math.random()*420)};crack()}
+ if(kind==='cafe'){const g=AC.createGain();g.gain.value=.8;nodes.push(g);loop(noiseBuf('brown')).connect(filt('bandpass',450,.7)).connect(g).connect(master);const lfo=AC.createOscillator(),lg=AC.createGain();lfo.frequency.value=.25;lg.gain.value=.3;lfo.connect(lg).connect(g.gain);lfo.start();nodes.push(lfo,lg);const clink=()=>{if(!snd||snd.kind!=='cafe')return;const o=AC.createOscillator(),og=AC.createGain(),t=AC.currentTime;o.frequency.value=2200+Math.random()*1800;og.gain.setValueAtTime(.08,t);og.gain.exponentialRampToValueAtTime(.0001,t+.4);o.connect(og).connect(master);o.start();o.stop(t+.45);snd.t=setTimeout(clink,1500+Math.random()*5000)};clink()}
+ }catch(e){snd=null;toast("Sounds aren't available here")}}
+const flag=a=>a.map(x=>({...x,sample:true}));
+const st=a=>a.map(([t,d])=>({t,done:!!d}));
+function sampleCrochet(){
+ const yarns=[['y1','Dusty rose','#c99aa4','pink','Acrylic','A few balls'],['y2','Sage','#9aa77f','green','Cotton','Loads'],['y3','Rust','#a5573b','orange','Wool','About one ball'],['y4','Oat cream','#eadcc6','cream','Cotton','Loads'],['y5','Plum velvet','#6b3b52','purple','Velvet','A few balls'],['y6','Mustard','#c9a23f','yellow','Acrylic','A little'],['y7','Denim','#5b6f8c','blue','Chenille','A few balls'],['y8','Cocoa','#6e4a3a','brown','Chenille','About one ball'],['y9','Wine','#943d47','red','Wool','A few balls']].map(([id,name,hex,fam,type,amt])=>({id,kind:'item',name,hex,fam,fams:[fam],type,amt,img:null,label:null,notes:'',items:[]}));
+ yarns.unshift({id:'yk1',kind:'kit',name:'Sunburst blanket colours',hex:'#943d47',fam:'',fams:['multi'],members:['y9','y1','y6','y4'],type:'',amt:'',img:null,label:null,notes:'Keep these together in the big basket.',items:['4.5mm hook','Stitch markers']});
+ const I=(id,title,cat,source,k,c1,c2,h,fams,type,ys,notes)=>({id,title,cat,source,art:{k,c1,c2,h},fams,type,yarns:ys,noSup:!ys.length,notes,link:'',img:null});
+ const ideas=[I('i1','Chunky granny square cardigan','Cardigans','TikTok','cardigan','#f1e1e3','#b88896',130,['pink','cream'],'Acrylic',['y1','y4'],'Love the oversized fit and the cream border.'),
+ I('i2','Bobble stitch beanie','Beanies','Pinterest','beanie','#f3ead0','#c9a23f',110,['yellow'],'Acrylic',[],'Pompom optional.'),
+ I('i3','Striped market tote','Bags','Instagram','bag','#e8ead9','#837f26',125,['green','cream'],'Cotton',['y2'],'Cotton so it holds its shape.'),
+ I('i4','Velvet teddy bear','Amigurumi','TikTok','bear','#efe2da','#6e4a3a',100,['brown'],'Chenille',['y8'],'10mm safety eyes.'),
+ I('i5','Sunburst granny blanket','Blankets','Website','blanket','#f4e6df','#943d47',140,['red','pink','yellow','multi'],'',['yk1'],'Great scrap-buster.'),
+ I('i6','Little frog friend','Amigurumi','PDF pattern','frog','#e6ead7','#8f9c62',110,['green'],'',['y2'],'Bought on Etsy.'),
+ I('i7','Wavy striped scarf','Scarves','Pinterest','scarf','#f0e3d6','#a5573b',130,['orange','cream'],'Wool',['y3','y4'],''),
+ I('i8','Cropped bobble jumper','Jumpers','Instagram','jumper','#e3e7ee','#5b6f8c',120,['blue'],'Chenille',[],'Would need more of the denim.'),
+ I('i9','Mohair lace cardigan','Cardigans','Pinterest','cardigan','#ece0e8','#6b3b52',140,['purple'],'Mohair',[],''),
+ I('i10','Forever tulip bouquet','Flowers','TikTok','flower','#f5e4e6','#943d47',110,['red','pink','green'],'',['y9','y1'],'Make 7 for Mum.')];
+ const projects=[{id:'p1',title:'Granny square cardigan',ideas:['i1'],yarns:['y1','y4'],art:ideas[0].art,img:null,photos:[],notes:'Using a 4.5mm hook instead of 5mm.',steps:st([['Make 12 pink centre squares',1],['Make 12 cream squares',1],['Make 12 mixed squares'],['Join the back panel'],['Join the front panels'],['Sleeves'],['Border and buttons']])},
+ {id:'p2',title:'Velvet teddy bear',ideas:['i4'],yarns:['y8'],art:ideas[3].art,img:null,photos:[],notes:'',steps:st([['Head',1],['Body',1],['Arms',1],['Legs'],['Sew together'],['Stitch the face']])},
+ {id:'p3',title:'Wavy striped scarf',ideas:['i7'],yarns:['y3','y4'],art:ideas[6].art,img:null,photos:[],notes:'Changing colour every 4 rows.',steps:[]}];
+ const Gi=(id,title,k,c1,c2,h,date,gift,ids,ys,notes)=>({id,title,art:{k,c1,c2,h},img:null,date,gift,ideas:ids,yarns:ys,notes});
+ const gallery=[Gi('g1','Bobble beanie','beanie','#f3ead0','#c9a23f',110,'2026-03-14',{to:'Sarah',occ:'Birthday'},['i2'],['y6'],'Did 2 extra rows so it fits over her ears.'),
+ Gi('g2','Tulip bouquet','flower','#f5e4e6','#943d47',130,'2026-05-10',{to:'Mum',occ:"Mother's Day"},['i10'],['y9','y1'],'Made 7 tulips with wire stems.'),
+ Gi('g3','Little frog friend','frog','#e6ead7','#8f9c62',100,'2026-07-02',null,['i6'],['y2'],'Pattern page 3 has a typo in round 6.'),
+ Gi('g4','Baby blanket','blanket','#f1e1e3','#b88896',140,'2026-08-20',{to:"Emma's baby",occ:'Baby shower'},[],['y1','y4'],'Solid granny squares, 7 by 7.'),
+ Gi('g5','Sage market tote','bag','#e8ead9','#837f26',120,'2026-10-05',null,['i3'],['y2'],'')];
+ const LU={y1:'2026-11-10',y2:'2026-10-05',y3:'2026-06-02',y4:'2026-11-10',y6:'2026-03-14',y8:'2026-09-20',y9:'2026-05-10'};yarns.forEach(y=>y.lastUsed=LU[y.id]||null);
+ const now=Date.now();projects[0].updated=now-2*864e5;projects[1].updated=now-30*864e5;projects[2].updated=now-5*864e5;projects[0].playlist='';
+ ideas[0].tut=[{t:'2:15',n:'How she joins the squares'},{t:'6:40',n:'The cream border'}];ideas[8].when='someday';ideas[4].when='someday';
+ return {cats:[...DEFCATS.crochet],ideas:flag(ideas),projects:flag(projects),yarns:flag(yarns),gallery:flag(gallery),palettes:flag([{id:'pl1',name:'Granny cardigan colours',cols:['#c99aa4','#eadcc6','#943d47','#837f26','#f3e3e5']}])};
+}
+function samplePainting(){
+ const K=(id,name,hex,fams,items,notes)=>({id,kind:'kit',name,hex,fam:fams[0],fams,type:'',amt:'',img:null,label:null,notes,items});
+ const yarns=[K('k1','Watercolour travel kit','#5f7896',['blue','green'],['12-pan watercolour palette','Round brushes: 2, 6 and 10','Water brush pen','A5 cold-press pad'],'Lives in the blue pouch.'),
+ K('k2','Acrylic florals set','#943d47',['red','pink','green'],['Mixing palette','Flat brushes x3','Crimson, white and sap green acrylics','Canvas boards'],''),
+ K('k3','Gouache mini set','#c9a23f',['yellow','orange','brown'],['6 gouache tubes','Ceramic palette','Detail brush size 0'],'')];
+ const I=(id,title,cat,source,k,c1,c2,h,fams,ys,notes)=>({id,title,cat,source,art:{k,c1,c2,h},fams,type:'',yarns:ys,noSup:!ys.length,notes,link:'',img:null});
+ const ideas=[I('pi1','Loose watercolour hills','Landscapes','TikTok','landscape','#e3e9ee','#5f7896',120,['blue','green'],['k1'],'Wet-on-wet sky first.'),
+ I('pi2','Peony study in acrylic','Florals','Pinterest','flower','#f5e4e6','#943d47',130,['pink','red'],['k2'],''),
+ I('pi3','Gouache mushrooms','Techniques','Instagram','mushroom','#f3ead0','#a5573b',110,['orange','brown'],['k3'],'Cute for cards.'),
+ I('pi4','Sunset sky gradient','Landscapes','Video','landscape','#f4e2d8','#c4703f',140,['orange','pink'],[],'')];
+ const projects=[{id:'pp1',title:'Watercolour postcard set',ideas:['pi1'],yarns:['k1'],art:ideas[0].art,img:null,photos:[],notes:'',steps:st([['Sketch 4 postcards',1],['Paint the skies'],['Paint the hills'],['Add tiny details']])}];
+ const gallery=[{id:'pg1',title:'Peony canvas',art:{k:'flower',c1:'#f5e4e6',c2:'#943d47',h:120},img:null,date:'2026-04-18',gift:{to:'Nan',occ:'Birthday'},ideas:['pi2'],yarns:['k2'],notes:'Glazed with satin varnish.'}];
+ return {cats:[...DEFCATS.painting],ideas:flag(ideas),projects:flag(projects),yarns:flag(yarns),gallery:flag(gallery)};
+}
+const sampleOcc=()=>flag([{id:'o1',name:'Mum',occ:'Christmas',date:'2026-12-25',yearly:true,craft:'crochet',pid:'p1'},{id:'o2',name:'Sarah',occ:'Birthday',date:'2026-03-14',yearly:true,craft:'crochet',pid:null},{id:'o3',name:'Nan',occ:'Birthday',date:'2026-12-09',yearly:true,craft:'crochet',pid:'p2'}]);
+const fresh=()=>({craft:'crochet',tab:'ideas',theme:'blueberry',mode:'auto',hfont:'Theme default',size:'normal',order:CRAFTS.map(c=>c[0]),custom:[],heads:{},supStyle:{},crafts:{crochet:sampleCrochet(),painting:samplePainting()},occasions:sampleOcc(),skills:{crochet:{'Magic ring':'2026-02-01','Single crochet':'2026-01-10','Double crochet':'2026-01-12','Granny square':'2026-04-03'}}});
+function migrate(s){s.fx={...FXDEF,...(s.fx||{})};s.me=s.me||{name:'',bday:''};s.days=s.days||[];s.stats=s.stats||{steps:0,best:0};s.skills=s.skills||{};s.skillsExtra=s.skillsExtra||{};s.hidden=s.hidden||[];s.icon=s.icon||'ball';s.season=s.season||'auto';s.dismiss=s.dismiss||{};s.vol=s.vol??.5;delete s.drive;s.media=s.media||{};s.mq=s.mq||[];if(!THEMES.some(t=>t.id===s.theme))s.theme='blueberry';
+ if(!s.occasions){const hasSample=Object.values(s.crafts).some(c=>c.ideas.some(i=>i.sample));s.occasions=hasSample?sampleOcc():[]}
+ Object.values(s.crafts).forEach(c=>{c.palettes=c.palettes||[];c.ideas.forEach(i=>{i.when=i.when||'soon';i.tut=i.tut||[]});c.projects.forEach(p=>{p.updated=p.updated||Date.now();p.board=p.board||{}})});return s}
+let S=migrate(fresh());
+const ui={cat:'All',haveOnly:false,fam:'',type:'',vals:{},form:{},fin:{},stab:'crafts',hcraft:null,giftEdit:false,when:'all',sview:'wall',sort:'',ob:0,obC:[],page:0,soundOpen:false,egg:0};
+/* ---------- Saving: this device (IndexedDB) + a private, hidden app folder in your own Google Drive ----------
+   Uses the same Google sign-in as the lesson planner (same website address), but its own file names
+   (mycrafts...) so the two apps never touch each other's files. */
+const GOOGLE_CLIENT_ID='744170181576-ngotngduq5a2kh882pfi2dbgid03din1.apps.googleusercontent.com';
+const DATA_NAME='mycrafts.json';
+const IDB={_db:null,open(){if(this._db)return this._db;this._db=new Promise((res,rej)=>{try{const rq=indexedDB.open('my-crafts',1);rq.onupgradeneeded=()=>{rq.result.createObjectStore('kv');rq.result.createObjectStore('media')};rq.onsuccess=()=>res(rq.result);rq.onerror=()=>rej(rq.error)}catch(e){rej(e)}});return this._db},
+ async get(st,k){const db=await this.open();return new Promise((res,rej)=>{const rq=db.transaction(st).objectStore(st).get(k);rq.onsuccess=()=>res(rq.result);rq.onerror=()=>rej(rq.error)})},
+ async set(st,k,v){const db=await this.open();return new Promise((res,rej)=>{const tx=db.transaction(st,'readwrite');tx.objectStore(st).put(v,k);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error)})},
+ async clear(){try{const db=await this.open();for(const s of ['kv','media'])await new Promise(r=>{const tx=db.transaction(s,'readwrite');tx.objectStore(s).clear();tx.oncomplete=r;tx.onerror=r})}catch(e){}}};
+let saveT=null;
+function localSave(){clearTimeout(saveT);saveT=setTimeout(()=>{IDB.set('kv','state',JSON.parse(JSON.stringify(S))).catch(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast('This device is full. Your things are still safe in Google Drive.')}})},250)}
+function save(){S.savedAt=Date.now();localSave();GD.schedule()}
+const LS={get:k=>{try{return localStorage.getItem('mc_'+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem('mc_'+k,v)}catch(e){}},del:k=>{try{localStorage.removeItem('mc_'+k)}catch(e){}}};
+const GD={token:'',exp:0,client:null,fileId:'',ready:false,pushing:false,again:false,timer:null,waiters:[],needAuth:false,status:'',
+ setStatus(m){this.status=m;const p=$('#syncPill');if(p){p.textContent=m;p.classList.toggle('warn',this.needAuth||!LS.get('user'))}const d=$('#drvStatus');if(d)d.textContent=m},
+ loadGis(){return new Promise((res,rej)=>{if(window.google&&google.accounts&&google.accounts.oauth2)return res();const sc=document.createElement('script');sc.src='https://accounts.google.com/gsi/client';sc.async=true;sc.onload=()=>res();sc.onerror=()=>rej(new Error('gis'));document.head.appendChild(sc)})},
+ async getToken(interactive){
+  if(!this.token){try{const tk=JSON.parse(LS.get('tok')||'null');if(tk&&tk.exp>Date.now()+60000){this.token=tk.t;this.exp=tk.exp}}catch(e){}}
+  if(this.token&&Date.now()<this.exp-60000)return this.token;
+  // Google only gives a website a pass that lasts about an hour. Renewing it needs a tap, so we never open a Google window by surprise.
+  if(!interactive){this.needAuth=true;this.setStatus('Tap to sync');throw new Error('auth')}
+  await this.loadGis();
+  if(!this.client)this.client=google.accounts.oauth2.initTokenClient({client_id:GOOGLE_CLIENT_ID,scope:'https://www.googleapis.com/auth/drive.appdata',callback:r=>this.gotToken(r),error_callback:e=>this.gotToken({error:e&&e.type||'failed'})});
+  return new Promise((res,rej)=>{this.waiters.push({res,rej});try{this.client.requestAccessToken({prompt:LS.get('user')?'':'consent'})}catch(e){this.gotToken({error:'failed'})}})},
+ gotToken(r){const w=this.waiters;this.waiters=[];
+  if(r&&r.access_token){this.token=r.access_token;this.exp=Date.now()+(r.expires_in||3600)*1000;this.needAuth=false;LS.set('user','1');LS.set('tok',JSON.stringify({t:this.token,exp:this.exp}));w.forEach(x=>x.res(this.token))}
+  else{this.needAuth=true;w.forEach(x=>x.rej(new Error(r&&r.error||'auth')))}},
+ async api(url,opt={}){const tok=await this.getToken(false);const r=await fetch(url,{...opt,headers:{...(opt.headers||{}),Authorization:'Bearer '+tok}});
+  if(r.status===401){this.token='';LS.del('tok');this.needAuth=true;this.setStatus('Tap to sync');throw new Error('auth')}
+  if(!r.ok)throw new Error('drive '+r.status);return r},
+ list(q){return this.api(`https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=${encodeURIComponent(q)}&orderBy=modifiedTime%20desc&pageSize=100&fields=files(id,name,modifiedTime,size)`).then(r=>r.json()).then(j=>j.files||[])},
+ async uploadFile(name,data,type,fileId){const blob=data instanceof Blob?data:new Blob([data],{type});
+  if(fileId){const r=await this.api(`https://www.googleapis.com/upload/drive/v3/files/${fileId}?uploadType=media&fields=id,modifiedTime`,{method:'PATCH',headers:{'Content-Type':type},body:blob});return r.json()}
+  const meta={name,parents:['appDataFolder']};
+  if(blob.size<4e6){const bd='mc'+Date.now(),body=new Blob([`--${bd}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(meta)}\r\n--${bd}\r\nContent-Type: ${type}\r\n\r\n`,blob,`\r\n--${bd}--`]);const r=await this.api('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,modifiedTime',{method:'POST',headers:{'Content-Type':'multipart/related; boundary='+bd},body});return r.json()}
+  const r=await this.api('https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&fields=id,modifiedTime',{method:'POST',headers:{'Content-Type':'application/json; charset=UTF-8','X-Upload-Content-Type':type},body:JSON.stringify(meta)});
+  const loc=r.headers.get('Location');if(!loc)throw new Error('no upload address');const r2=await fetch(loc,{method:'PUT',headers:{'Content-Type':type},body:blob});if(!r2.ok)throw new Error('drive '+r2.status);return r2.json()},
+ async pushState(){const j=await this.uploadFile(DATA_NAME,JSON.stringify(S),'application/json',this.fileId);this.fileId=j.id||this.fileId;LS.set('fid',this.fileId);LS.set('rmod',j.modifiedTime||'');LS.set('synced',String(S.savedAt||0))},
+ async pull(){
+  if(!this.fileId)this.fileId=LS.get('fid')||'';
+  if(!this.fileId){const f=(await this.list(`name='${DATA_NAME}'`))[0];if(!f)return false;this.fileId=f.id;LS.set('fid',f.id)}
+  let m;try{m=(await (await this.api(`https://www.googleapis.com/drive/v3/files/${this.fileId}?fields=modifiedTime`)).json()).modifiedTime}catch(e){if(/404/.test(e.message)){this.fileId='';LS.del('fid');return this.pull()}throw e}
+  if(m===LS.get('rmod'))return false;
+  const remote=await (await this.api(`https://www.googleapis.com/drive/v3/files/${this.fileId}?alt=media`)).json();LS.set('rmod',m);
+  if(!remote||!remote.crafts||(remote.savedAt||0)<=(S.savedAt||0))return false;
+  // The other device has newer changes. If this device also had changes that never reached Google, keep a copy of them first.
+  if((S.savedAt||0)>(+LS.get('synced')||0)&&S.onboarded){try{await this.uploadFile(`mycrafts-copy-${dayKey()}-unsynced-${Date.now()}.json`,JSON.stringify(S),'application/json')}catch(e){}}
+  const keepUi=S.tab;S=migrate(remote);S.tab=keepUi||S.tab;localSave();LS.set('synced',String(S.savedAt||0));return true},
+ schedule(){if(!this.ready)return;clearTimeout(this.timer);this.setStatus('Saving…');this.timer=setTimeout(()=>this.push(),2500)},
+ async push(){if(!this.ready)return;if(this.pushing){this.again=true;return}this.pushing=true;
+  try{if(await this.pull()){render();toast('Updated with changes from your other device')}
+   if((S.savedAt||0)>(+LS.get('synced')||0)||!this.fileId)await this.pushState();
+   await MEDIA.flush();await this.dailyCopy();this.setStatus('Saved to Google')}
+  catch(e){this.setStatus(this.needAuth?'Tap to sync':'Saved on this device')}
+  this.pushing=false;if(this.again){this.again=false;this.schedule()}},
+ async dailyCopy(){if(LS.get('copy')===dayKey())return;try{await this.uploadFile(`mycrafts-copy-${dayKey()}.json`,JSON.stringify(S),'application/json');LS.set('copy',dayKey());const l=await this.copies();for(const f of l.slice(14))await this.api(`https://www.googleapis.com/drive/v3/files/${f.id}`,{method:'DELETE'}).catch(()=>{})}catch(e){}},
+ copies(){return this.list("name contains 'mycrafts-copy-'")},
+ async restore(id){const remote=await (await this.api(`https://www.googleapis.com/drive/v3/files/${id}?alt=media`)).json();if(!remote||!remote.crafts)throw new Error('bad');S=migrate(remote);save();render();toast('That copy has been restored')},
+ async connect(interactive){
+  try{await this.getToken(interactive);this.setStatus('Syncing…');const replaced=await this.pull();this.ready=true;ui.gate=false;render();if(replaced)toast('Your crafts are here');await this.push();
+   if(!this.poll){this.poll=setInterval(()=>this.syncNow(),60000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')this.syncNow();else if(this.timer){clearTimeout(this.timer);this.push()}})}}
+  catch(e){if(ui.gate){ui.gateMsg=interactive?"Sign-in didn't finish. Please try again.":'';render()}else this.setStatus(this.needAuth?'Tap to sync':'Saved on this device')}},
+ async syncNow(){if(!this.ready||this.pushing)return;if(!(this.token&&Date.now()<this.exp-60000)){this.needAuth=true;this.setStatus('Tap to sync');return}try{if(await this.pull())render();await MEDIA.flush();this.setStatus('Saved to Google')}catch(e){}},
+ async signOut(){try{await this.push()}catch(e){}try{if(this.token&&window.google)google.accounts.oauth2.revoke(this.token,()=>{})}catch(e){}['user','tok','fid','rmod','synced','copy'].forEach(LS.del);await IDB.clear();location.reload()}};
+
+/* Photos, videos and PDFs: kept on this device and copied into the same hidden Drive folder */
+const MEDIA={urls:{},blobs:{},
+ async put(blob,name){const id='m'+uid()+uid();await IDB.set('media',id,blob);S.media=S.media||{};S.media[id]={n:name||'',t:blob.type||'',s:blob.size,d:''};S.mq=[...(S.mq||[]),id];return id},
+ async get(id){if(this.blobs[id])return this.blobs[id];let b=null;try{b=await IDB.get('media',id)}catch(e){}
+  if(!b){const m=(S.media||{})[id];if(!m||!m.d)return null;const r=await GD.api(`https://www.googleapis.com/drive/v3/files/${m.d}?alt=media`);b=await r.blob();if(m.t&&b.type!==m.t)b=new Blob([b],{type:m.t});try{await IDB.set('media',id,b)}catch(e){}}
+  return this.blobs[id]=b},
+ async url(id){if(this.urls[id])return this.urls[id];const b=await this.get(id);return b?(this.urls[id]=URL.createObjectURL(b)):null},
+ async flush(){const q=[...(S.mq||[])];if(!q.length)return;for(const id of q){const m=(S.media||{})[id];let b=null;try{b=await IDB.get('media',id)}catch(e){}if(m&&b){const j=await GD.uploadFile('mycrafts-media-'+id,b,b.type||m.t||'application/octet-stream');m.d=j.id}S.mq=(S.mq||[]).filter(x=>x!==id)}S.savedAt=Date.now();localSave();await GD.pushState()}};
+const extOf=t=>({'image/jpeg':'jpg','image/png':'png','video/mp4':'mp4','video/quicktime':'mov','application/pdf':'pdf'})[t]||(t.split('/')[1]||'bin');
+async function saveFile(name,blob){const f=new File([blob],name,{type:blob.type});if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f]});return}catch(e){if(e&&e.name==='AbortError')return}}const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}
+async function saveMedia(id,title){let b=MEDIA.blobs[id];if(!b){try{b=await MEDIA.get(id)}catch(e){}}if(!b){toast(GD.needAuth?'Tap "Tap to sync" at the top first, then try again.':"This file hasn't reached Google yet. Open the app on the device you added it from.");return}await saveFile(`${(title||'my-craft').replace(/[^\w\- ]+/g,'').trim()||'my-craft'}.${extOf(b.type)}`,b)}
+const saveBtn=(id,title,label)=>id?`<button class="btn small" data-act="save-media" data-m="${id}" data-n="${esc(title||'')}">${IC.download} ${label||'Save to my iPhone or iPad'}</button>`:'';
+function hydrate(root){(root||document).querySelectorAll('[data-hm]').forEach(el=>{const id=el.dataset.hm;MEDIA.url(id).then(u=>{if(u)el.src=u;else if(el.tagName==='VIDEO')el.outerHTML='<div class="note">This video is still on the device you added it from. It will appear here once that device syncs.</div>'}).catch(()=>{})})}
+const blank=c=>({cats:[...(DEFCATS[c]||['General'])],ideas:[],projects:[],yarns:[],gallery:[],palettes:[]});
+function dataFor(c){if(!S.crafts[c])S.crafts[c]=blank(c);return S.crafts[c]}
+const D=()=>dataFor(S.craft);
+const find=(a,id)=>a.find(x=>x.id===id);
+function allCrafts(){const names=Object.fromEntries(CRAFTS),cu={};(S.custom||[]).forEach(c=>{names[c.id]=c.name;cu[c.id]=1});S.order=(S.order||[]).filter(id=>names[id]);Object.keys(names).forEach(id=>{if(!S.order.includes(id))S.order.push(id)});return S.order.map(id=>({id,name:names[id],custom:!!cu[id]}))}
+const nameOf=c=>(allCrafts().find(x=>x.id===c)||{name:c}).name;
+const craftName=()=>nameOf(S.craft);
+const colorOf=c=>CC[c]||((S.custom||[]).find(x=>x.id===c)||{}).hex||'#b88896';
+const supStyle=c=>(S.supStyle||{})[c]||(['painting','drawing','colouring'].includes(c)?'kits':'items');
+const isYarn=()=>S.craft==='crochet';
+const supWord=()=>isYarn()?'yarn':'supplies';
+function defHeads(c){return {ideas:{n:'Ideas',on:true},projects:{n:'Projects',on:true},stash:{n:c==='crochet'?'Stash':'Supplies',on:true},gallery:{n:c==='embroidery'?'Gallery':'Portfolio',on:true}}}
+function heads(c){if(!S.heads[c])S.heads[c]=defHeads(c);return S.heads[c]}
+const visTabs=()=>[...TABKEYS.filter(k=>heads(S.craft)[k].on).map(k=>[k,heads(S.craft)[k].n]),['settings','Settings']];
+const val=(id,d='')=>ui.vals[id]??d;
+const isVid=i=>!!(i.hasVideo||i.vidM||['TikTok','Video'].includes(i.source));
+const media=(it,full)=>it.img?`<img src="${it.img}" ${full&&it.imgM?`data-hm="${it.imgM}"`:''} alt="${esc(it.title)}">`:art(it.art);
+const pmedia=(p,full)=>{const ph=p.photos[p.photos.length-1];return ph?`<img src="${ph.src}" ${full&&ph.m?`data-hm="${ph.m}"`:''} alt="${esc(p.title)}">`:media(p,full)};
+function cluster(cols,size){const c=cols.slice(0,3),pos=[[0,34,58],[42,30,58],[20,2,58]];return `<svg viewBox="0 0 100 100" ${size?`width="${size}" height="${size}"`:''} aria-hidden="true">${c.map((h,k)=>ball(h).replace('<svg ',`<svg x="${pos[k][0]}" y="${pos[k][1]}" width="${pos[k][2]}" height="${pos[k][2]}" `)).reverse().join('')}</svg>`}
+function kitThumb(y,size){const cols=(y.members||[]).map(m=>find(D().yarns,m)).filter(Boolean).map(m=>m.hex);if(cols.length)return cluster(cols,size);return isYarn()?cluster([y.hex,shade(y.hex,-.35),shade(y.hex,.25)],size):kitSvg(y.hex,size)}
+const supThumb=(y,size)=>y.img?`<img src="${y.img}" alt="">`:y.kind==='kit'?kitThumb(y,size):ball(y.hex,size);
+const kitCount=y=>(y.members||[]).length+y.items.length;
+const kitFams=y=>[...new Set([...(y.fams||[]),...(y.members||[]).map(m=>find(D().yarns,m)).filter(Boolean).flatMap(m=>m.fams||[m.fam])])].filter(Boolean);
+const pct=p=>p.steps.length?Math.round(p.steps.filter(s=>s.done).length/p.steps.length*100):0;
+const sw=y=>`<button class="sw" data-act="yarn" data-id="${y.id}">${supThumb(y,56)}<span>${esc(y.name)}</span></button>`;
+const th=i=>`<button class="th" data-act="idea" data-id="${i.id}">${media(i)}${isVid(i)?`<span class="play s">${IC.play}</span>`:''}<span>${esc(i.title)}</span></button>`;
+const empty=(t,b,act,label)=>`<div class="empty">${ball(colorOf(S.craft),90)}<h3>${t}</h3><p>${b}</p>${act?`<button class="btn primary" data-act="${act}">${IC.plus} ${label}</button>`:''}</div>`;
+const fileBtn=(label,icon,accept,up,id='',cls='btn')=>`<label class="${cls}">${icon} ${label}<input type="file" accept="${accept}" hidden data-up="${up}" data-id="${id}"></label>`;
+const cheer=()=>['Nice one!','Another step done','Look at you go','One step closer'][Math.floor(Math.random()*4)];
+const famChips=(act,sel)=>Object.keys(FAMS).map(k=>`<button class="chip cap1" data-act="${act}" data-v="${k}" aria-pressed="${sel.includes(k)}"><span class="dot" style="background:${FAMS[k]}"></span>${k}</button>`).join('');
+
+function resolvedMode(){const t=THEMES.find(x=>x.id===S.theme)||THEMES[0];let m=S.mode==='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):S.mode;if(!t[m])m=t.light?'light':'dark';return m}
+function applyTheme(){const t=THEMES.find(x=>x.id===S.theme)||THEMES[0],m=resolvedMode(),p=t[m],r=document.documentElement.style;Object.entries(p).forEach(([k,v])=>r.setProperty('--'+k,v));const hf=S.hfont&&S.hfont!=='Theme default'?S.hfont:t.fh;r.setProperty('--fh',`'${hf}',sans-serif`);r.setProperty('--fb',`'${t.fb}',system-ui,sans-serif`);r.setProperty('--fd',`'${t.fd}',cursive`);r.colorScheme=m;r.setProperty('--pat',t.pat?t.pat(m):'none');document.body.style.zoom=S.size==='large'?'1.12':'';
+ const b=document.body.classList;b.toggle('fx-washi',!!S.fx.washi);b.toggle('fx-polaroid',!!S.fx.polaroid);b.toggle('fxb',!!S.fx.borders);document.body.dataset.craft=S.craft}
+const visCrafts=()=>allCrafts().filter(c=>!S.hidden.includes(c.id));
+const prog=(v,big)=>`<span class="prog ${big?'big':''} ${S.fx.yarnprog?'yp':''}"><i style="width:${v}%"></i>${S.fx.yarnprog?`<span class="pball" style="left:calc(${v}% - 11px)">${ball(getComputedStyle(document.documentElement).getPropertyValue('--rose').trim()||'#b88896',22)}</span>`:''}</span>`;
+const mascotOr=(size)=>S.fx.mascots?mascot(S.craft,size):ball(colorOf(S.craft),size);
+
+function tile(i){const ys=i.yarns.map(id=>find(D().yarns,id)).filter(Boolean);
+ return `<button class="tile" data-act="idea" data-id="${i.id}"><span class="m">${media(i)}<span class="badge">${esc(i.source)}</span>${isVid(i)?`<span class="play">${IC.play}</span>`:''}</span><span class="cap"><b>${esc(i.title)}</b><span class="dots">${ys.length?ys.map(y=>`<span class="dot" style="background:${y.hex}" title="${esc(y.name)}"></span>`).join(''):'<span class="tag">No supplies yet</span>'}${S.fx.someday&&i.when==='someday'?'<span class="tag olive">Someday</span>':''}</span></span></button>`}
+
+function banners(){let h='';const t=new Date(),me=S.me||{};
+ if(S.fx.birthday&&me.bday&&me.bday.slice(5)===dayKey().slice(5))h+=`<div class="banner">${mascotOr(56)}<div><p class="hand" style="font-size:28px">Happy birthday${me.name?', '+esc(me.name):''}!</p><p class="small" style="margin:0">Hope today is full of cake and yarn.</p></div></div>`;
+ const mk=dayKey().slice(0,7);if(S.fx.monthly&&t.getDate()<=3&&!S.dismiss['m'+mk]){const [n,cols]=PALS[t.getMonth()];h+=`<div class="banner"><div style="flex:1 1 220px"><p class="hand">Hello ${t.toLocaleDateString('en-AU',{month:'long'})}! Try this palette:</p><b>${n}</b></div><div class="sw4">${cols.map(c=>`<i style="background:${c}"></i>`).join('')}</div><button class="btn small" data-act="savepal-month">Save palette</button><button class="mini" data-act="dismiss" data-v="m${mk}" aria-label="Hide">${IC.x}</button></div>`}
+ return h}
+
+function vIdeas(){const d=D(),uns=d.ideas.filter(i=>!i.cat),cats=['All',...(uns.length?['Unsorted']:[]),...d.cats,...(S.fx.palettes?['Palettes']:[])];if(!cats.includes(ui.cat))ui.cat='All';
+ const list=d.ideas.filter(i=>(ui.cat==='All'||(ui.cat==='Unsorted'?!i.cat:i.cat===ui.cat))&&(!ui.haveOnly||i.yarns.length)&&(!S.fx.someday||ui.when==='all'||i.when===ui.when));const hasSample=d.ideas.some(i=>i.sample);
+ const cnt=c=>c==='All'?d.ideas.length:c==='Unsorted'?uns.length:c==='Palettes'?d.palettes.length:d.ideas.filter(i=>i.cat===c).length;
+ let body;
+ if(ui.cat==='Palettes')body=d.palettes.length?`<div class="masonry">${d.palettes.map(p=>`<div class="palcard"><div class="cols">${p.cols.map(c=>`<i style="background:${c}" title="${c}"></i>`).join('')}</div><div class="pb2"><b>${esc(p.name)}</b><div class="small">${p.cols.join(' ')}</div><div class="acts" style="margin-top:8px"><button class="btn small" data-act="pal-match" data-id="${p.id}">Find matching ${supWord()}</button><button class="mini" data-act="pal-del" data-id="${p.id}" aria-label="Delete palette">${IC.x}</button></div></div></div>`).join('')}</div>`:empty('No palettes yet','Open any idea and tap "Make a colour palette".');
+ else if(ui.cat==='Unsorted')body=list.length?`<p class="hand">Tap a category under each one to sort it.</p><div class="masonry">${list.map(i=>`<div class="ut">${tile(i)}<div class="sortrow"><small>Sort into</small>${d.cats.map(c=>`<button class="chip" data-act="assign" data-id="${i.id}" data-v="${esc(c)}">${esc(c)}</button>`).join('')}</div></div>`).join('')}</div>`:empty('All sorted!','Nice and tidy.');
+ else body=list.length?`<div class="masonry">${list.map(tile).join('')}</div>`:empty('Nothing saved here yet','Paste a link above, save a photo or PDF, or use the buttons to find ideas.','add-idea','Save an idea');
+ return `${banners()}<div class="bar"><div class="quick"><input id="quickLink" placeholder="Paste a link from TikTok, Pinterest, Instagram..." aria-label="Paste a link"><button class="btn olive" data-act="quick-save">Save</button></div><button class="btn primary" data-act="add-idea">${IC.plus} Save an idea</button></div>
+ <div class="bar"><div class="chips">${cats.map(c=>`<button class="chip" data-act="cat" data-v="${esc(c)}" aria-pressed="${ui.cat===c}">${esc(c)} <span class="n">${cnt(c)}</span></button>`).join('')}</div></div>
+ ${ui.cat==='Palettes'?'':`<div class="sub">${S.fx.someday?`<div class="chips" style="flex:none">${[['all','Everything'],['soon','Soon'],['someday','Someday']].map(([k,l])=>`<button class="chip" data-act="when" data-v="${k}" aria-pressed="${ui.when===k}">${l}</button>`).join('')}</div>`:''}<label class="tog"><input type="checkbox" data-act="have" ${ui.haveOnly?'checked':''}> Only ideas I have supplies for</label>${hasSample?'<span class="hand">These are sample ideas to show how it works.</span>':''}</div>
+ <div class="find"><b>Find ideas${ui.cat!=='All'&&ui.cat!=='Unsorted'?' for '+esc(ui.cat.toLowerCase()):''}:</b>${findLinks(S.craft,ui.cat).map(([n,u])=>`<a class="btn small" href="${u}" target="_blank" rel="noopener">${IC.ext} ${n}</a>`).join('')}</div>`}
+ ${body}`}
+
+function nextHtml(p){const n=p.steps.find(s=>!s.done);if(n)return `<span class="next"><small>Next small step</small>${esc(n.t)}</span>`;if(!p.steps.length)return '<span class="next unsure"><small>Next small step</small>Not sure yet. Add one when you know.</span>';return '<span class="next"><small>All steps done</small>Ready to call it finished?</span>'}
+function vProjects(){const d=D();
+ return `${banners()}<div class="bar"><h2 class="h">${isYarn()?'On the hook':'In progress'} <span class="n">${d.projects.length}</span></h2><div class="acts" style="margin:0">${S.fx.giftcal?`<button class="btn" data-act="giftcal">${IC.calendar} Gift calendar</button>`:''}${S.fx.skills?`<button class="btn" data-act="skills">${IC.star} Skills</button>`:''}<button class="btn primary" data-act="add-project">${IC.plus} New project</button></div></div>
+ ${d.projects.length?`<div class="plist">${d.projects.map(p=>{const done=p.steps.filter(s=>s.done).length,v=pct(p);return `<button class="pcard" data-act="project" data-id="${p.id}"><span class="pm">${pmedia(p)}</span><span class="pb"><b>${esc(p.title)}</b>${prog(v)}<span class="small">${p.steps.length?`${v}% · ${done} of ${p.steps.length} small steps`:'No steps yet'}</span>${nextHtml(p)}</span></button>`}).join('')}</div>`:empty('No projects on the go','Start one from a saved idea, or from scratch.','add-project','New project')}`}
+
+function vWheel(list){const items=list.filter(y=>y.kind!=='kit').map(y=>({y,h:hsl(y.hex)})).sort((a,b)=>a.h[0]-b.h[0]);let lastA=-99,alt=0;
+ return `<div class="wheel">${items.map(({y,h})=>{const neutral=h[1]<.15||h[2]>.88||h[2]<.12;let r;if(neutral){r=h[2]>.6?6:18}else{const a=h[0];if(a-lastA<22)alt++;else alt=0;lastA=a;r=[41,30,48][alt%3]}const ang=(h[0]-90)*Math.PI/180;const x=50+r*Math.cos(ang),yy=50+r*Math.sin(ang);return `<button class="wb" style="left:${x}%;top:${yy}%" data-act="yarn" data-id="${y.id}">${y.img?`<img src="${y.img}" alt="">`:ball(y.hex,54)}<span>${esc(y.name)}</span></button>`}).join('')}</div><p class="small" style="text-align:center">Neutrals sit in the middle. Kits aren't shown here.</p>`}
+
+function vStash(){const d=D(),fams=[...new Set(d.yarns.flatMap(y=>y.fams||[y.fam]).filter(Boolean))];
+ let list=d.yarns.filter(y=>(!ui.fam||(y.fams||[y.fam]).includes(ui.fam))&&(!ui.type||y.type===ui.type));const types=[...new Set(d.yarns.map(y=>y.type).filter(Boolean))];
+ if(ui.sort==='unused')list=[...list].sort((a,b)=>(a.lastUsed||'0').localeCompare(b.lastUsed||'0'));
+ const view=S.fx.wheel?ui.sview:'wall';
+ return `<div class="bar"><div class="chips">${fams.length?`<button class="chip" data-act="fam" data-v="" aria-pressed="${!ui.fam}">All colours</button>${fams.map(f=>`<button class="chip cap1" data-act="fam" data-v="${f}" aria-pressed="${ui.fam===f}"><span class="dot" style="background:${FAMS[f]}"></span>${f}</button>`).join('')}`:''}</div>
+ <button class="btn primary" data-act="add-yarn">${IC.plus} Add ${isYarn()?'yarn':'an item'}</button><button class="btn primary" data-act="add-kit">${IC.plus} New kit</button></div>
+ <div class="bar">${S.fx.wheel?`<div class="chips" style="flex:none"><button class="chip" data-act="sview" data-v="wall" aria-pressed="${view==='wall'}">${IC.grid} Wall</button><button class="chip" data-act="sview" data-v="wheel" aria-pressed="${view==='wheel'}">${IC.wheel} Colour wheel</button></div>`:'<span></span>'}
+ <div class="acts" style="margin:0">${types.length?`<select class="sel" data-act="type" aria-label="Filter by type"><option value="">All types</option>${types.map(t=>`<option ${ui.type===t?'selected':''}>${esc(t)}</option>`).join('')}</select>`:''}${S.fx.lastused?`<select class="sel" data-act="sort" aria-label="Sort"><option value="">Newest first</option><option value="unused" ${ui.sort==='unused'?'selected':''}>Longest unused first</option></select>`:''}${S.fx.stashbuster&&d.yarns.length?`<button class="btn" data-act="buster">${IC.shuffle} Stash buster</button>`:''}</div></div>
+ ${!d.yarns.length?empty('Your supplies are empty',`Add single ${isYarn()?'yarns':'items'}, or make a kit of things you use together.`,'add-yarn','Add supplies'):view==='wheel'?vWheel(list):`<p class="hand">${isYarn()?'Tap a yarn or kit to see ideas you could make with it. Kits group colours you use together.':'Tap an item or kit to see ideas you could make with it. Kits group things you use together.'}</p><div class="wall">${list.map(y=>{const n=d.ideas.filter(i=>i.yarns.includes(y.id)).length,kc=kitCount(y);return `<button class="yarn" data-act="yarn" data-id="${y.id}"><span class="ym">${supThumb(y)}</span><b>${esc(y.name)}</b><span class="small">${y.kind==='kit'?`Kit · ${kc} thing${kc===1?'':'s'}`:[y.type,y.amt].filter(Boolean).map(esc).join(' · ')}</span>${S.fx.lastused&&ui.sort==='unused'&&y.kind!=='kit'?`<span class="small">${ago(y.lastUsed)}</span>`:''}${n?`<span class="tag olive">${n} idea${n>1?'s':''}</span>`:''}</button>`}).join('')}</div>`}`}
+
+function vGallery(){const d=D(),yr=String(new Date().getFullYear()),ty=d.gallery.filter(g=>g.date.startsWith(yr)),mk=dayKey().slice(0,7),tm=d.gallery.filter(g=>g.date.startsWith(mk));
+ return `<div class="year"><div><span class="hand">Your ${yr} so far</span><div class="stats"><span><b>${ty.length}</b>finished</span><span><b>${ty.filter(g=>g.gift).length}</b>gifted</span></div></div><button class="btn light" data-act="review">${IC.sparkle} Year in review</button></div>
+ ${S.fx.monthshelf?`<h3>Finished this month <span class="n">${tm.length}</span></h3>${tm.length?`<div class="row">${tm.map(g=>`<button class="th" data-act="gal" data-id="${g.id}">${media(g)}<span>${esc(g.title)}</span></button>`).join('')}</div>`:`<p class="small">Nothing yet this month. There's still time!</p>`}`:''}
+ ${S.fx.stickers?`<h3>Stickers</h3><div class="shelf">${stickers().map(([n,h,on,i])=>`<div class="stk ${on?'':'off'}" title="${esc(h)}"><div class="sc">${i}</div>${n}${on?'':`<div class="small" style="font-weight:400">${h}</div>`}</div>`).join('')}</div>`:''}
+ <div class="bar" style="margin-top:12px"><div class="chips"><button class="chip big" data-act="gview" data-v="pics" aria-pressed="${ui.gview!=='list'}">${IC.image} Pictures</button><button class="chip big" data-act="gview" data-v="list" aria-pressed="${ui.gview==='list'}">${IC.list} List</button></div><button class="btn" data-act="add-gallery">${IC.plus} Add a finished piece</button></div>
+ ${ui.gview==='list'?gList(d):d.gallery.length?`<div class="masonry">${[...d.gallery].sort((a,b)=>b.date.localeCompare(a.date)).map(g=>`<button class="tile gtile" data-act="gal" data-id="${g.id}"><span class="m">${media(g)}${g.gift?`<span class="badge">${IC.gift} Gift</span>`:''}</span><span class="cap"><b>${esc(g.title)}</b><span class="small">${fmt(g.date)}</span></span></button>`).join('')}</div>`:empty('Nothing here yet','Finished projects land here, and you can add older makes and drawings too.','add-gallery','Add a finished piece')}`}
+
+function gList(d){const fin=[...d.gallery].sort((a,b)=>b.date.localeCompare(a.date));
+ return `<h3>In progress <span class="n">${d.projects.length}</span></h3>${d.projects.length?`<div>${d.projects.map(p=>{const n=p.steps.find(s=>!s.done);return `<button class="lrow" data-act="project" data-id="${p.id}"><span><b>${esc(p.title)}</b><span class="small">${n?'Next: '+esc(n.t):p.steps.length?'All steps done':'No next step yet'}</span></span><span class="r small">${p.steps.length?pct(p)+'% done':''}</span></button>`}).join('')}</div>`:'<p class="small">Nothing in progress.</p>'}
+ <h3>Finished <span class="n">${fin.length}</span></h3>${fin.length?`<div>${fin.map(g=>`<button class="lrow" data-act="gal" data-id="${g.id}"><span><b>${esc(g.title)}</b><span class="small">${fmt(g.date)}</span></span><span class="r small">${g.gift?'Gifted to '+esc(g.gift.to):'Kept'}</span></button>`).join('')}</div>`:'<p class="small">Nothing finished yet.</p>'}`}
+
+function vSettings(){const T=[['crafts','Crafts',IC.basket],['theme','Theme',IC.palette],['heads','Headings',IC.heading],['fun','Fun extras',IC.party],['data','Your data',IC.cloud]];return `<div class="setgrid"><nav class="snav" aria-label="Settings sections">${T.map(([k,l,i])=>`<button class="sbtn" data-act="stab" data-v="${k}" aria-pressed="${ui.stab===k}">${i}<span>${l}</span></button>`).join('')}</nav><div>${({crafts:vCrafts,theme:vTheme,heads:vHeads,fun:vFun,data:vData})[ui.stab]()}</div></div>`}
+function vCrafts(){const cs=visCrafts(),hid=allCrafts().filter(c=>S.hidden.includes(c.id)),anySample=Object.values(S.crafts).some(c=>['ideas','projects','yarns','gallery'].some(k=>c[k].some(x=>x.sample)));
+ return `<h2 class="h" style="margin-top:0">Your crafts</h2><p class="small">Tap a craft to open it. Drag the dots in the corner, or use the arrows, to change the order.</p>
+ <div class="clist" id="clist">${cs.map((c,k)=>{const d=S.crafts[c.id],cnt=d?d.ideas.length+d.projects.length+d.gallery.length:0;return `<div class="crow ${S.craft===c.id?'on':''}" data-v="${c.id}"><span class="handle" aria-hidden="true">${IC.grip}</span><button class="cpick" data-act="craft" data-v="${c.id}">${S.fx.mascots?mascot(c.id,84):ball(colorOf(c.id),84)}<b>${esc(c.name)}</b><span class="small">${S.craft===c.id?'Open now':cnt?cnt+' saved':'Nothing yet'}</span></button><span class="arrows"><button class="mini" data-act="cup" data-v="${c.id}" aria-label="Move ${esc(c.name)} earlier" style="${k?'':'visibility:hidden'}">${IC.left}</button><button class="mini" data-act="${c.custom?'cdel':'chide'}" data-v="${c.id}" aria-label="${c.custom?'Remove':'Hide'} ${esc(c.name)}">${IC.x}</button><button class="mini" data-act="cdown" data-v="${c.id}" aria-label="Move ${esc(c.name)} later" style="${k<cs.length-1?'':'visibility:hidden'}">${IC.right}</button></span></div>`}).join('')}</div>
+ ${hid.length?`<h3>Hidden crafts</h3><p class="small">Tap one to bring it back.</p><div class="chips wrap">${hid.map(c=>`<button class="chip" data-act="cshow" data-v="${c.id}">${IC.plus} ${esc(c.name)}</button>`).join('')}</div>`:''}
+ <h3>Add a craft</h3><div class="addrow"><input id="newcraft" placeholder="Candle making" aria-label="New craft name"><button class="btn olive" data-act="addcraft">Add craft</button></div><p class="err" id="craftErr"></p>
+ <h3>Tidy up</h3><div class="box" id="tidy">
+ ${anySample?'<p><b>Remove the sample items.</b> This takes out only the made-up examples I added to show how the app works. Everything you added yourself stays.</p><button class="btn" data-act="rm-samples">Remove sample items</button>':''}
+ <p><b>Empty ${esc(craftName())}.</b> This deletes every idea, project, supply and portfolio piece in ${esc(craftName())} only. Your other crafts are not touched.</p><button class="btn ghost" data-act="clear-craft">Empty ${esc(craftName())}</button>
+ <p><b>Welcome page.</b> See the start-up steps again.</p><button class="btn ghost" data-act="ob-again">Show the welcome page</button></div>`}
+const modeChips=()=>`<div class="chips wrap" style="justify-content:inherit">${[['light','Light'],['dark','Dark'],['auto','Match my device']].map(([k,l])=>`<button class="chip big" data-act="mode" data-v="${k}" aria-pressed="${S.mode===k}">${l}</button>`).join('')}</div>`;
+function themeGrid(){const m=resolvedMode();return `<div class="themes">${THEMES.map(x=>{const mm=x[m]?m:(x.light?'light':'dark'),p=x[mm],on=S.theme===x.id;return `<button class="theme" data-act="theme" data-v="${x.id}" aria-pressed="${on}" style="background:${p.card};color:${p.ink};border-color:${on?p.wine:p.line};${on?`box-shadow:0 0 0 2px ${p.wine}`:''}"><span class="tpat" style="background-color:${p.bg};background-image:${x.pat(mm)}"></span><span class="tsw">${[p.wine,p.olive,p.brown,p.rose].map(c=>`<i style="background:${c}"></i>`).join('')}</span><b style="font-family:'${x.fh}',sans-serif;color:${p.brown}">${x.name}</b><span class="ttag" style="background:${p.roseTint};color:${p.wine}">${x.light&&x.dark?'Light and dark':x.light?'Light mode only':'Dark mode only'}</span><span class="tmini" style="background:${p.card};border-color:${p.line}"><i style="background:${p.wine}"></i><i style="background:${p.olive}"></i><i style="background:${p.line}"></i></span>${on?`<span style="font:700 13px var(--fb);color:${p.wine}">In use</span>`:''}</button>`}).join('')}</div>`}
+function vTheme(){const t=THEMES.find(x=>x.id===S.theme)||THEMES[0],want=S.mode==='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):S.mode,m=resolvedMode();
+ return `<h2 class="h" style="margin-top:0">Light or dark</h2>${modeChips()}
+ ${want!==m?`<div class="note">${esc(t.name)} is made for ${m} mode only, so it stays ${m}. Pick a theme marked "${want==='dark'?'Dark':'Light'}" or "Light and dark" to switch.</div>`:''}
+ <h2 class="h" style="margin-top:20px">Theme</h2>${themeGrid()}
+ <h2 class="h" style="margin-top:20px">Make it yours</h2><label class="f" for="hfont">Heading font</label><select id="hfont" data-act="hfont">${HFONTS.map(f=>`<option ${f===(S.hfont||'Theme default')?'selected':''}>${f}</option>`).join('')}</select>
+ <label class="f">Text size</label><div class="chips wrap"><button class="chip" data-act="size" data-v="normal" aria-pressed="${S.size!=='large'}">Normal</button><button class="chip" data-act="size" data-v="large" aria-pressed="${S.size==='large'}">Larger</button></div>`}
+function vHeads(){const hc=ui.hcraft||S.craft,h=heads(hc),d=dataFor(hc);
+ return `<h2 class="h" style="margin-top:0">Headings for</h2><select data-act="hcraft" aria-label="Choose craft">${allCrafts().map(c=>`<option value="${c.id}" ${c.id===hc?'selected':''}>${esc(c.name)}</option>`).join('')}</select>
+ <p class="small">Rename the headings at the top of the page, or untick the ones you don't need. Settings always stays so you can get back here.</p>
+ ${TABKEYS.map(k=>`<div class="hr ${h[k].on?'':'off'}"><label><input type="checkbox" data-act="hon" data-c="${hc}" data-k="${k}" ${h[k].on?'checked':''}> Show</label><input value="${esc(h[k].n)}" data-act="hname" data-c="${hc}" data-k="${k}" aria-label="Name for this heading"><span class="small">${DESC[k]}</span></div>`).join('')}
+ <button class="btn ghost" data-act="hreset" data-c="${hc}">Reset to the usual names</button>
+ <h2 class="h" style="margin-top:22px">Idea categories for ${esc(nameOf(hc))}</h2><p class="small">These are the little tabs inside ${esc(h.ideas.n)}.</p>
+ <div class="chips wrap">${d.cats.map(c=>`<span class="chip">${esc(c)}<button class="mini" data-act="delcat" data-c="${hc}" data-v="${esc(c)}" aria-label="Remove ${esc(c)}">${IC.x}</button></span>`).join('')}</div>
+ <div class="addrow"><input id="newcat" placeholder="Baby clothes" aria-label="New category"><button class="btn olive" data-act="addcat" data-c="${hc}">Add</button></div>`}
+function vFun(){const me=S.me||{};
+ return `<h2 class="h" style="margin-top:0">About you</h2><div class="fxg" style="padding:6px 16px 16px"><label class="f" for="meName">Your name</label><input id="meName" data-act="me-name" value="${esc(me.name||'')}" placeholder="Sarah"><label class="f" for="meBday">Your birthday</label><input id="meBday" type="date" data-act="me-bday" value="${esc(me.bday||'')}"></div>
+ <p class="small">Tick the extras you want. Untick any you don't.</p>
+ ${FXGROUPS.map(([g,rows])=>`<h3>${g}</h3><div class="fxg">${rows.map(([k,t,dsc])=>`<label class="fxr"><input type="checkbox" data-act="fx" data-v="${k}" ${S.fx[k]?'checked':''}><span><b>${t}</b><span>${dsc}</span></span></label>${k==='seasonal'&&S.fx.seasonal?`<div style="padding:0 0 12px 36px"><label class="f" for="seasonSel" style="margin-top:0">Show decorations for</label><select id="seasonSel" data-act="season">${[['auto','The season right now'],['xmas','Christmas (December)'],['summer','Summer'],['autumn','Autumn'],['winter','Winter'],['spring','Spring']].map(([v,l])=>`<option value="${v}" ${S.season===v?'selected':''}>${l}</option>`).join('')}</select></div>`:''}${k==='headicon'&&S.fx.headicon?`<div class="chips wrap" style="padding:0 0 12px 36px">${ICONS.map(([v,l])=>`<button class="chip" data-act="icon" data-v="${v}" aria-pressed="${(S.icon||'ball')===v}">${l}</button>`).join('')}</div>`:''}`).join('')}</div>`).join('')}`}
+function vData(){const signed=!!LS.get('user');return `<h2 class="h" style="margin-top:0">Your data is safe</h2>
+ <div class="box">${signed?`<p><b>You're signed in with Google.</b> Everything you add is saved on this device <i>and</i> in a private, hidden folder in your own Google Drive that only this app can use. When you open the app on your iPhone, iPad or MacBook, it brings in your latest changes.</p><p><b>Status:</b> <span id="drvStatus">${esc(GD.status||'')}</span></p><div class="acts" style="margin-top:0"><button class="btn primary" data-act="gd-sync">${IC.cloud} Sync now</button><button class="btn" data-act="gd-copies">See daily copies</button></div><div id="copies" style="margin-top:12px"></div><p class="small">A copy of everything is kept each day for the last 14 days, so you can go back if something goes wrong.</p>`:`<p><b>Not backed up yet.</b> Right now your things are only on this device. Sign in with Google so they're saved safely and show up on your other devices.</p><button class="btn primary" data-act="gd-sync">Sign in with Google</button>`}</div>
+ <h3>Where are my photos, videos and PDFs?</h3><div class="box"><p>They live <b>inside this app</b>. Open any idea, project or finished piece to see them, or tap "Open pattern" for a PDF.</p><p><b>For a plane or no internet:</b> tap <b>"Save to my device"</b> under a picture, video or PDF. Then choose <b>Save Video</b> or <b>Save Image</b> (it goes into your Photos app), or <b>Save to Files</b> (for PDFs). Those copies are on your iPhone or iPad and open without internet.</p><p class="small">Behind the scenes, they're also kept in a hidden folder in your Google Drive. You won't see it when you open Google Drive. That's on purpose, so nothing gets deleted by accident. To see how much space it uses, open Google Drive on a computer, then Settings, then Manage apps.</p></div>
+ <h3>Backup file</h3><div class="box"><p>Save a copy of all your words, lists and small pictures as a file, for extra peace of mind.</p><div class="acts" style="margin-top:0"><button class="btn" data-act="backup">${IC.download} Download a backup</button>${fileBtn('Restore from a backup',IC.file,'application/json,.json','restore','','btn')}</div><p class="err" id="formErr"></p></div>
+ ${signed?`<h3>Sign out</h3><div class="box"><p class="small">Signing out removes your things from this device only. They stay safe in your Google Drive and come back when you sign in again.</p><button class="btn ghost" data-act="gd-signout">Sign out of Google</button></div>`:''}`}
+
+function vOnboard(){const st=ui.ob,dots=`<div class="obdots">${[0,1,2,3].map(i=>`<i class="${i===st?'on':''}"></i>`).join('')}</div>`;let body='';
+ if(st===0)body=`${mascot('crochet',120)}<h1 class="obh">Welcome to your craft corner</h1><p>Let's get you set up. It takes about a minute.</p><label class="f" for="obName" style="text-align:left">What should I call you? (optional)</label><input id="obName" value="${esc(ui.vals.obName??S.me.name??'')}" placeholder="Sarah">`;
+ if(st===1)body=`<h1 class="obh">Pick a look</h1><p>Light, dark or match your device, then choose a theme. You can change this any time in Settings.</p>${modeChips()}<div style="height:14px"></div>${themeGrid()}`;
+ if(st===2)body=`<h1 class="obh">Which crafts do you do?</h1><p>Tick as many as you like. The others stay hidden until you want them.</p><div class="clist">${allCrafts().map(c=>{const on=ui.obC.includes(c.id);return `<button class="crow obc ${on?'on':''}" data-act="ob-craft" data-v="${c.id}" aria-pressed="${on}">${mascot(c.id,72)}<b class="cname">${esc(c.name)}</b>${on?`<span class="tick">${IC.check}</span>`:''}</button>`}).join('')}</div><p class="err" id="formErr"></p>`;
+ if(st===3)body=`<h1 class="obh">Go find some ideas</h1><p>These open a search for each of your crafts. When you find something you love, copy the link and paste it into Ideas.</p>${ui.obC.map(c=>`<div class="box"><h3>${esc(nameOf(c))}</h3><div class="acts" style="margin-top:0">${findLinks(c).map(([n,u])=>`<a class="btn small" href="${u}" target="_blank" rel="noopener">${IC.ext} ${n}</a>`).join('')}</div></div>`).join('')}`;
+ return `<div class="ob">${dots}${body}<div class="acts">${st?'<button class="btn ghost" data-act="ob-back">Back</button>':''}<button class="btn primary" data-act="ob-next">${st===3?'Start crafting':'Next'}</button></div>${st===0?'<button class="btn ghost" data-act="ob-skip" style="margin-top:8px">Skip setup</button>':''}</div>`}
+
+function header(){const me=S.me||{},st=streak();let h='';
+ if(S.fx.seasonal&&season()!=='xmas')h+=decorSvg(season());
+ if(S.fx.seasonal&&season()==='xmas')h+=decorSvg('xmas');
+ const g=S.fx.greeting?`<p class="greet">${greeting()}${me.name?', '+esc(me.name):''}</p>`:'',qq='';
+ if(g||qq)h+=`<div class="gbox" style="min-width:0">${g}${qq}</div>`;
+ if(S.fx.streak)h+=`<span class="streak" title="Days in a row you've made progress">${st?st+'-day streak':'Start a streak today'}</span>`;
+ h+=`<button class="syncpill ${GD.needAuth||!LS.get('user')?'warn':''}" id="syncPill" data-act="gd-sync">${LS.get('user')?esc(GD.status||'Saved on this device'):'Not backed up'}</button>`;
+ if(S.fx.sounds)h+=`<button class="sbtn2 ${snd?'on':''}" data-act="sound-open" aria-label="Cosy sounds">${IC.music}</button>`;
+ $('#hleft').innerHTML=h;
+ $('#soundPanel').innerHTML=S.fx.sounds&&ui.soundOpen?`<div class="spanel"><b style="margin-right:4px">Cosy sounds</b>${[['off','Off'],['rain','Rain'],['fire','Fireplace'],['cafe','Café']].map(([k,l])=>`<button class="chip" data-act="sound" data-v="${k}" aria-pressed="${(snd?snd.kind:'off')===k}">${l}</button>`).join('')}<label class="small" style="display:flex;align-items:center;gap:6px">Volume <input type="range" min="0" max="1" step="0.05" value="${S.vol}" data-act="vol" aria-label="Volume"></label></div>`:'';
+ $('#lights').innerHTML=S.fx.seasonal&&season()==='xmas'?lightsSvg():'';
+ $('#brandBall').innerHTML=headIcon()}
+
+function vGate(){return `<div class="ob" style="margin-top:30px">${mascot('crochet',120)}<h1 class="obh">My Crafts</h1><p>Sign in with your Google account. Everything is saved in a private, hidden folder in your own Google Drive that only this app can use, so it's backed up and the same on your iPhone, iPad and MacBook.</p><div class="acts"><button class="btn primary" data-act="gate-signin" style="font-size:18px;padding:12px 22px">${LS.get('user')?'Open my crafts':'Sign in with Google'}</button></div>${ui.gateMsg?`<p class="err">${esc(ui.gateMsg)}</p>`:''}<p class="small" style="margin-top:18px">Nobody else can see your things.</p><button class="btn ghost" data-act="gate-local">Use it on this device only for now</button></div>`}
+function render(){D();applyTheme();
+ if(ui.gate){$('#tabs').innerHTML='';$('#hleft').innerHTML='';$('#soundPanel').innerHTML='';$('#lights').innerHTML='';$('#craftName').textContent='';$('#brandBall').innerHTML='';$('#main').innerHTML=vGate();return}
+ if(!S.onboarded){$('#tabs').innerHTML='';$('#hleft').innerHTML='';$('#soundPanel').innerHTML='';$('#lights').innerHTML='';$('#craftName').textContent='';$('#brandBall').innerHTML='';$('#main').innerHTML=vOnboard();return}
+ const vt=visTabs();if(!vt.some(t=>t[0]===S.tab))S.tab=vt[0][0];$('#craftName').textContent=craftName();header();
+ $('#tabs').innerHTML=vt.map(([k,l])=>`<button class="tab" role="tab" data-act="tab" data-v="${k}" aria-selected="${S.tab===k}">${TABICON[k]}<span>${esc(l)}</span></button>`).join('');
+ $('#main').innerHTML=({ideas:vIdeas,projects:vProjects,stash:vStash,gallery:vGallery,settings:vSettings}[S.tab])();hydrate($('#main'))}
+
+let sheetFn=null,stack=[];
+function capture(){$('#sheet').querySelectorAll('input[id]:not([type=checkbox]):not([type=file]),select[id],textarea[id]').forEach(e=>ui.vals[e.id]=e.value)}
+function drawSheet(top,skip){const sh=$('#sheet');if(!top&&!skip)capture();const s=sh.scrollTop;sh.innerHTML=`<button class="x" data-act="close" aria-label="Close">${IC.x}</button>${stack.length?`<button class="x bk" data-act="back" aria-label="Back">${IC.back}</button>`:''}`+sheetFn();sh.scrollTop=top?0:s;hydrate(sh)}
+function openSheet(fn){sheetFn=fn;$('#ov').hidden=false;drawSheet(true);document.body.style.overflow='hidden'}
+function go(fn){if(sheetFn)stack.push(sheetFn);openSheet(fn)}
+function back(){const f=stack.pop();if(f){sheetFn=f;drawSheet(true)}else closeSheet()}
+function closeSheet(){$('#ov').hidden=true;sheetFn=null;stack=[];document.body.style.overflow='';render()}
+
+const sIdea=id=>()=>{const d=D(),i=find(d.ideas,id);if(!i)return '<p>This idea has gone.</p>';const ys=i.yarns.map(y=>find(d.yarns,y)).filter(Boolean),v=i.vidM;
+ return `<div class="hero">${v?`<video data-hm="${v}" controls playsinline preload="metadata"></video>`:`<div class="m">${media(i,true)}${isVid(i)?`<span class="play">${IC.play}</span>`:''}</div>`}</div>
+ ${isVid(i)&&!v?`<div class="note"><span>This plays from ${esc(i.source)} when you're online. Add a screen recording so it plays anywhere, even on a plane.</span>${fileBtn('Add screen recording',IC.video,'video/*','video',id,'btn small')}</div>`:''}
+ ${i.imgM||i.vidM||i.pdfM?`<div class="acts" style="margin:0 0 10px">${saveBtn(i.vidM,i.title,'Save video to my device')}${saveBtn(i.pdfM,i.title,'Save PDF to my device')}${saveBtn(i.imgM,i.title,'Save picture to my device')}</div>`:''}
+ <h2>${esc(i.title)}</h2><div class="meta"><span class="chip sm">${esc(i.source)}</span>${i.fams.map(f=>`<span class="chip sm cap1"><span class="dot" style="background:${FAMS[f]}"></span>${f}</span>`).join('')}</div>
+ <label class="f" for="icat">Category</label><select id="icat" data-act="icat" data-id="${id}"><option value="" ${!i.cat?'selected':''}>Unsorted</option>${d.cats.map(c=>`<option ${c===i.cat?'selected':''}>${esc(c)}</option>`).join('')}</select>
+ ${S.fx.someday?`<div class="chips wrap" style="margin-top:10px"><button class="chip" data-act="iwhen" data-id="${id}" data-v="soon" aria-pressed="${i.when!=='someday'}">Soon</button><button class="chip" data-act="iwhen" data-id="${id}" data-v="someday" aria-pressed="${i.when==='someday'}">Someday</button></div>`:''}
+ ${i.notes?`<p class="hand big">${esc(i.notes)}</p>`:''}
+ ${S.fx.tutnotes?`<h3>Tutorial notes</h3>${(i.tut||[]).map((n,k)=>`<div class="step"><b style="flex:none;min-width:48px;color:var(--wine)">${esc(n.t)}</b><span style="flex:1">${esc(n.n)}</span><button class="mini" data-act="tut-del" data-id="${id}" data-k="${k}" aria-label="Remove note">${IC.x}</button></div>`).join('')}<div class="addrow"><input id="tutT" value="${esc(val('tutT'))}" placeholder="3:20" style="max-width:90px" aria-label="Time in the video"><input id="tutN" value="${esc(val('tutN'))}" placeholder="The tricky bit" aria-label="Note"><button class="btn olive" data-act="tut-add" data-id="${id}">Add</button></div>`:''}
+ ${S.fx.palettes?`<div class="acts"><button class="btn" data-act="mkpal" data-id="${id}">${IC.palette} Make a colour palette</button></div>`:''}
+ <h3>${isYarn()?'Yarn from your stash':'Supplies for this'}</h3>${ys.length?`<div class="swatches">${ys.map(sw).join('')}</div>`:`<p><span class="tag">No supplies yet</span> Saved for when you've got what you need.</p>`}
+ <div class="acts"><button class="btn" data-act="pick-yarn" data-id="${id}">${IC.link} Link ${supWord()}</button>${i.hasPdf||i.source==='PDF pattern'?`<button class="btn" data-act="pdf" data-id="${id}">${IC.file} Open pattern</button>`:''}${i.link?`<a class="btn" href="${esc(i.link)}" target="_blank" rel="noopener">${IC.ext} Open original</a>`:''}<button class="btn primary" data-act="start" data-id="${id}">Start a project</button></div>
+ <div class="acts end"><button class="btn ghost" data-act="del-idea" data-id="${id}">Delete idea</button></div>`};
+
+const sPickYarn=(o,id)=>()=>{const d=D(),x=find(o==='idea'?d.ideas:d.projects,id);
+ return `<h2>Which ${supWord()} go${isYarn()?'es':''} with this?</h2><p class="small">Pick as many as you like.</p>${d.yarns.length?`<div class="wall">${d.yarns.map(y=>{const on=x.yarns.includes(y.id);return `<button class="yarn ${on?'on':''}" data-act="toggle-yarn" data-o="${o}" data-id="${id}" data-y="${y.id}" aria-pressed="${on}"><span class="ym">${supThumb(y)}</span><b>${esc(y.name)}</b>${on?`<span class="tick">${IC.check}</span>`:''}</button>`}).join('')}</div>`:'<p class="small">Nothing in your supplies yet.</p>'}
+ ${o==='idea'?`<label class="tog"><input type="checkbox" data-act="nosup" data-id="${id}" ${x.noSup&&!x.yarns.length?'checked':''}> I haven't got the supplies for this yet</label>`:''}<div class="acts"><button class="btn primary" data-act="back">Done</button></div>`};
+
+const sPickIdea=(o,id)=>()=>{const d=D(),sel=o==='yarn'?d.ideas.filter(i=>i.yarns.includes(id)).map(i=>i.id):find(d.projects,id).ideas;
+ return `<h2>Link pictures, videos and patterns</h2><p class="small">Tap as many as you like.</p><div class="masonry sm">${d.ideas.map(i=>{const on=sel.includes(i.id);return `<button class="tile ${on?'on':''}" data-act="toggle-idea" data-o="${o}" data-id="${id}" data-i="${i.id}" aria-pressed="${on}"><span class="m">${media(i)}${on?`<span class="tick">${IC.check}</span>`:''}</span><span class="cap"><b>${esc(i.title)}</b></span></button>`}).join('')}</div><div class="acts"><button class="btn primary" data-act="back">Done</button></div>`};
+
+function suggest(y){const big=['Jumpers','Cardigans','Blankets'],fs=y.kind==='kit'?kitFams(y):(y.fams||[y.fam]);return D().ideas.filter(i=>!i.yarns.includes(y.id)).map(i=>{let s=0;const why=[];const hit=fs.find(f=>i.fams.includes(f));if(hit){s+=3;why.push('Matches '+hit)}if(y.kind!=='kit'&&i.type&&i.type===y.type){s+=2;why.push(y.type)}if(i.noSup&&s){s+=1;why.push('Still needs supplies')}if(s&&y.kind!=='kit'&&big.includes(i.cat)&&['A little','About one ball'].includes(y.amt)){s-=1;why.push('May need more yarn')}return {i,s,why}}).filter(x=>x.s>=2).sort((a,b)=>b.s-a.s).slice(0,6)}
+
+const sYarn=id=>()=>{const d=D(),y=find(d.yarns,id);if(!y)return '<p>This has gone.</p>';const kit=y.kind==='kit',linked=d.ideas.filter(i=>i.yarns.includes(id)),sug=suggest(y);
+ return `<div class="yhero"><div class="ybig">${y.img?`<img src="${y.img}" ${y.imgM?`data-hm="${y.imgM}"`:''} alt="">`:supThumb(y)}</div><div><h2>${esc(y.name)}</h2><div class="meta">${(y.fams||[]).map(f=>`<span class="chip sm cap1"><span class="dot" style="background:${FAMS[f]}"></span>${f}</span>`).join('')}${y.type?`<span class="chip sm">${esc(y.type)}</span>`:''}${kit?'<span class="chip sm">Kit</span>':''}</div>
+ ${kit?'':`<label class="f" for="amt">How much is left?</label><select id="amt" data-act="amt" data-id="${id}">${amts().map(a=>`<option ${a===y.amt?'selected':''}>${a}</option>`).join('')}</select>`}</div></div>
+ ${kit?`<h3>${isYarn()?'Yarn':'Supplies'} in this kit <span class="n">${(y.members||[]).length}</span></h3><div class="swatches">${(y.members||[]).map(m=>find(d.yarns,m)).filter(Boolean).map(sw).join('')}<button class="sw add" data-act="pick-members" data-id="${id}">${IC.plus}<span>Add from your ${isYarn()?'stash':'supplies'}</span></button></div>
+ <h3>Other things in this kit <span class="n">${y.items.length}</span></h3><ul class="kitems">${y.items.map((t,k)=>`<li><span>${esc(t)}</span><button class="mini" data-act="kdel" data-id="${id}" data-k="${k}" aria-label="Remove ${esc(t)}">${IC.x}</button></li>`).join('')}</ul><div class="addrow"><input id="kitem" placeholder="${isYarn()?'4.5mm hook':'Size 4 round brush'}" aria-label="Add a thing to this kit"><button class="btn olive" data-act="kadd" data-id="${id}">Add</button></div>
+ <h3>Colours</h3><p class="small">Optional. Used to suggest ideas.</p><div class="chips wrap">${famChips('kfam',y.fams||[]).replace(/data-act="kfam"/g,`data-act="kfam" data-id="${id}"`)}</div>`:''}
+ <h3>Photos</h3><div class="row wrap"><div class="ph">${y.img?`<img src="${y.img}" alt="">`:`<span>No photo yet</span>`}${fileBtn(kit?'Kit photo':'Photo',IC.camera,'image/*','yimg',id,'btn small')}</div>${kit?'':`<div class="ph">${y.label?`<img src="${y.label}" ${y.labelM?`data-hm="${y.labelM}"`:''} alt="Label">${saveBtn(y.labelM,y.name+' label','Save label photo')}`:'<span>No label photo yet</span>'}${fileBtn('Label photo',IC.camera,'image/*','ylabel',id,'btn small')}</div>`}</div>
+ <h3>Ideas linked to this ${kit?'kit':supWord()==='yarn'?'yarn':'item'} <span class="n">${linked.length}</span></h3>
+ ${linked.length?`<div class="masonry sm">${linked.map(i=>`<div class="tile"><button class="m plain" data-act="idea" data-id="${i.id}">${media(i)}${isVid(i)?`<span class="play">${IC.play}</span>`:''}</button><div class="cap"><b>${esc(i.title)}</b><button class="mini" data-act="unlink" data-y="${id}" data-i="${i.id}">Unlink</button></div></div>`).join('')}</div>`:'<p class="small">Nothing linked yet. Link anything you might make with it, even if you haven\'t decided.</p>'}
+ <button class="btn" data-act="pick-idea" data-o="yarn" data-id="${id}">${IC.link} Link pictures, videos or patterns</button>
+ <h3>${IC.sparkle} Ideas that could suit this</h3>
+ ${sug.length?`<div class="sug">${sug.map(({i,why})=>`<div class="sg"><button class="sgm" data-act="idea" data-id="${i.id}">${media(i)}</button><div><b>${esc(i.title)}</b><div class="why">${why.map(w=>`<span class="tag ${w.startsWith('May')?'':'olive'}">${esc(w)}</span>`).join('')}</div><button class="btn small olive" data-act="link1" data-y="${id}" data-i="${i.id}">${IC.link} Link</button></div></div>`).join('')}</div>`:`<p class="small">No matches yet. ${kit?'Add colours to this kit, or save':'Save'} more ideas with colours and they'll show up here.</p>`}
+ ${S.fx.pairs&&!kit?(()=>{const pr=pairs(y);return pr.length?`<h3>Goes nicely with</h3><div class="swatches">${pr.map(({o,why})=>`<button class="sw" data-act="yarn" data-id="${o.id}">${supThumb(o,56)}<span>${esc(o.name)}</span><span class="tag olive">${why}</span></button>`).join('')}</div>`:''})():''}
+ ${S.fx.family?(()=>{const inKits=d.yarns.filter(k=>k.kind==='kit'&&(k.members||[]).includes(id)).map(k=>k.id),uses=x=>(x.yarns||[]).some(z=>z===id||inKits.includes(z));const ps=d.projects.filter(uses),gs=d.gallery.filter(uses);return `<h3>Family tree</h3>${ps.length||gs.length?`<div class="tree">${ps.map(p=>`<div class="branch"><button class="th" data-act="project" data-id="${p.id}">${pmedia(p)}<span>${esc(p.title)}<br><span class="small">In progress · ${pct(p)}%</span></span></button></div>`).join('')}${gs.map(g=>`<div class="branch"><button class="th" data-act="gal" data-id="${g.id}">${media(g)}<span>${esc(g.title)}<br><span class="small">Finished ${fmt(g.date)}${g.gift?' · gift for '+esc(g.gift.to):''}</span></span></button></div>`).join('')}</div>`:'<p class="small">Nothing made with this yet.</p>'}`})():''}
+ ${S.fx.lastused&&!kit?`<p class="small" style="margin-top:14px">${ago(y.lastUsed)}</p>`:''}
+ ${y.notes?`<h3>Notes</h3><p>${esc(y.notes)}</p>`:''}
+ <div class="acts end"><button class="btn ghost" data-act="del-yarn" data-id="${id}">Delete ${kit?'kit':'this'}</button></div>`};
+const sPickMembers=id=>()=>{const d=D(),k=find(d.yarns,id),items=d.yarns.filter(y=>y.kind!=='kit');k.members=k.members||[];
+ return `<h2>What goes in ${esc(k.name)}?</h2><p class="small">Pick as many as you like.</p>${items.length?`<div class="wall">${items.map(y=>{const on=k.members.includes(y.id);return `<button class="yarn ${on?'on':''}" data-act="toggle-member" data-id="${id}" data-y="${y.id}" aria-pressed="${on}"><span class="ym">${supThumb(y)}</span><b>${esc(y.name)}</b>${on?`<span class="tick">${IC.check}</span>`:''}</button>`}).join('')}</div>`:'<p class="small">Add some single items first.</p>'}<div class="acts"><button class="btn primary" data-act="back">Done</button></div>`};
+const amts=()=>isYarn()?['A little','About one ball','A few balls','Loads']:['A little','Some','Plenty'];
+
+const sProject=id=>()=>{const d=D(),p=find(d.projects,id);if(!p)return '<p>This project has gone.</p>';const v=pct(p),firstK=p.steps.findIndex(s=>!s.done),n=p.steps[firstK];
+ const msg=!p.steps.length?'Every project starts somewhere.':v===100?'Every step done. Time to celebrate!':v>=50?'Over halfway. You can see the finish line.':v>0?'Every stitch counts. Keep going.':'Start with the first small step.';
+ const away=Math.floor((Date.now()-(p.updated||Date.now()))/864e5);
+ const lastPh=p.photos[p.photos.length-1];
+ return `<div class="hero">${pmedia(p,true)}</div>${lastPh&&lastPh.m?`<div class="acts" style="margin:0 0 10px">${saveBtn(lastPh.m,p.title,'Save photo to my device')}</div>`:''}<h2>${esc(p.title)}</h2>${prog(v,true)}<p class="hand big">${p.steps.length?v+'% · ':''}${msg}</p>
+ ${S.fx.welcomeback&&away>=14?`<div class="banner">${mascotOr(48)}<div><b>Welcome back!</b> <span>It's been ${away>=28?Math.round(away/7)+' weeks':away+' days'}. ${n?'Last time you were up to: <b>'+esc(n.t)+'</b>':'Pick a small step below to get going again.'}</span></div></div>`:''}
+ <div class="acts" style="margin-top:0">${S.fx.moodboard?`<button class="btn" data-act="board" data-id="${id}">${IC.board} Mood board</button>`:''}${S.fx.playlist&&p.playlist?`<a class="btn" href="${esc(p.playlist)}" target="_blank" rel="noopener">${IC.music} Play my playlist</a>`:''}</div>
+ <div class="nextbox"><small>Your next small step</small>${n?`<p class="nt">${esc(n.t)}</p><div class="acts" style="margin-top:0"><button class="btn primary" data-act="donenext" data-id="${id}">${IC.check} Done it</button></div>`:`<p style="margin:0 0 8px">${p.steps.length?'All your steps are ticked off. Add another, or tap "It\'s finished!" below.':'Not sure what comes next? That\'s okay. Leave it blank and come back when you know.'}</p><div class="addrow"><input id="nextIn" value="${esc(val('nextIn'))}" placeholder="Make 2 more squares" aria-label="Next small step"><button class="btn olive" data-act="setnext" data-id="${id}">Add</button></div>`}</div>
+ <h3>All the small steps</h3>${p.steps.length?p.steps.map((s,k)=>`<div class="step ${s.done?'done':''} ${k===firstK?'first':''}"><input type="checkbox" id="st${k}" data-act="step" data-id="${id}" data-k="${k}" ${s.done?'checked':''}><label for="st${k}">${esc(s.t)}</label>${!s.done&&k!==firstK?`<button class="mini" data-act="mknext" data-id="${id}" data-k="${k}">Do next</button>`:''}<button class="mini" data-act="delstep" data-id="${id}" data-k="${k}" aria-label="Remove step">${IC.x}</button></div>`).join(''):'<p class="small">No steps yet.</p>'}
+ <div class="addrow"><input id="newstep" value="${esc(val('newstep'))}" placeholder="Add a later step" aria-label="Add a later step"><button class="btn" data-act="addstep" data-id="${id}">Add to the list</button></div>
+ <h3>Patterns, pictures and videos</h3><div class="row">${p.ideas.map(x=>find(d.ideas,x)).filter(Boolean).map(th).join('')}<button class="th add" data-act="pick-idea" data-o="project" data-id="${id}">${IC.plus}<span>Link more</span></button></div>
+ <h3>${isYarn()?'Yarn':'Supplies'}</h3><div class="swatches">${p.yarns.map(x=>find(d.yarns,x)).filter(Boolean).map(sw).join('')}<button class="sw add" data-act="pick-yarn-p" data-id="${id}">${IC.plus}<span>Link ${supWord()}</span></button></div>
+ <h3>Progress photos</h3><div class="row">${p.photos.map(ph=>`<div class="th"><img src="${ph.src}" alt=""><span>${fmt(ph.date)}</span></div>`).join('')}<label class="th add">${IC.camera}<span>Add photo</span><input type="file" accept="image/*" hidden data-up="pphoto" data-id="${id}"></label></div>
+ <h3>Notes</h3><textarea data-act="pnotes" data-id="${id}" rows="3" aria-label="Project notes" placeholder="Hook size, changes to the pattern">${esc(p.notes)}</textarea>
+ ${S.fx.playlist?`<label class="f" for="plist">Playlist link (optional)</label><input id="plist" type="url" data-act="playlist" data-id="${id}" value="${esc(p.playlist||'')}" placeholder="https://open.spotify.com/playlist/...">`:''}
+ <div class="acts"><button class="btn primary" data-act="finish" data-id="${id}">${IC.sparkle} It's finished!</button></div>
+ <div class="acts end"><button class="btn ghost" data-act="del-project" data-id="${id}">Delete project</button></div>`};
+
+const sFinish=id=>()=>{const p=find(D().projects,id),ph=ui.fin.photo||(p.photos.length?p.photos[p.photos.length-1].src:null);
+ return `<h2>Hooray, ${esc(p.title)} is done!</h2><p>Take a photo before it goes, especially if it's a gift.</p>
+ <div class="hero sm">${ph?`<img src="${ph}" alt="">`:`<div class="ph">${IC.camera}<span>No photo yet</span></div>`}</div>
+ ${fileBtn(ph?'Change photo':'Add a photo',IC.camera,'image/*','finphoto')}<p class="err" id="formErr"></p>
+ <label class="tog"><input type="checkbox" data-act="isgift" ${ui.fin.gift?'checked':''}> This is a gift</label>
+ ${ui.fin.gift?`<label class="f" for="giftTo">Who is it for?</label><input id="giftTo" value="${esc(val('giftTo'))}" placeholder="Mum"><label class="f" for="giftOcc">What's the occasion?</label><input id="giftOcc" value="${esc(val('giftOcc'))}" placeholder="Birthday">`:''}
+ <label class="f" for="finNotes">Notes on the pattern</label><textarea id="finNotes" rows="3">${esc(val('finNotes',p.notes))}</textarea>
+ <div class="acts"><button class="btn primary" data-act="finish-save" data-id="${id}">Add to my ${esc(heads(S.craft).gallery.n.toLowerCase())}</button>${ph?'':`<button class="btn ghost" data-act="finish-save" data-id="${id}" data-nophoto="1">No photo this time</button>`}</div>`};
+
+const sGal=id=>()=>{const d=D(),g=find(d.gallery,id);if(!g)return '';const pats=(g.ideas||[]).map(x=>find(d.ideas,x)).filter(Boolean),ys=(g.yarns||[]).map(x=>find(d.yarns,x)).filter(Boolean);
+ const giftBox=ui.giftEdit?`<h3>${IC.gift} Who was it for?</h3><label class="f" for="gEdTo">Name</label><input id="gEdTo" value="${esc(val('gEdTo',g.gift?g.gift.to:''))}" placeholder="Mum"><label class="f" for="gEdOcc">Occasion</label><input id="gEdOcc" value="${esc(val('gEdOcc',g.gift?g.gift.occ:''))}" placeholder="Birthday"><p class="err" id="formErr"></p><div class="acts" style="margin-top:10px"><button class="btn primary" data-act="gift-save" data-id="${id}">Save</button><button class="btn ghost" data-act="gift-cancel">Cancel</button></div>`
+ :`<h3>${IC.gift} ${g.gift?'Gifted to':'Kept'}</h3><p class="hand big" style="margin:0 0 10px">${g.gift?esc(g.gift.to)+(g.gift.occ?' · '+esc(g.gift.occ):''):'This one stayed with me'}</p><div class="acts" style="margin-top:0">${g.gift?`<button class="btn small" data-act="gift-edit">Edit</button><button class="btn small ghost" data-act="gift-kept" data-id="${id}">Change to kept</button>`:`<button class="btn small" data-act="gift-edit">${IC.gift} Change to gifted</button>`}</div>`;
+ return `<div class="hero">${media(g,true)}</div>${g.imgM?`<div class="acts" style="margin:0 0 10px">${saveBtn(g.imgM,g.title,'Save photo to my device')}</div>`:''}${g.img?'':`<div class="note"><span>No photo yet. Add one so you remember it.</span>${fileBtn('Add photo',IC.camera,'image/*','gimg',id,'btn small')}</div>`}
+ <h2>${esc(g.title)}</h2><p class="small">Finished ${fmt(g.date)}</p><div class="info">${giftBox}</div>
+ <h3>Pattern I used</h3>${pats.length?`<div class="row">${pats.map(th).join('')}</div>`:'<p class="small">No pattern linked.</p>'}
+ <h3>Notes on the pattern</h3><p>${g.notes?esc(g.notes):'<span class="small">No notes.</span>'}</p>
+ <h3>${isYarn()?'Yarn':'Supplies'}</h3>${ys.length?`<div class="swatches">${ys.map(sw).join('')}</div>`:'<p class="small">Nothing linked.</p>'}
+ <div class="acts end"><button class="btn ghost" data-act="del-gal" data-id="${id}">Remove</button></div>`};
+
+function yearData(){const d=D(),yr=String(new Date().getFullYear()),items=d.gallery.filter(g=>g.date.startsWith(yr)).sort((a,b)=>a.date.localeCompare(b.date)),gifts=items.filter(g=>g.gift),people=[...new Set(gifts.map(g=>g.gift.to))],mc={};items.forEach(g=>{const m=g.date.slice(5,7);mc[m]=(mc[m]||0)+1});const bm=Object.entries(mc).sort((a,b)=>b[1]-a[1])[0];return {yr,items,gifts,people,busy:bm?new Date(2026,+bm[0]-1,1).toLocaleDateString('en-AU',{month:'long'}):'None yet'}}
+const sReview=()=>()=>{const {yr,items,gifts,people,busy}=yearData();
+ const post=S.fx.insta?`<div class="acts" style="justify-content:center"><button class="btn primary" data-act="post">${IC.image} Make an Instagram post</button></div>`:'';
+ if(!S.fx.scrapbook)return `<p class="hand big">${yr}, a year of ${esc(craftName().toLowerCase())}</p><h2>${items.length} finished ${items.length===1?'make':'makes'}</h2>
+ <div class="stats3"><div><b>${gifts.length}</b><span>given as gifts</span></div><div><b>${people.length}</b><span>lucky people</span></div><div><b style="font-size:20px;line-height:1.7">${busy}</b><span>busiest month</span></div></div>
+ <div class="collage">${items.map(g=>`<div class="ci">${media(g)}</div>`).join('')}</div>${people.length?`<p class="hand big">Made with love for ${people.map(esc).join(', ')}.</p>`:''}${post}`;
+ const pages=[`<div class="page"><p class="hand big">My scrapbook</p><h2 style="font-size:36px">${yr}, a year of ${esc(craftName().toLowerCase())}</h2>${mascotOr(110)}<div class="stats3"><div><b>${items.length}</b><span>finished</span></div><div><b>${gifts.length}</b><span>gifts given</span></div><div><b style="font-size:20px;line-height:1.7">${busy}</b><span>busiest month</span></div></div></div>`];
+ for(let k=0;k<items.length;k+=2)pages.push(`<div class="page">${items.slice(k,k+2).map(g=>`<div class="pol">${media(g)}<span>${esc(g.title)}</span></div>`).join('')}${items.slice(k,k+2).map(g=>`<p class="small" style="margin:4px 0">${esc(g.title)}: ${fmt(g.date)}${g.gift?' · for '+esc(g.gift.to):''}</p>`).join('')}</div>`);
+ pages.push(`<div class="page"><h2>That's a wrap!</h2>${people.length?`<p class="hand big">Made with love for ${people.map(esc).join(', ')}.</p>`:'<p class="hand big">Here\'s to next year.</p>'}${mascotOr(90)}</div>`);
+ ui.page=Math.max(0,Math.min(ui.page,pages.length-1));
+ return `<div class="book">${pages[ui.page].replace('class="page"',`class="page ${ui.flip?'flip':''}"`)}</div><div class="acts" style="justify-content:space-between"><button class="btn" data-act="pg" data-v="-1" style="${ui.page?'':'visibility:hidden'}">${IC.left} Back</button><span class="small" style="align-self:center">Page ${ui.page+1} of ${pages.length}</span><button class="btn" data-act="pg" data-v="1" style="${ui.page<pages.length-1?'':'visibility:hidden'}">Next ${IC.right}</button></div>${post}`};
+
+async function makePost(){const {yr,items,gifts}=yearData(),W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d'),cs=getComputedStyle(document.documentElement),v=n=>cs.getPropertyValue('--'+n).trim(),fh=v('fh'),fb=v('fb'),fd=v('fd');
+ try{await document.fonts.ready}catch(_){}
+ x.fillStyle=v('bg');x.fillRect(0,0,W,H);x.strokeStyle=v('rose');x.setLineDash([14,10]);x.lineWidth=4;x.strokeRect(36,36,W-72,H-72);x.setLineDash([]);
+ x.save();x.translate(80,100);x.rotate(-.04);x.fillStyle=v('rose');x.globalAlpha=.4;x.fillRect(0,0,520,70);x.restore();x.globalAlpha=1;
+ x.fillStyle=v('brown');x.font=`500 92px ${fh}`;x.fillText(`My ${yr}`,90,170);x.font=`500 58px ${fh}`;x.fillText(`in ${craftName().toLowerCase()}`,90,248);
+ x.fillStyle=v('wine');x.font=`700 40px ${fb}`;x.fillText(`${items.length} finished · ${gifts.length} gifted`,90,318);
+ const pick=items.slice(-6),imgs=await Promise.all(pick.map(g=>loadImg(g.img||svgUrl(art(g.art),400,400*((g.art&&g.art.h)||100)/100))));
+ imgs.forEach((im,k)=>{const col=k%3,row=Math.floor(k/3),cw=290,ch=300,px=60+col*330+cw/2,py=390+row*420+ch/2;x.save();x.translate(px,py);x.rotate((k%2?1:-1)*.035);x.shadowColor='rgba(0,0,0,.18)';x.shadowBlur=20;x.fillStyle='#fffefb';x.fillRect(-cw/2-12,-ch/2-12,cw+24,ch+80);x.shadowBlur=0;
+  if(im){const r=cw/ch;let sw=im.width,sh=im.height,sx=0,sy=0;if(sw/sh>r){sw=sh*r;sx=(im.width-sw)/2}else{sh=sw/r;sy=(im.height-sh)/2}x.drawImage(im,sx,sy,sw,sh,-cw/2,-ch/2,cw,ch)}
+  x.fillStyle='#3a2520';x.font=`600 34px ${fd}`;let t=pick[k].title;while(x.measureText(t).width>cw&&t.length>3)t=t.slice(0,-2);if(t!==pick[k].title)t=t.trim()+'…';x.fillText(t,-cw/2,ch/2+46);x.restore()});
+ if(!pick.length){x.fillStyle=v('soft');x.font=`600 44px ${fd}`;x.fillText('Finished makes will appear here.',90,600)}
+ x.fillStyle=v('soft');x.font=`600 40px ${fd}`;x.fillText('Made by hand, with love',90,H-80);
+ return c}
+const sPost=()=>()=>`<h2>Your Instagram post</h2><div id="postBox"><p class="hand big">Painting your picture...</p></div>`;
+async function openPost(){go(sPost());try{const c=await makePost();ui.postCanvas=c;$('#postBox').innerHTML=`<img class="postimg" src="${c.toDataURL('image/png')}" alt="Your year in review picture"><div class="acts" style="justify-content:center"><button class="btn primary" data-act="post-save">${IC.cloud} Save picture</button></div><p class="small" style="text-align:center">Or press and hold the picture to save it to Photos. Then post it on Instagram.</p>`}catch(e){$('#postBox').innerHTML='<div class="note">Sorry, the picture could not be made here.</div>'}}
+
+const sGifts=()=>()=>{const d=D(),list=(S.occasions||[]).map(o=>({...o,nd:nextDate(o)})).sort((a,b)=>a.nd-b.nd),t0=new Date(dayKey()+'T00:00');
+ return `<h2>Gift calendar</h2><p class="small">Birthdays and occasions coming up, and what you're making for them.</p>
+ ${list.length?list.map(o=>{const days=Math.round((o.nd-t0)/864e5),c=S.crafts[o.craft],p=o.pid&&c?find(c.projects,o.pid):null,gp=o.pid&&c?find(c.gallery,o.pid):null;return `<div class="occ"><div class="od"><b>${o.nd.getDate()}</b><span>${o.nd.toLocaleDateString('en-AU',{month:'short'})}</span></div><div class="ob2"><b>${esc(o.name)}</b> <span class="small">${esc(o.occ)}</span><div class="small">${days===0?'Today!':days===1?'Tomorrow':'In '+days+' days'}</div>${p?`<button class="lk" data-act="occ-open" data-c="${o.craft}" data-id="${p.id}">Making: ${esc(p.title)} · ${pct(p)}%</button>`:gp?'<span class="small">Gift finished</span>':'<span class="small">Nothing linked yet</span>'}</div><button class="mini" data-act="occ-del" data-v="${o.id}" aria-label="Remove">${IC.x}</button></div>`}).join(''):'<p class="small">Nothing added yet.</p>'}
+ <h3>Add an occasion</h3><label class="f" for="occName">Who is it for?</label><input id="occName" value="${esc(val('occName'))}" placeholder="Mum"><label class="f" for="occWhat">Occasion</label><input id="occWhat" value="${esc(val('occWhat'))}" placeholder="Birthday"><label class="f" for="occDate">Date</label><input id="occDate" type="date" value="${esc(val('occDate'))}"><label class="f" for="occP">What you're making (optional)</label><select id="occP"><option value="">Nothing yet</option>${d.projects.map(p=>`<option value="${p.id}" ${val('occP')===p.id?'selected':''}>${esc(p.title)}</option>`).join('')}</select><p class="err" id="formErr"></p><div class="acts"><button class="btn primary" data-act="occ-save">Add to calendar</button></div>`};
+
+const skillList=c=>[...(SKILLS[c]||[]),...((S.skillsExtra||{})[c]||[])];
+const sSkills=()=>()=>{const c=S.craft,got=(S.skills[c]=S.skills[c]||{}),list=skillList(c),n=list.filter(s=>got[s]).length;
+ return `<h2>${esc(craftName())} skills</h2><p class="small">Tap a skill when you've learned it to earn its badge. ${n} of ${list.length} earned.</p>
+ <div class="skills">${list.map(s=>`<button class="sk ${got[s]?'on':''}" data-act="skill" data-v="${esc(s)}" aria-pressed="${!!got[s]}"><span class="sc">${got[s]?IC.star:IC.plus}</span>${esc(s)}${got[s]?`<span class="small" style="font-weight:400">${fmt(got[s])}</span>`:''}</button>`).join('')}</div>
+ <h3>Add your own skill</h3><div class="addrow"><input id="newskill" placeholder="Tunisian crochet" aria-label="New skill"><button class="btn olive" data-act="skill-add">Add</button></div>`};
+
+const sBoard=id=>()=>{const d=D(),p=find(d.projects,id);ui.boardP=id;const items=[...p.ideas.map(x=>find(d.ideas,x)).filter(Boolean).map(i=>({k:'i'+i.id,h:media(i),t:i.title})),...p.photos.map((ph,k)=>({k:'p'+k,h:`<img src="${ph.src}" alt="">`,t:fmt(ph.date)})),...p.yarns.map(x=>find(d.yarns,x)).filter(Boolean).map(y=>({k:'y'+y.id,h:supThumb(y),t:'',sm:1}))];
+ return `<h2>${esc(p.title)} mood board</h2><p class="small">Drag things around to arrange your board. It saves as you go.</p>${items.length?`<div class="board" id="board">${items.map((it,k)=>{const pos=p.board[it.k]||{x:4+(k%4)*24,y:4+Math.floor(k/4)*30},rot=((k*37)%9)-4;return `<div class="bi ${it.sm?'sm':''}" data-k="${it.k}" style="left:${pos.x}%;top:${pos.y}%;transform:rotate(${rot}deg)">${it.h}${it.t?`<span>${esc(it.t)}</span>`:''}</div>`}).join('')}</div>`:'<p class="small">Link some pictures, yarn or progress photos to this project first.</p>'}`};
+
+const sBuster=()=>()=>{const d=D(),items=d.yarns.filter(y=>y.kind!=='kit');if(!items.length)return '<p>Add some supplies first.</p>';if(!ui.bust||!find(d.yarns,ui.bust)){const pool=[...items].sort((a,b)=>(a.lastUsed||'0').localeCompare(b.lastUsed||'0')).slice(0,Math.max(3,Math.ceil(items.length/2)));ui.bust=pool[Math.floor(Math.random()*pool.length)].id}
+ const y=find(d.yarns,ui.bust),sug=suggest(y),extra=d.ideas.filter(i=>!sug.some(s=>s.i.id===i.id)&&!i.yarns.includes(y.id)),picks=[...sug.map(s=>s.i),...extra.sort(()=>Math.random()-.5)].slice(0,3);
+ return `<h2>Stash buster</h2><p class="hand big">Let's use up some ${esc(y.name)}!</p><div class="yhero"><div class="ybig">${supThumb(y)}</div><div><p>${S.fx.lastused?esc(ago(y.lastUsed))+'.':''} Here are three things you could make with it.</p><button class="btn" data-act="bust-again">${IC.shuffle} Pick something else</button></div></div>
+ <div class="sug" style="margin-top:14px">${picks.map(i=>`<div class="sg"><button class="sgm" data-act="idea" data-id="${i.id}">${media(i)}</button><div><b>${esc(i.title)}</b><div class="acts" style="margin-top:8px"><button class="btn small olive" data-act="link1" data-y="${y.id}" data-i="${i.id}">${IC.link} Link</button></div></div></div>`).join('')||'<p class="small">Save some ideas first.</p>'}</div>`};
+
+function trophy(title){if(!S.fx.trophy)return;const w=document.createElement('div');w.className='trophy';w.innerHTML=`<div><svg viewBox="0 0 100 100" width="110" height="110" aria-hidden="true"><path d="M30 14h40v24a20 20 0 0 1-40 0z" fill="#f2c14e"/><path d="M30 20H16a14 14 0 0 0 14 18M70 20h14a14 14 0 0 1-14 18" fill="none" stroke="#d9a630" stroke-width="5"/><rect x="45" y="56" width="10" height="16" fill="#d9a630"/><rect x="32" y="72" width="36" height="12" rx="3" fill="#78412c"/><path d="M42 26l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6-4.5-4 6-1z" fill="#fff" opacity=".8"/></svg>${S.fx.mascots?mascot(S.craft,70):''}<h2>You finished ${esc(title)}!</h2><p>That's going straight into your ${esc(heads(S.craft).gallery.n.toLowerCase())}.</p><button class="btn primary" data-act="trophy-close">Yay!</button></div>`;document.body.appendChild(w);confetti(true)}
+
+const sAddIdea=()=>()=>{const d=D(),f=ui.form;
+ return `<h2>Save an idea</h2><div class="hero sm">${f.img?`<img src="${f.img}" alt="">`:f.vid?`<video src="${f.vid}" controls playsinline></video>`:`<div class="ph">${IC.image}<span>Add a screenshot, photo, video or PDF pattern</span></div>`}</div>
+ <div class="acts" style="margin-top:0">${fileBtn('Picture or screenshot',IC.image,'image/*','fimg')}${fileBtn('Video or screen recording',IC.video,'video/*','fvid')}${fileBtn('PDF pattern',IC.file,'application/pdf','fpdf')}</div>
+ ${f.vidName?`<p class="small">Video added: ${esc(f.vidName)}</p>`:''}${f.pdfName?`<p class="small">Pattern added: ${esc(f.pdfName)}</p>`:''}
+ <label class="f" for="fTitle">What is it?</label><input id="fTitle" value="${esc(val('fTitle'))}" placeholder="Chunky bobble cardigan"><p class="err" id="formErr"></p>
+ <label class="f" for="fCat">Category</label><select id="fCat"><option value="">Sort it later</option>${d.cats.map(c=>`<option ${c===val('fCat',ui.cat)?'selected':''}>${esc(c)}</option>`).join('')}</select>
+ <label class="f" for="fSrc">Where's it from?</label><select id="fSrc">${SOURCES.map(s=>`<option ${s===val('fSrc','TikTok')?'selected':''}>${s}</option>`).join('')}</select>
+ <label class="f" for="fLink">Link (optional)</label><input id="fLink" type="url" value="${esc(val('fLink'))}" placeholder="https://www.tiktok.com/@maker/video/123">
+ <label class="f">Colours</label><div class="chips wrap">${famChips('ffam',f.fams)}</div>
+ <label class="f">${isYarn()?'Yarn from your stash':'Your supplies'}</label><div class="swatches">${d.yarns.map(y=>`<button class="sw ${f.yarns.includes(y.id)?'on':''}" data-act="fyarn" data-v="${y.id}" aria-pressed="${f.yarns.includes(y.id)}">${supThumb(y,48)}<span>${esc(y.name)}</span></button>`).join('')||'<p class="small">Add supplies to link them here.</p>'}</div>
+ <label class="tog"><input type="checkbox" data-act="fnosup" ${f.noSup?'checked':''}> I haven't got the supplies yet</label>
+ <label class="f" for="fNotes">Notes</label><textarea id="fNotes" rows="3" placeholder="What you love about it">${esc(val('fNotes'))}</textarea>
+ <div class="acts"><button class="btn primary" data-act="save-idea">Save idea</button></div>`};
+
+const sAddYarn=()=>()=>{const f=ui.form;
+ return `<h2>Add ${isYarn()?'yarn to your stash':'a single item'}</h2><div class="row wrap"><div class="ph">${f.img?`<img src="${f.img}" alt="">`:'<span>Photo</span>'}${fileBtn('Photo',IC.camera,'image/*','yfimg','','btn small')}</div><div class="ph">${f.label?`<img src="${f.label}" alt="">`:'<span>Label photo</span>'}${fileBtn('Label photo',IC.camera,'image/*','yflabel','','btn small')}</div></div>
+ <label class="f" for="yName">Name</label><input id="yName" value="${esc(val('yName'))}" placeholder="${isYarn()?'Dusty rose':'Linen fabric'}"><p class="err" id="formErr"></p>
+ <label class="f" for="yHex">Closest colour</label><input id="yHex" type="color" value="${esc(val('yHex','#b88896'))}">
+ <label class="f">Colour family</label><div class="chips wrap">${famChips('yfam',[f.fam])}</div>
+ <label class="f" for="yType">Type</label><input id="yType" list="tlist" value="${esc(val('yType',isYarn()?'Acrylic':''))}" placeholder="${isYarn()?'Cotton':'Fabric'}"><datalist id="tlist">${isYarn()?TYPES.map(t=>`<option value="${t}">`).join(''):''}</datalist>
+ <label class="f" for="yAmt">Roughly how much?</label><select id="yAmt">${amts().map(a=>`<option ${a===val('yAmt',amts()[1])?'selected':''}>${a}</option>`).join('')}</select>
+ <label class="f" for="yNotes">Notes</label><textarea id="yNotes" rows="2">${esc(val('yNotes'))}</textarea>
+ <div class="acts"><button class="btn primary" data-act="save-yarn">Add it</button></div>`};
+
+const sAddKit=()=>()=>{const f=ui.form,d=D(),items=d.yarns.filter(y=>y.kind!=='kit'),y=isYarn();
+ return `<h2>Make a kit</h2><p class="small">${y?'Group yarns you use together, like the colours for a striped blanket.':'Group things you use together, like brushes, a palette and paper.'}</p><div class="hero sm">${f.img?`<img src="${f.img}" alt="">`:`<div class="ph">${f.members.length?cluster(f.members.map(m=>find(d.yarns,m).hex),90):y?cluster(['#c99aa4','#eadcc6','#9aa77f'],90):kitSvg('#b88896',90)}<span>Kit photo (optional)</span></div>`}</div>${fileBtn(f.img?'Change photo':'Add photo',IC.camera,'image/*','kfimg')}
+ <label class="f" for="kName">Kit name</label><input id="kName" value="${esc(val('kName'))}" placeholder="${y?'Rainbow blanket colours':'Watercolour travel kit'}"><p class="err" id="formErr"></p>
+ <label class="f">${y?'Yarn from your stash':'From your supplies'}</label><div class="swatches">${items.map(s=>`<button class="sw ${f.members.includes(s.id)?'on':''}" data-act="kmem" data-v="${s.id}" aria-pressed="${f.members.includes(s.id)}">${supThumb(s,48)}<span>${esc(s.name)}</span></button>`).join('')||'<p class="small">Nothing to pick yet.</p>'}</div>
+ <label class="f" for="kItems">Anything else in it? One per line</label><textarea id="kItems" rows="4" placeholder="${y?'4.5mm hook&#10;Stitch markers':'12-pan palette&#10;Round brushes 2, 6 and 10'}">${esc(val('kItems'))}</textarea>
+ <label class="f" for="kHex">Kit colour</label><input id="kHex" type="color" value="${esc(val('kHex','#5f7896'))}">
+ <label class="f">Colours it suits (optional)</label><div class="chips wrap">${famChips('kffam',f.fams)}</div>
+ <label class="f" for="kNotes">Notes</label><textarea id="kNotes" rows="2" placeholder="Lives in the blue pouch">${esc(val('kNotes'))}</textarea>
+ <div class="acts"><button class="btn primary" data-act="save-kit">Save kit</button></div>`};
+
+const sAddProject=()=>()=>`<h2>Start a new project</h2><label class="f" for="pTitle">What are you making?</label><input id="pTitle" value="${esc(val('pTitle'))}" placeholder="Cosy bed socks"><p class="err" id="formErr"></p>
+ <label class="f" for="pNext">Your next small step (optional)</label><input id="pNext" value="${esc(val('pNext'))}" placeholder="Make the first cuff">
+ <p class="small">Not sure yet? Leave it blank. You can add it later.</p>
+ <label class="f" for="pSteps">Any later steps you already know (optional, one per line)</label><textarea id="pSteps" rows="4" placeholder="Make the heels&#10;Add the pompoms">${esc(val('pSteps'))}</textarea>
+ <div class="acts"><button class="btn primary" data-act="save-project">Start project</button></div>`;
+
+const sAddGal=()=>()=>{const f=ui.form;
+ return `<h2>Add a finished piece</h2><p class="small">Good for older makes, gifts and your drawings.</p><div class="hero sm">${f.img?`<img src="${f.img}" alt="">`:`<div class="ph">${IC.camera}<span>No photo yet</span></div>`}</div>${fileBtn(f.img?'Change photo':'Add photo',IC.camera,'image/*','gfimg')}
+ <label class="f" for="gTitle">Name</label><input id="gTitle" value="${esc(val('gTitle'))}" placeholder="Rainbow coasters"><p class="err" id="formErr"></p>
+ <label class="f" for="gDate">Finished on</label><input id="gDate" type="date" value="${esc(val('gDate',today()))}">
+ <label class="tog"><input type="checkbox" data-act="gfgift" ${f.gift?'checked':''}> This was a gift</label>
+ ${f.gift?`<label class="f" for="gTo">Who was it for?</label><input id="gTo" value="${esc(val('gTo'))}" placeholder="Nan"><label class="f" for="gOcc">Occasion</label><input id="gOcc" value="${esc(val('gOcc'))}" placeholder="Christmas">`:''}
+ <label class="f" for="gNotes">Notes on the pattern</label><textarea id="gNotes" rows="3">${esc(val('gNotes'))}</textarea>
+ <div class="acts"><button class="btn primary" data-act="save-gal">Add it</button></div>`};
+
+let pdfReady;
+function loadPdf(){if(!pdfReady)pdfReady=new Promise((res,rej)=>{const base='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';const a=document.createElement('script');a.src=base+'pdf.min.js';a.onerror=rej;a.onload=()=>{const b=document.createElement('script');b.src=base+'pdf.worker.min.js';b.onerror=rej;b.onload=()=>{window.pdfjsLib.GlobalWorkerOptions.workerSrc=base+'pdf.worker.min.js';res(window.pdfjsLib)};document.head.appendChild(b)};document.head.appendChild(a)});return pdfReady}
+async function pdfCover(buf){const lib=await loadPdf(),doc=await lib.getDocument({data:buf.slice(0)}).promise,pg=await doc.getPage(1),v1=pg.getViewport({scale:1}),vp=pg.getViewport({scale:700/v1.width}),c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;return c.toDataURL('image/jpeg',.82)}
+async function openPdf(id){const i=find(D().ideas,id);go(()=>`<h2>${esc(i.title)}</h2>${i.pdfM?`<div class="acts" style="margin:0 0 10px">${saveBtn(i.pdfM,i.title,'Save PDF to my device')}</div>`:''}<div id="pdfv" class="pdfv"><p class="hand big">Unrolling the pattern...</p></div>`);const box=$('#pdfv');let buf=null;if(i.pdfM){try{const b=await MEDIA.get(i.pdfM);if(b)buf=await b.arrayBuffer()}catch(e){}}
+ if(!buf){box.innerHTML=`<div class="note">${i.pdfM?(GD.needAuth?'Tap "Tap to sync" at the top, then open this pattern again.':'This PDF is still on the device you added it from. It will appear here once that device syncs.'):'This is a sample. Save your own PDF pattern and it opens right here, page by page.'}</div>`;return}
+ try{const lib=await loadPdf(),doc=await lib.getDocument({data:buf.slice(0)}).promise;box.innerHTML='';const W=box.clientWidth||700,r=window.devicePixelRatio||1;for(let n=1;n<=Math.min(doc.numPages,40);n++){const pg=await doc.getPage(n),v1=pg.getViewport({scale:1}),vp=pg.getViewport({scale:W/v1.width*r}),c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;c.style.width='100%';box.appendChild(c);await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise}}
+ catch(e){box.innerHTML='<div class="note">This pattern would not open. Try saving it again.</div>'}}
+
+function shrink(im,max,q){const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);return {url:c.toDataURL('image/jpeg',q),c}}
+function readImg(file){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;im.onload=()=>{const t=shrink(im,480,.72),f=shrink(im,1800,.86);f.c.toBlob(b=>b?res({thumb:t.url,blob:b}):rej(new Error('img')),'image/jpeg',.86)};im.src=r.result};r.readAsDataURL(file)})}
+async function onUpload(el){const file=el.files&&el.files[0];if(!file)return;const t=el.dataset.up,id=el.dataset.id,d=D();capture();
+ try{if(t==='video'){const i=find(d.ideas,id);toast('Saving your video...');i.vidM=await MEDIA.put(file,'video');i.hasVideo=true}
+  else if(t==='fvid'){ui.form.vid=URL.createObjectURL(file);ui.form.vidName=file.name;toast('Saving your video...');ui.form.vidM=await MEDIA.put(file,'video');if(val('fSrc','TikTok')==='Photo')ui.vals.fSrc='Video'}
+  else if(t==='fpdf'){const buf=await file.arrayBuffer();ui.form.pdfName=file.name;ui.vals.fSrc='PDF pattern';if(!val('fTitle'))ui.vals.fTitle=file.name.replace(/\.pdf$/i,'');ui.form.pdfM=await MEDIA.put(new Blob([buf],{type:'application/pdf'}),file.name);toast('Making the cover...');try{ui.form.img=await pdfCover(buf)}catch(e){toast("Couldn't make a cover, but the pattern is saved.")}}
+  else if(t==='restore'){const txt=await file.text();let p=null;try{p=JSON.parse(txt)}catch(_){}if(!p||!p.crafts){toast("That file isn't a My Crafts backup");return}const keep={media:S.media,mq:S.mq};S=migrate(p);S.media={...(p.media||{}),...(keep.media||{})};S.mq=keep.mq||[];S.onboarded=true;save();render();toast('Backup restored');return}
+  else{const {thumb,blob}=await readImg(file),mid=await MEDIA.put(blob,'photo');({fimg:()=>{ui.form.img=thumb;ui.form.imgM=mid},yfimg:()=>{ui.form.img=thumb;ui.form.imgM=mid},yflabel:()=>{ui.form.label=thumb;ui.form.labelM=mid},kfimg:()=>{ui.form.img=thumb;ui.form.imgM=mid},gfimg:()=>{ui.form.img=thumb;ui.form.imgM=mid},finphoto:()=>{ui.fin.photo=thumb;ui.fin.photoM=mid},yimg:()=>{const y=find(d.yarns,id);y.img=thumb;y.imgM=mid},ylabel:()=>{const y=find(d.yarns,id);y.label=thumb;y.labelM=mid},gimg:()=>{const g=find(d.gallery,id);g.img=thumb;g.imgM=mid},pphoto:()=>{const p=find(d.projects,id);p.photos.push({src:thumb,m:mid,date:today()});touch(p)}})[t]()}
+  save();if(sheetFn)drawSheet(false,true)}catch(e){toast("That file didn't load. Try another one.")}}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)}
+function sure(el){if(el.dataset.sure)return true;el.dataset.sure='1';el.textContent='Tap again to confirm';return false}
+function err(m,focusId){const e=$('#formErr');if(e)e.textContent=m;if(focusId)$('#'+focusId)?.focus()}
+const toggle=(arr,v)=>arr.includes(v)?arr.filter(x=>x!==v):[...arr,v];
+function moveCraft(id,dir){const o=S.order,k=o.indexOf(id),j=k+dir;if(j<0||j>=o.length)return;[o[k],o[j]]=[o[j],o[k]];save();render()}
+function cleanLinks(d){const ids=new Set(d.ideas.map(i=>i.id)),ys=new Set(d.yarns.map(y=>y.id));d.ideas.forEach(i=>i.yarns=i.yarns.filter(y=>ys.has(y)));d.yarns.forEach(y=>{if(y.members)y.members=y.members.filter(m=>ys.has(m))});d.projects.forEach(p=>{p.ideas=p.ideas.filter(x=>ids.has(x));p.yarns=p.yarns.filter(y=>ys.has(y))});d.gallery.forEach(g=>{g.ideas=(g.ideas||[]).filter(x=>ids.has(x));g.yarns=(g.yarns||[]).filter(y=>ys.has(y))})}
+
+function act(a,el){const d=D(),id=el.dataset.id,v=el.dataset.v;
+ switch(a){
+ case 'tab':if(S.tab!==v&&S.fx.wiggle&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.body.classList.remove('wig');void document.body.offsetWidth;document.body.classList.add('wig');setTimeout(()=>document.body.classList.remove('wig'),800)}S.tab=v;save();render();window.scrollTo(0,0);break;
+ case 'go-crafts':S.tab='settings';ui.stab='crafts';render();window.scrollTo(0,0);break;
+ case 'cat':ui.cat=v;render();break;
+ case 'have':ui.haveOnly=el.checked;render();break;
+ case 'fam':ui.fam=v;render();break;
+ case 'type':ui.type=el.value;render();break;
+ case 'idea':go(sIdea(id));break;
+ case 'yarn':ui.vals={};go(sYarn(id));break;
+ case 'project':ui.vals={};go(sProject(id));break;
+ case 'gal':ui.giftEdit=false;ui.vals={};go(sGal(id));break;
+ case 'close':closeSheet();break;
+ case 'back':back();break;
+ case 'pick-yarn':go(sPickYarn('idea',id));break;
+ case 'pick-yarn-p':go(sPickYarn('project',id));break;
+ case 'toggle-yarn':{const x=find(el.dataset.o==='idea'?d.ideas:d.projects,id);x.yarns=toggle(x.yarns,el.dataset.y);if(x.yarns.length)x.noSup=false;if(el.dataset.o!=='idea'&&x.yarns.includes(el.dataset.y)){useYarns([el.dataset.y]);touch(x)}save();drawSheet();break}
+ case 'nosup':{const x=find(d.ideas,id);x.noSup=el.checked;if(el.checked)x.yarns=[];save();drawSheet();break}
+ case 'pick-idea':go(sPickIdea(el.dataset.o,id));break;
+ case 'toggle-idea':{const iid=el.dataset.i;if(el.dataset.o==='yarn'){const i=find(d.ideas,iid);i.yarns=toggle(i.yarns,id);if(i.yarns.length)i.noSup=false}else{const p=find(d.projects,id);p.ideas=toggle(p.ideas,iid)}save();drawSheet();break}
+ case 'unlink':{const i=find(d.ideas,el.dataset.i);i.yarns=i.yarns.filter(x=>x!==el.dataset.y);save();drawSheet();break}
+ case 'link1':{const i=find(d.ideas,el.dataset.i);if(!i.yarns.includes(el.dataset.y))i.yarns.push(el.dataset.y);i.noSup=false;save();drawSheet();toast('Linked');break}
+ case 'amt':find(d.yarns,id).amt=el.value;save();break;
+ case 'kadd':{const inp=$('#kitem'),t=inp.value.trim();if(!t){inp.focus();return}find(d.yarns,id).items.push(t);capture();ui.vals.kitem='';save();drawSheet(false,true);$('#kitem').focus();break}
+ case 'kdel':find(d.yarns,id).items.splice(+el.dataset.k,1);save();drawSheet();break;
+ case 'kfam':{const y=find(d.yarns,id);y.fams=toggle(y.fams||[],v);y.fam=y.fams[0]||'';save();drawSheet();break}
+ case 'pdf':openPdf(id);break;
+ case 'start':{const i=find(d.ideas,id),p={id:uid(),title:i.title,ideas:[i.id],yarns:[...i.yarns],art:i.art,img:i.img,imgM:i.imgM||null,photos:[],notes:'',steps:[]};d.projects.unshift(p);S.tab='projects';save();stack=[];sheetFn=null;render();ui.vals={};go(sProject(p.id));toast('Project started');break}
+ case 'del-idea':if(!sure(el))return;d.ideas=d.ideas.filter(x=>x.id!==id);cleanLinks(d);save();closeSheet();toast('Idea deleted');break;
+ case 'del-yarn':if(!sure(el))return;d.yarns=d.yarns.filter(x=>x.id!==id);cleanLinks(d);save();closeSheet();toast('Removed');break;
+ case 'del-project':if(!sure(el))return;d.projects=d.projects.filter(x=>x.id!==id);save();closeSheet();toast('Project deleted');break;
+ case 'del-gal':if(!sure(el))return;d.gallery=d.gallery.filter(x=>x.id!==id);save();closeSheet();toast('Removed');break;
+ case 'step':{const p=find(d.projects,id);p.steps[+el.dataset.k].done=el.checked;touch(p);if(el.checked){S.stats.steps=(S.stats.steps||0)+1;confetti()}save();drawSheet();if(pct(p)===100)toast('All steps done! Ready to finish it?');else if(el.checked)toast(cheer());break}
+ case 'donenext':{const p=find(d.projects,id),s=p.steps.find(x=>!x.done);if(s){s.done=true;S.stats.steps=(S.stats.steps||0)+1;confetti()}touch(p);save();drawSheet();toast(pct(p)===100?'All steps done! Ready to finish it?':cheer());break}
+ case 'setnext':{const inp=$('#nextIn'),t=inp.value.trim();if(!t){inp.focus();return}const p=find(d.projects,id),k=p.steps.findIndex(x=>!x.done);p.steps.splice(k<0?p.steps.length:k,0,{t,done:false});capture();ui.vals.nextIn='';save();drawSheet(false,true);break}
+ case 'mknext':{const p=find(d.projects,id),s=p.steps.splice(+el.dataset.k,1)[0],k=p.steps.findIndex(x=>!x.done);p.steps.splice(k<0?p.steps.length:k,0,s);save();drawSheet();break}
+ case 'delstep':find(d.projects,id).steps.splice(+el.dataset.k,1);save();drawSheet();break;
+ case 'addstep':{const inp=$('#newstep'),t=inp.value.trim();if(!t){inp.focus();return}find(d.projects,id).steps.push({t,done:false});capture();ui.vals.newstep='';save();drawSheet(false,true);$('#newstep').focus();break}
+ case 'finish':ui.fin={};ui.vals={};go(sFinish(id));break;
+ case 'isgift':capture();ui.fin.gift=el.checked;drawSheet(false,true);break;
+ case 'finish-save':{capture();const p=find(d.projects,id),ph=ui.fin.photo||(p.photos.length?p.photos[p.photos.length-1].src:null),to=val('giftTo').trim();
+  if(!ph&&!el.dataset.nophoto)return err('Add a photo first. Future you will thank you.');
+  if(ui.fin.gift&&!to)return err('Who is the lucky person?','giftTo');
+  d.gallery.unshift({id:uid(),title:p.title,img:ph||p.img||null,imgM:ui.fin.photoM||(p.photos.length?p.photos[p.photos.length-1].m:null)||p.imgM||null,art:p.art,ideas:p.ideas,yarns:p.yarns,notes:val('finNotes',p.notes),date:today(),gift:ui.fin.gift?{to,occ:val('giftOcc').trim()}:null});
+  useYarns(p.yarns);mark();d.projects=d.projects.filter(x=>x.id!==id);if(heads(S.craft).gallery.on)S.tab='gallery';save();closeSheet();if(S.fx.trophy)trophy(p.title);else toast('Finished and saved!');break}
+ case 'gift-edit':ui.giftEdit=true;ui.vals={};drawSheet(false,true);break;
+ case 'gift-cancel':ui.giftEdit=false;drawSheet(false,true);break;
+ case 'gift-save':{capture();const to=val('gEdTo').trim();if(!to)return err('Who was it for?','gEdTo');find(d.gallery,id).gift={to,occ:val('gEdOcc').trim()};ui.giftEdit=false;save();drawSheet(false,true);toast('Marked as a gift');break}
+ case 'gift-kept':find(d.gallery,id).gift=null;save();drawSheet();break;
+ case 'review':go(sReview());break;
+ case 'add-idea':ui.form={yarns:[],fams:[]};ui.vals={};go(sAddIdea());break;
+ case 'ffam':ui.form.fams=toggle(ui.form.fams,v);drawSheet();break;
+ case 'fyarn':ui.form.yarns=toggle(ui.form.yarns,v);if(ui.form.yarns.length)ui.form.noSup=false;drawSheet();break;
+ case 'fnosup':ui.form.noSup=el.checked;if(el.checked)ui.form.yarns=[];drawSheet();break;
+ case 'save-idea':{capture();const f=ui.form,title=val('fTitle').trim();if(!title)return err('Give it a name first','fTitle');
+  const link=/^https?:\/\//i.test(val('fLink').trim())?val('fLink').trim():'',nid=uid(),cat=val('fCat',''),f0=f.fams[0];
+  d.ideas.unshift({id:nid,title,cat,source:val('fSrc','TikTok'),link,img:f.img||null,imgM:f.imgM||null,vidM:f.vidM||null,pdfM:f.pdfM||null,art:{k:KMAP[cat]||(isYarn()?'blanket':'palette'),c1:'#f3e6e3',c2:f0&&f0!=='multi'?FAMS[f0]:'#b88896',h:[110,125,140][d.ideas.length%3]},fams:f.fams,type:'',yarns:f.yarns,noSup:!f.yarns.length,notes:val('fNotes'),hasVideo:!!f.vidM,hasPdf:!!f.pdfM});
+  S.tab='ideas';save();closeSheet();toast(cat?'Saved to '+cat:'Saved. Sort it when you\'re ready.');mark();break}
+ case 'add-yarn':ui.form={fam:'pink'};ui.vals={};go(sAddYarn());break;
+ case 'yfam':ui.form.fam=v;drawSheet();break;
+ case 'save-yarn':{capture();const name=val('yName').trim();if(!name)return err('Give it a name first','yName');const fam=ui.form.fam||'pink';d.yarns.unshift({id:uid(),kind:'item',name,hex:val('yHex','#b88896'),fam,fams:[fam],type:val('yType').trim(),amt:val('yAmt',amts()[1]),img:ui.form.img||null,imgM:ui.form.imgM||null,label:ui.form.label||null,labelM:ui.form.labelM||null,notes:val('yNotes'),items:[]});save();closeSheet();toast('Added to your supplies');break}
+ case 'add-kit':ui.form={fams:[],members:[]};ui.vals={};go(sAddKit());break;
+ case 'kffam':ui.form.fams=toggle(ui.form.fams,v);drawSheet();break;
+ case 'kmem':ui.form.members=toggle(ui.form.members,v);drawSheet();break;
+ case 'pick-members':go(sPickMembers(id));break;
+ case 'toggle-member':{const k=find(d.yarns,id);k.members=toggle(k.members||[],el.dataset.y);save();drawSheet();break}
+ case 'gview':ui.gview=v;render();break;
+ case 'save-kit':{capture();const name=val('kName').trim();if(!name)return err('Give the kit a name','kName');d.yarns.unshift({id:uid(),kind:'kit',name,hex:val('kHex','#5f7896'),fam:ui.form.fams[0]||'',fams:ui.form.fams,members:ui.form.members,type:'',amt:'',img:ui.form.img||null,imgM:ui.form.imgM||null,label:null,notes:val('kNotes'),items:val('kItems').split('\n').map(s=>s.trim()).filter(Boolean)});save();closeSheet();toast('Kit saved');break}
+ case 'add-project':ui.form={};ui.vals={};go(sAddProject());break;
+ case 'save-project':{capture();const title=val('pTitle').trim();if(!title)return err('What are you making?','pTitle');const steps=[val('pNext'),...val('pSteps').split('\n')].map(s=>s.trim()).filter(Boolean).map(t=>({t,done:false}));const p={id:uid(),title,ideas:[],yarns:[],art:{k:isYarn()?'blanket':'palette',c1:'#efe8dc',c2:'#837f26',h:100},img:null,photos:[],notes:'',steps};d.projects.unshift(p);S.tab='projects';save();stack=[];sheetFn=null;render();ui.vals={};go(sProject(p.id));break}
+ case 'add-gallery':ui.form={gift:false};ui.vals={};go(sAddGal());break;
+ case 'gfgift':capture();ui.form.gift=el.checked;drawSheet(false,true);break;
+ case 'save-gal':{capture();const title=val('gTitle').trim();if(!ui.form.img)return err('Add a photo so you can remember it');if(!title)return err('Give it a name','gTitle');d.gallery.unshift({id:uid(),title,img:ui.form.img,imgM:ui.form.imgM||null,art:null,date:val('gDate',today())||today(),gift:ui.form.gift&&val('gTo').trim()?{to:val('gTo').trim(),occ:val('gOcc').trim()}:null,ideas:[],yarns:[],notes:val('gNotes')});if(heads(S.craft).gallery.on)S.tab='gallery';save();closeSheet();toast('Added');break}
+ case 'stab':ui.stab=v;render();break;
+ case 'craft':S.hidden=S.hidden.filter(x=>x!==v);S.craft=v;ui.cat='All';ui.fam='';ui.type='';ui.hcraft=null;S.tab=visTabs()[0][0];save();render();window.scrollTo(0,0);toast('Now in '+craftName());break;
+ case 'cup':moveCraft(v,-1);break;
+ case 'cdown':moveCraft(v,1);break;
+ case 'cdel':if(!sure(el))return;S.custom=S.custom.filter(c=>c.id!==v);delete S.crafts[v];if(S.craft===v)S.craft=allCrafts()[0].id;save();render();break;
+ case 'addcraft':{const inp=$('#newcraft'),t=inp.value.trim();if(!t){inp.focus();return}if(allCrafts().some(c=>c.name.toLowerCase()===t.toLowerCase())){$('#craftErr').textContent='You already have that one';return}const nid='c'+uid();S.custom=[...(S.custom||[]),{id:nid,name:t,hex:EXTRA[(S.custom||[]).length%EXTRA.length]}];S.crafts[nid]={cats:['General'],ideas:[],projects:[],yarns:[],gallery:[]};save();render();toast(t+' added. Tap it to open.');break}
+ case 'supstyle':S.supStyle[S.craft]=v;save();render();break;
+ case 'rm-samples':Object.values(S.crafts).forEach(c=>{['ideas','projects','yarns','gallery','palettes'].forEach(k=>c[k]=(c[k]||[]).filter(x=>!x.sample));cleanLinks(c)});S.occasions=(S.occasions||[]).filter(o=>!o.sample);save();render();toast('Sample items removed. Your own things are all still here.');break;
+ case 'clear-craft':if(!sure(el))return;S.crafts[S.craft]={...blank(S.craft),cats:D().cats};save();render();toast(craftName()+' is empty');break;
+ case 'mode':S.mode=v;save();applyTheme();render();break;
+ case 'theme':S.theme=v;save();applyTheme();render();break;
+ case 'hfont':S.hfont=el.value;save();applyTheme();break;
+ case 'size':S.size=v;save();applyTheme();render();break;
+ case 'hcraft':ui.hcraft=el.value;render();break;
+ case 'hon':{const h=heads(el.dataset.c)[el.dataset.k];h.on=el.checked;save();render();break}
+ case 'hname':{const t=el.value.trim();const h=heads(el.dataset.c)[el.dataset.k];if(t){h.n=t;save();render()}else el.value=h.n;break}
+ case 'hreset':S.heads[el.dataset.c]=defHeads(el.dataset.c);save();render();break;
+ case 'quick-save':{const raw=$('#quickLink').value.trim(),m=raw.match(/https?:\/\/\S+/i);if(!m){toast('Paste a link first');$('#quickLink').focus();return}const u=m[0].replace(/[),.]+$/,''),src=srcOf(u);let host='';try{host=new URL(u).hostname.replace(/^www\./,'')}catch(_){}const title=src==='Website'?host:src==='PDF pattern'?'PDF pattern':src+(['TikTok','Video'].includes(src)?' video':' post');const C={TikTok:['#f1e1e3','#943d47'],Instagram:['#f3e3ea','#b88896'],Pinterest:['#f6e2e2','#b84a4f'],Video:['#e3e7ee','#5b6f8c'],Etsy:['#f4e6df','#c4703f'],Website:['#e8ead9','#837f26'],'PDF pattern':['#f3ead0','#c9a23f']}[src];d.ideas.unshift({id:uid(),title,cat:'',source:src,link:u,img:null,art:{k:'bookmark',c1:C[0],c2:C[1],h:110},fams:[],type:'',yarns:[],noSup:true,notes:'',when:'soon',tut:[]});mark();save();ui.cat='Unsorted';render();toast('Saved to Unsorted');break}
+ case 'assign':{const i=find(d.ideas,id);i.cat=v;save();render();toast('Moved to '+v);break}
+ case 'icat':{find(d.ideas,id).cat=el.value;save();toast(el.value?'Moved to '+el.value:'Moved to Unsorted');break}
+ case 'iwhen':find(d.ideas,id).when=v;save();drawSheet();break;
+ case 'when':ui.when=v;render();break;
+ case 'tut-add':{capture();const t=val('tutT').trim(),n=val('tutN').trim();if(!n&&!t)return;const i=find(d.ideas,id);i.tut=i.tut||[];i.tut.push({t,n});i.tut.sort((a,b)=>{const s=x=>x.t.split(':').reduce((m,p)=>m*60+(+p||0),0);return s(a)-s(b)});ui.vals.tutT='';ui.vals.tutN='';save();drawSheet(false,true);break}
+ case 'tut-del':find(d.ideas,id).tut.splice(+el.dataset.k,1);save();drawSheet();break;
+ case 'mkpal':{const i=find(d.ideas,id);toast('Mixing your palette...');extract(i.img||svgUrl(art(i.art),200,200)).then(cols=>{if(!cols.length){toast("Couldn't read the colours from that picture");return}d.palettes.unshift({id:uid(),name:i.title+' colours',cols});save();toast('Palette saved. Find it under Palettes.');});break}
+ case 'savepal-month':{const [n,cols]=PALS[new Date().getMonth()];d.palettes.unshift({id:uid(),name:n,cols:[...cols]});S.dismiss['m'+dayKey().slice(0,7)]=1;save();render();toast('Palette saved');break}
+ case 'dismiss':S.dismiss[v]=1;save();render();break;
+ case 'pal-del':if(!sure(el))return;d.palettes=d.palettes.filter(p=>p.id!==id);save();render();break;
+ case 'pal-match':{const p=find(d.palettes,id),dist=(a,b)=>{const A=parseInt(a.slice(1),16),B=parseInt(b.slice(1),16);return Math.hypot((A>>16)-(B>>16),(A>>8&255)-(B>>8&255),(A&255)-(B&255))};const hits=d.yarns.filter(y=>y.kind!=='kit').map(y=>({y,s:Math.min(...p.cols.map(c=>dist(c,y.hex)))})).filter(x=>x.s<90).sort((a,b)=>a.s-b.s).slice(0,8);go(()=>`<h2>${esc(p.name)}</h2><div class="palcard"><div class="cols">${p.cols.map(c=>`<i style="background:${c}"></i>`).join('')}</div></div><h3>Closest in your ${isYarn()?'stash':'supplies'}</h3>${hits.length?`<div class="swatches">${hits.map(({y})=>sw(y)).join('')}</div>`:'<p class="small">Nothing close yet.</p>'}`);break}
+ case 'sview':ui.sview=v;render();break;
+ case 'sort':ui.sort=el.value;render();break;
+ case 'buster':ui.bust=null;go(sBuster());break;
+ case 'bust-again':ui.bust=null;drawSheet();break;
+ case 'giftcal':ui.vals={};go(sGifts());break;
+ case 'occ-save':{capture();const name=val('occName').trim(),date=val('occDate');if(!name)return err('Who is it for?','occName');if(!date)return err('Pick a date','occDate');S.occasions.push({id:uid(),name,occ:val('occWhat').trim()||'Occasion',date,yearly:true,craft:S.craft,pid:val('occP')||null});ui.vals={};save();drawSheet(false,true);toast('Added to your gift calendar');break}
+ case 'occ-del':if(!sure(el))return;S.occasions=S.occasions.filter(o=>o.id!==v);save();drawSheet();break;
+ case 'occ-open':if(el.dataset.c!==S.craft){S.craft=el.dataset.c;save()}ui.vals={};go(sProject(id));break;
+ case 'skills':go(sSkills());break;
+ case 'skill':{const g=S.skills[S.craft]=S.skills[S.craft]||{};if(g[v])delete g[v];else{g[v]=dayKey();confetti();toast('Badge earned: '+v)}save();drawSheet();break}
+ case 'skill-add':{const inp=$('#newskill'),t=inp.value.trim();if(!t){inp.focus();return}const x=S.skillsExtra[S.craft]=S.skillsExtra[S.craft]||[];if(!skillList(S.craft).includes(t))x.push(t);save();drawSheet(false,true);break}
+ case 'board':go(sBoard(id));break;
+ case 'playlist':{const u=el.value.trim(),p=find(d.projects,id);p.playlist=/^https?:\/\//i.test(u)?u:'';if(u&&!p.playlist)toast('Paste a full link starting with https://');save();drawSheet();break}
+ case 'pg':ui.page+=+v;ui.flip=true;drawSheet(false,true);ui.flip=false;break;
+ case 'post':openPost();break;
+ case 'post-save':{const c=ui.postCanvas;if(!c)return;c.toBlob(b=>{if(b)saveFile(`my-${yearData().yr}-${S.craft}.png`,b)},'image/png');break}
+ case 'trophy-close':el.closest('.trophy').remove();break;
+ case 'fx':S.fx[v]=el.checked;if(v==='sounds'&&!el.checked){stopSound();ui.soundOpen=false}save();render();break;
+ case 'season':S.season=el.value;save();render();break;
+ case 'icon':S.icon=v;save();render();break;
+ case 'me-name':S.me.name=el.value.trim();save();render();break;
+ case 'me-bday':S.me.bday=el.value;save();render();break;
+ case 'sound-open':ui.soundOpen=!ui.soundOpen;header();break;
+ case 'sound':playSound(v);header();break;
+ case 'vol':S.vol=+el.value;if(snd)snd.master.gain.value=S.vol*.7;save();break;
+ case 'egg':{ui.egg++;clearTimeout(ui.eggT);ui.eggT=setTimeout(()=>ui.egg=0,1800);if(ui.egg>=5){ui.egg=0;if(S.fx.easter)storm()}break}
+ case 'chide':if(visCrafts().length<=1){toast('Keep at least one craft');return}S.hidden.push(v);if(S.craft===v)S.craft=visCrafts()[0].id;save();render();toast(nameOf(v)+' hidden. You can bring it back below.');break;
+ case 'cshow':S.hidden=S.hidden.filter(x=>x!==v);save();render();break;
+ case 'ob-again':S.onboarded=false;ui.ob=0;ui.obC=visCrafts().map(c=>c.id);render();window.scrollTo(0,0);break;
+ case 'ob-skip':S.onboarded=true;save();render();break;
+ case 'ob-back':ui.ob--;render();break;
+ case 'ob-craft':ui.obC=toggle(ui.obC,v);render();break;
+ case 'ob-next':{if(ui.ob===0){const n=$('#obName');if(n)S.me.name=n.value.trim()}if(ui.ob===2&&!ui.obC.length)return err('Pick at least one craft');if(ui.ob<3){ui.ob++;save();render();window.scrollTo(0,0);break}const ch=ui.obC.slice();S.hidden=allCrafts().map(c=>c.id).filter(x=>!ch.includes(x));S.order=[...allCrafts().map(c=>c.id).filter(x=>ch.includes(x)),...allCrafts().map(c=>c.id).filter(x=>!ch.includes(x))];S.craft=ch[0];S.tab='ideas';S.onboarded=true;save();render();window.scrollTo(0,0);toast('All set! Happy making.');break}
+ case 'backup':saveFile(`my-crafts-backup-${dayKey()}.json`,new Blob([JSON.stringify(S)],{type:'application/json'}));break;
+ case 'gd-sync':if(!LS.get('user')){ui.gate=true;render();break}if(GD.needAuth||!GD.ready)GD.connect(true);else GD.push();break;
+ case 'gd-copies':{const box=$('#copies');if(!box)break;box.innerHTML='<p class="small">Looking...</p>';GD.copies().then(l=>{box.innerHTML=l.length?l.map(f=>`<div class="lrow" style="cursor:default"><span><b>${esc(new Date(f.modifiedTime).toLocaleString('en-AU',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}))}</b><span class="small">${/unsynced/.test(f.name)?'Changes kept from a device that was out of date':'Daily copy'}</span></span><button class="btn small" data-act="gd-restore" data-id="${esc(f.id)}">Restore this</button></div>`).join(''):'<p class="small">No copies yet. The first one is made today.</p>'}).catch(()=>{box.innerHTML='<p class="small">Tap "Tap to sync" at the top first, then try again.</p>'});break}
+ case 'gd-restore':if(!sure(el))return;GD.restore(id).catch(()=>toast("That copy couldn't be opened"));break;
+ case 'gd-signout':if(!sure(el))return;GD.signOut();break;
+ case 'save-media':saveMedia(el.dataset.m,el.dataset.n);break;
+ case 'gate-signin':ui.gateMsg='';el.textContent='Signing in…';GD.connect(true);break;
+ case 'gate-local':LS.set('local','1');ui.gate=false;render();break;
+ case 'addcat':{const c=dataFor(el.dataset.c),inp=$('#newcat'),t=inp.value.trim();if(!t||c.cats.includes(t)){inp.focus();return}c.cats.push(t);save();render();break}
+ case 'delcat':{const c=dataFor(el.dataset.c);c.cats=c.cats.filter(x=>x!==v);if(ui.cat===v)ui.cat='All';save();render();break}
+ }}
+
+let drag=null;
+document.addEventListener('pointerdown',e=>{const h=e.target.closest('.handle');if(!h)return;e.preventDefault();drag=h.closest('.crow');drag.classList.add('dragging');try{h.setPointerCapture(e.pointerId)}catch(_){}});
+document.addEventListener('pointermove',e=>{if(!drag)return;const t=document.elementFromPoint(e.clientX,e.clientY)?.closest('.crow');if(!t||t===drag||t.parentNode!==drag.parentNode)return;const kids=[...drag.parentNode.children];if(kids.indexOf(drag)<kids.indexOf(t))t.after(drag);else t.before(drag)});
+document.addEventListener('pointerup',()=>{if(!drag)return;const list=drag.parentNode;drag.classList.remove('dragging');S.order=[...list.children].map(r=>r.dataset.v);drag=null;save();render()});
+document.addEventListener('click',e=>{if(e.target.id==='ov'){closeSheet();return}const el=e.target.closest('[data-act]');if(!el||/^(INPUT|SELECT|TEXTAREA)$/.test(el.tagName))return;act(el.dataset.act,el)});
+document.addEventListener('change',e=>{const el=e.target;if(el.dataset.up){onUpload(el);el.value='';return}if(el.dataset.act&&el.dataset.act!=='pnotes')act(el.dataset.act,el)});
+document.addEventListener('input',e=>{const el=e.target;if(el.dataset.act==='pnotes'){find(D().projects,el.dataset.id).notes=el.value;save()}else if(el.id&&$('#formErr'))$('#formErr').textContent=''});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sheetFn)closeSheet();if(e.key!=='Enter')return;const map={newstep:'addstep',newcat:'addcat',nextIn:'setnext',kitem:'kadd',newcraft:'addcraft'};const a=map[e.target.id];if(a){e.preventDefault();$(`[data-act=${a}]`)?.click()}});
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{applyTheme();render()})}catch(_){}
+(async()=>{let st=null;try{st=await IDB.get('kv','state')}catch(e){}
+ if(!st){try{st=JSON.parse(localStorage.getItem(KEY))}catch(e){}}
+ if(st&&st.crafts)S=migrate(st);
+ if(LS.get('user')&&st&&st.crafts){render();GD.connect(false)}
+ else if(LS.get('local')&&!LS.get('user'))render();
+ else{ui.gate=true;render()}
+ try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+})();
+}
+</script>
+</body>
+</html>
