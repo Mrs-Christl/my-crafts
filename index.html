@@ -16,7 +16,7 @@ IDEA: a hand-stitched scrapbook: dashed stitching, a yarn strand, tabs like fabr
 PICTURE: picture grids of saved ideas, a wall of supplies, finished makes
 COLOUR and TYPE: set by the chosen theme (default: olive, dusty rose, chestnut, wine); fonts per theme
 LAYOUT: craft name top right, big tabs, chips row, masonry grid; details open in sheets */
-:root{color-scheme:light;--bg:#f7f0ea;--card:#fffaf6;--ink:#3a2520;--soft:#7d6058;--olive:#837f26;--rose:#b88896;--brown:#78412c;--wine:#943d47;--roseTint:#f3e3e5;--oliveTint:#edebd5;--line:#e4cfd0;--on1:#fff6f1;--on2:#fffbe9;--fh:Fredoka,sans-serif;--fb:Nunito,system-ui,sans-serif;--fd:Caveat,cursive;--bw:1.5px;--bs:dashed}
+:root{color-scheme:light;--acc:#943d47;--bg:#f7f0ea;--card:#fffaf6;--ink:#3a2520;--soft:#7d6058;--olive:#837f26;--rose:#b88896;--brown:#78412c;--wine:#943d47;--roseTint:#f3e3e5;--oliveTint:#edebd5;--line:#e4cfd0;--on1:#fff6f1;--on2:#fffbe9;--fh:Fredoka,sans-serif;--fb:Nunito,system-ui,sans-serif;--fd:Caveat,cursive;--bw:1.5px;--bs:dashed}
 *{box-sizing:border-box;min-width:0}
 body{margin:0;background:var(--bg) var(--pat);min-height:100vh;color:var(--ink);font:16px/1.55 var(--fb);overflow-x:clip;transition:background .3s}
 button,input,select,textarea{font-family:var(--fb)}
@@ -90,12 +90,12 @@ main{padding:16px max(3vw,14px) 90px;max-width:1240px;margin:12px auto 40px;back
 .cap{display:block;padding:10px 12px 12px}.cap b{font:700 15px/1.3 var(--fb);display:block}
 .dots{display:flex;gap:4px;margin-top:6px;align-items:center;flex-wrap:wrap}
 .dot{display:inline-block;width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 1.5px var(--card),0 0 0 2.5px var(--line);flex:none}
-.tag{display:inline-block;font:700 12px var(--fb);color:var(--wine);background:var(--roseTint);padding:3px 9px;border-radius:999px}
+.tag{display:inline-block;font:700 12px var(--fb);color:var(--acc);background:var(--roseTint);padding:3px 9px;border-radius:999px}
 .tag.olive{color:var(--ink);background:var(--oliveTint)}
 .small{font-size:13px;color:var(--soft)}
 h2.h{font:500 22px var(--fh);color:var(--brown);margin:8px 0}
 .sheet h2{font:500 27px/1.15 var(--fh);color:var(--brown);margin:4px 0 8px;text-wrap:balance}
-h3{font:500 18px var(--fh);color:var(--wine);margin:22px 0 8px;display:flex;align-items:center;gap:6px}
+h3{font:500 18px var(--fh);color:var(--acc);margin:22px 0 8px;display:flex;align-items:center;gap:6px}
 .plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:14px}
 .pcard{display:flex;gap:14px;text-align:left;background:var(--card);border:var(--bw) var(--bs) var(--line);border-radius:20px;padding:12px;color:inherit;font:inherit;cursor:pointer}
 .pm{flex:none;width:100px;height:100px;border-radius:14px;overflow:hidden}
@@ -152,7 +152,7 @@ label.f{display:block;font:700 14px var(--fb);margin:16px 0 6px}
 input:not([type=checkbox]):not([type=file]),select,textarea{width:100%;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);min-height:44px}
 input[type=color]{padding:4px;height:48px;max-width:120px}
 select.sel{width:auto;min-width:140px}
-.err{color:var(--wine);font-weight:700;font-size:14px;margin:6px 0 0;min-height:1em}
+.err{color:var(--acc);font-weight:700;font-size:14px;margin:6px 0 0;min-height:1em}
 .step{display:flex;gap:8px;align-items:center;padding:6px 6px 6px 12px;border-radius:14px;background:var(--card);margin:6px 0}
 .step label{flex:1;margin:0;font:700 15px var(--fb);cursor:pointer;padding:6px 0}
 .step.done label{text-decoration:line-through;color:var(--soft)}
@@ -202,7 +202,7 @@ select.sel{width:auto;min-width:140px}
 .info{background:var(--roseTint);border-radius:16px;padding:4px 16px 14px}
 .stats3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
 .stats3 div{background:var(--roseTint);border-radius:16px;padding:12px 8px;text-align:center}
-.stats3 b{display:block;font:500 28px var(--fh);color:var(--wine)}.stats3 span{font-size:13px}
+.stats3 b{display:block;font:500 28px var(--fh);color:var(--acc)}.stats3 span{font-size:13px}
 .collage{columns:3 120px;column-gap:10px;margin:14px 0}
 .ci{break-inside:avoid;margin-bottom:10px;border-radius:12px;overflow:hidden;border:5px solid var(--card)}
 .ci:nth-child(odd){transform:rotate(-1.5deg)}.ci:nth-child(even){transform:rotate(1.2deg)}
@@ -223,7 +223,7 @@ select.sel{width:auto;min-width:140px}
 .palcard .cols{display:flex;height:90px}.palcard .cols i{flex:1}
 .palcard .pb2{padding:10px 12px}
 .banner{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:var(--roseTint);border-radius:20px;padding:12px 16px;margin:0 0 14px}
-.banner .hand{color:var(--wine)}
+.banner .hand{color:var(--acc)}
 .banner .sw4{display:flex;gap:4px}.banner .sw4 i{width:30px;height:30px;border-radius:8px;display:block}
 .prog{position:relative}
 .prog.yp{overflow:visible}
@@ -251,7 +251,7 @@ select.sel{width:auto;min-width:140px}
 .occ{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:16px;padding:10px 12px;margin:8px 0}
 .od{flex:none;width:58px;height:58px;border-radius:14px;background:var(--wine);color:var(--on1);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
 .od b{font:500 24px var(--fh)}.od span{font:700 12px var(--fb)}
-.ob2{flex:1}.lk{border:0;background:none;padding:0;color:var(--wine);font:700 14px var(--fb);cursor:pointer;text-align:left}
+.ob2{flex:1}.lk{border:0;background:none;padding:0;color:var(--acc);font:700 14px var(--fb);cursor:pointer;text-align:left}
 .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
 .sk{border:0;background:var(--card);border-radius:18px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;color:inherit;font:700 13px/1.25 var(--fb);text-align:center}
 .sk .sc{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;border:3px dashed var(--line);color:var(--soft)}
@@ -316,7 +316,7 @@ body.th-cherry .tab[aria-selected=true],body.th-cherry .btn.primary,body.th-cher
 .tipex{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 4px;align-items:flex-start}
 .tipex .mini{width:84px;border-radius:12px;overflow:hidden;background:var(--bg);font:700 11px var(--fb);text-align:center;display:block;padding-bottom:4px}
 .tipex .mini svg{width:84px;height:84px;display:block;margin-bottom:3px}
-.tip{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:2px dashed var(--wine);border-radius:18px;padding:12px 14px;margin:0 0 14px}
+.tip{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:2px dashed var(--acc);border-radius:18px;padding:12px 14px;margin:0 0 14px}
 .tip svg{flex:none}.tipb{flex:1}.tipb>b{font:500 18px var(--fh);color:var(--brown)}.tip li b{font-weight:700}
 .tip ol{margin:6px 0 0;padding-left:20px}.tip li{margin:4px 0;font-size:15px}
 @media(max-width:600px){.tip>svg{width:40px;height:40px}.tab{font-size:12px;padding:8px 1px 7px}.tab svg{width:20px;height:20px}}
@@ -384,7 +384,7 @@ const THEMES=[
  light:{bg:'#f7d7a6',card:'#fff6ea',ink:'#2a1418',soft:'#6b4a3c',wine:'#751737',olive:'#f5ced9',brown:'#751737',rose:'#751737',roseTint:'#f5ced9',oliveTint:'#fbe3ea',line:'#e6c08f',on1:'#ffffff',on2:'#3a0d1f'},
  dark:{bg:'#000000',card:'#1a0f10',ink:'#f9e4ea',soft:'#d9b2be',wine:'#f5ced9',olive:'#751737',brown:'#f5ced9',rose:'#f5ced9',roseTint:'#3a1424',oliveTint:'#2a0d18',line:'#3b2228',on1:'#3a0d1f',on2:'#ffffff'}},
 {id:'cherry',name:'Cherry cola',pat:PAT.wobble,fh:'Fredoka',fb:'Nunito',fd:'Caveat',
- dark:{bg:'#140306',card:'#22070d',ink:'#fde3e3',soft:'#e7aeb0',wine:'#000000',olive:'#a50305',brown:'#f3afb0',rose:'#e46a6c',roseTint:'#3a0a12',oliveTint:'#2c0609',line:'#45121a',on1:'#ffd6d7',on2:'#ffffff'}}];
+ dark:{bg:'#140306',card:'#22070d',ink:'#fde3e3',soft:'#e7aeb0',wine:'#000000',acc:'#ffd6d7',olive:'#a50305',brown:'#ffd6d7',rose:'#e46a6c',roseTint:'#3a0a12',oliveTint:'#2c0609',line:'#45121a',on1:'#ffd6d7',on2:'#ffffff'}}];
 const HFONTS=['Theme default','Quicksand','Cormorant Garamond','Patrick Hand','Shrikhand','DM Serif Display','Playfair Display','Fredoka','Caveat'];
 const FXGROUPS=[
 ['Decorations',[['washi','Washi tape headings','Strips of patterned tape behind headings.'],['polaroid','Polaroid portfolio','Portfolio photos look like polaroids.']]],
@@ -627,7 +627,7 @@ const colorOf=c=>CC[c]||((S.custom||[]).find(x=>x.id===c)||{}).hex||'#b88896';
 const supStyle=c=>(S.supStyle||{})[c]||(['painting','drawing','colouring'].includes(c)?'kits':'items');
 const isYarn=()=>S.craft==='crochet';
 const supWord=()=>isYarn()?'yarn':'supplies';
-function defHeads(c){return {ideas:{n:'Ideas',on:true},projects:{n:'Projects',on:true},stash:{n:c==='crochet'?'Stash':'Supplies',on:true},combos:{n:'Colour combos',on:true},gallery:{n:c==='embroidery'?'Gallery':'Portfolio',on:true}}}
+function defHeads(c){return {ideas:{n:'Ideas',on:true},projects:{n:'Projects',on:true},stash:{n:c==='crochet'?'Stash':'Supplies',on:true},combos:{n:'Colours',on:true},gallery:{n:c==='embroidery'?'Gallery':'Portfolio',on:true}}}
 function heads(c){if(!S.heads[c])S.heads[c]=defHeads(c);return S.heads[c]}
 const visTabs=()=>[...TABKEYS.filter(k=>heads(S.craft)[k].on).map(k=>[k,heads(S.craft)[k].n]),['settings','Settings']];
 const val=(id,d='')=>ui.vals[id]??d;
@@ -648,7 +648,7 @@ const cheer=()=>['Nice one!','Another step done','Look at you go','One step clos
 const famChips=(act,sel)=>Object.keys(FAMS).map(k=>`<button class="chip cap1" data-act="${act}" data-v="${k}" aria-pressed="${sel.includes(k)}"><span class="dot" style="background:${FAMS[k]}"></span>${k}</button>`).join('');
 
 function resolvedMode(){const t=THEMES.find(x=>x.id===S.theme)||THEMES[0];let m=S.mode==='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):S.mode;if(!t[m])m=t.light?'light':'dark';return m}
-function applyTheme(){const t=THEMES.find(x=>x.id===S.theme)||THEMES[0],m=resolvedMode(),p=t[m],r=document.documentElement.style;Object.entries(p).forEach(([k,v])=>r.setProperty('--'+k,v));const hf=S.hfont&&S.hfont!=='Theme default'?S.hfont:t.fh;r.setProperty('--fh',`'${hf}',sans-serif`);r.setProperty('--fb',`'${t.fb}',system-ui,sans-serif`);r.setProperty('--fd',`'${t.fd}',cursive`);r.colorScheme=m;r.setProperty('--pat',t.pat?t.pat(m):'none');document.body.style.zoom=S.size==='large'?'1.12':'';
+function applyTheme(){const t=THEMES.find(x=>x.id===S.theme)||THEMES[0],m=resolvedMode(),p=t[m],r=document.documentElement.style;Object.entries(p).forEach(([k,v])=>r.setProperty('--'+k,v));const hf=S.hfont&&S.hfont!=='Theme default'?S.hfont:t.fh;r.setProperty('--fh',`'${hf}',sans-serif`);r.setProperty('--fb',`'${t.fb}',system-ui,sans-serif`);r.setProperty('--fd',`'${t.fd}',cursive`);r.colorScheme=m;r.setProperty('--acc',p.acc||p.wine);r.setProperty('--pat',t.pat?t.pat(m):'none');document.body.style.zoom=S.size==='large'?'1.12':'';
  const b=document.body.classList;b.toggle('fx-washi',!!S.fx.washi);b.toggle('fx-polaroid',!!S.fx.polaroid);b.toggle('fxb',!!S.fx.borders);document.body.dataset.craft=S.craft;[...b].filter(c=>c.startsWith('th-')).forEach(c=>b.remove(c));b.add('th-'+t.id)}
 const visCrafts=()=>allCrafts().filter(c=>!S.hidden.includes(c.id));
 const prog=(v,big)=>`<span class="prog ${big?'big':''} ${S.fx.yarnprog?'yp':''}"><i style="width:${v}%"></i>${S.fx.yarnprog?`<span class="pball" style="left:calc(${v}% - 11px)">${ball(getComputedStyle(document.documentElement).getPropertyValue('--rose').trim()||'#b88896',22)}</span>`:''}</span>`;
@@ -753,6 +753,7 @@ function vFun(){const me=S.me||{};
 function vData(){const signed=!!LS.get('user');return `<h2 class="h" style="margin-top:0">Your data is safe</h2>
  <div class="box">${signed?`<p><b>You're signed in with Google.</b> Everything you add is saved on this device <i>and</i> in a private, hidden folder in your own Google Drive that only this app can use. When you open the app on your iPhone, iPad or MacBook, it brings in your latest changes.</p><p><b>Status:</b> <span id="drvStatus">${esc(GD.status||'')}</span></p><div class="acts" style="margin-top:0"><button class="btn primary" data-act="gd-sync">${IC.cloud} Sync now</button><button class="btn" data-act="gd-copies">See daily copies</button></div><div id="copies" style="margin-top:12px"></div><p class="small">A copy of everything is kept each day for the last 14 days, so you can go back if something goes wrong.</p>`:`<p><b>Not backed up yet.</b> Right now your things are only on this device. Sign in with Google so they're saved safely and show up on your other devices.</p><button class="btn primary" data-act="gd-sync">Sign in with Google</button>`}</div>
  <h3>Where are my photos, videos and PDFs?</h3><div class="box"><p>They live <b>inside this app</b>. Open any idea, project or finished piece to see them, or tap "Open pattern" for a PDF.</p><p><b>For a plane or no internet:</b> tap <b>"Save to my device"</b> under a picture, video or PDF. Then choose <b>Save Video</b> or <b>Save Image</b> (it goes into your Photos app), or <b>Save to Files</b> (for PDFs). Those copies are on your iPhone or iPad and open without internet.</p><p class="small">Behind the scenes, they're also kept in a hidden folder in your Google Drive. You won't see it when you open Google Drive. That's on purpose, so nothing gets deleted by accident. To see how much space it uses, open Google Drive on a computer, then Settings, then Manage apps.</p></div>
+ <h3>Pictures from links</h3><div class="box"><p>When you paste a link, free helper services fetch its picture. TikTok and YouTube have no limit. Pinterest and other websites use a free service with a small daily limit.</p><p><b>Want more?</b> Get a free key from LinkPreview (it allows up to 60 links an hour for personal use):</p><ol><li>Go to <b>linkpreview.net</b> and tap <b>Sign up</b> (it's free, no card needed).</li><li>Copy the <b>API key</b> it shows you.</li><li>Paste it below and tap Save.</li></ol><div class="addrow"><input id="lpKey" value="${esc(S.lpKey||'')}" placeholder="Paste your LinkPreview key" aria-label="LinkPreview key" autocomplete="off"><button class="btn olive" data-act="lpkey">Save</button></div>${S.lpKey?'<p class="small">Key saved. Links will use LinkPreview first.</p>':''}</div>
  <h3>Backup file</h3><div class="box"><p>Save a copy of all your words, lists and small pictures as a file, for extra peace of mind.</p><div class="acts" style="margin-top:0"><button class="btn" data-act="backup">${IC.download} Download a backup</button>${fileBtn('Restore from a backup',IC.file,'application/json,.json','restore','','btn')}</div><p class="err" id="formErr"></p></div>
  ${signed?`<h3>Sign out</h3><div class="box"><p class="small">Signing out removes your things from this device only. They stay safe in your Google Drive and come back when you sign in again.</p><button class="btn ghost" data-act="gd-signout">Sign out of Google</button></div>`:''}`}
 
@@ -801,7 +802,7 @@ const sIdea=id=>()=>{const d=D(),i=find(d.ideas,id);if(!i)return '<p>This idea h
  <label class="f" for="icat">Category</label><select id="icat" data-act="icat" data-id="${id}"><option value="" ${!i.cat?'selected':''}>Unsorted</option>${d.cats.map(c=>`<option ${c===i.cat?'selected':''}>${esc(c)}</option>`).join('')}</select>
  ${S.fx.someday?`<div class="chips wrap" style="margin-top:10px"><button class="chip" data-act="iwhen" data-id="${id}" data-v="soon" aria-pressed="${i.when!=='someday'}">Soon</button><button class="chip" data-act="iwhen" data-id="${id}" data-v="someday" aria-pressed="${i.when==='someday'}">Someday</button></div>`:''}
  ${i.notes?`<p class="hand big">${esc(i.notes)}</p>`:''}
- ${S.fx.tutnotes?`<h3>Tutorial notes</h3>${(i.tut||[]).map((n,k)=>`<div class="step"><b style="flex:none;min-width:48px;color:var(--wine)">${esc(n.t)}</b><span style="flex:1">${esc(n.n)}</span><button class="mini" data-act="tut-del" data-id="${id}" data-k="${k}" aria-label="Remove note">${IC.x}</button></div>`).join('')}<div class="addrow"><input id="tutT" value="${esc(val('tutT'))}" placeholder="3:20" style="max-width:90px" aria-label="Time in the video"><input id="tutN" value="${esc(val('tutN'))}" placeholder="The tricky bit" aria-label="Note"><button class="btn olive" data-act="tut-add" data-id="${id}">Add</button></div>`:''}
+ ${S.fx.tutnotes?`<h3>Tutorial notes</h3>${(i.tut||[]).map((n,k)=>`<div class="step"><b style="flex:none;min-width:48px;color:var(--acc)">${esc(n.t)}</b><span style="flex:1">${esc(n.n)}</span><button class="mini" data-act="tut-del" data-id="${id}" data-k="${k}" aria-label="Remove note">${IC.x}</button></div>`).join('')}<div class="addrow"><input id="tutT" value="${esc(val('tutT'))}" placeholder="3:20" style="max-width:90px" aria-label="Time in the video"><input id="tutN" value="${esc(val('tutN'))}" placeholder="The tricky bit" aria-label="Note"><button class="btn olive" data-act="tut-add" data-id="${id}">Add</button></div>`:''}
  ${i.img||i.art?`<div class="acts"><button class="btn" data-act="mkpal" data-id="${id}">${IC.palette} Make a colour combo from this picture</button></div>`:''}
  ${comboSection('ideas',i)}
  <h3>${isYarn()?'Yarn from your stash':'Supplies for this'}</h3>${ys.length?`<div class="swatches">${ys.map(sw).join('')}</div>`:`<p><span class="tag">No supplies yet</span> Saved for when you've got what you need.</p>`}
@@ -810,7 +811,7 @@ const sIdea=id=>()=>{const d=D(),i=find(d.ideas,id);if(!i)return '<p>This idea h
 
 const comboStripe=(c,h)=>`<span class="cstripe" style="height:${h||70}px">${(c.cols||[]).map(x=>`<i style="background:${x.hex}" title="${esc(x.name||x.hex)}"></i>`).join('')||'<i style="background:var(--line)"></i>'}</span>`;
 const comboLinks=c=>{const d=D(),has=x=>(x.combos||[]).includes(c.id);return {projects:d.projects.filter(has),ideas:d.ideas.filter(has),yarns:d.yarns.filter(has)}};
-function vCombos(){const d=D();return `${tip('combos')}<div class="bar"><h2 class="h">Colour combos <span class="n">${d.combos.length}</span></h2><button class="btn primary" data-act="add-combo">${IC.plus} New colour combo</button></div>
+function vCombos(){const d=D();return `${tip('combos')}<div class="bar"><h2 class="h">Colours <span class="n">${d.combos.length}</span></h2><button class="btn primary" data-act="add-combo">${IC.plus} New colour combo</button></div>
  ${d.combos.length?`<div class="cgrid">${d.combos.map(c=>{const L=comboLinks(c),n=L.projects.length+L.ideas.length+L.yarns.length;return `<button class="ccard" data-act="combo" data-id="${c.id}">${comboStripe(c,80)}<span class="cb"><b>${esc(c.name)}</b><span class="small">${c.cols.length} colour${c.cols.length===1?'':'s'}${n?' · linked to '+n:''}</span><span class="cnames">${c.cols.slice(0,5).map(x=>`<span class="dot" style="background:${x.hex}"></span>`).join('')}</span></span></button>`}).join('')}</div>`:empty('No colour combos yet','Make a set of colours you love. Pick them from your stash, a photo, or the colour picker.','add-combo','New colour combo')}`}
 const sCombo=id=>()=>{const d=D(),c=find(d.combos,id);if(!c)return '<p>This colour combo has gone.</p>';const L=comboLinks(c),stash=d.yarns.filter(y=>y.kind!=='kit');
  return `${comboStripe(c,110)}<label class="f" for="cName">Name</label><input id="cName" data-act="cname" data-id="${id}" value="${esc(c.name)}" placeholder="Autumn walk">
@@ -1010,6 +1011,7 @@ function readImg(file){return new Promise((res,rej)=>{const r=new FileReader();r
 async function fetchPreview(u){
  const yt=u.match(/(?:youtu\.be\/|[?&]v=|shorts\/)([\w-]{11})/);if(yt)return {title:'',image:`https://img.youtube.com/vi/${yt[1]}/hqdefault.jpg`};
  if(/tiktok\.com/i.test(u)){try{const j=await (await fetch('https://www.tiktok.com/oembed?url='+encodeURIComponent(u))).json();if(j&&j.thumbnail_url)return {title:j.title||'',image:j.thumbnail_url}}catch(e){}}
+ if(S.lpKey){try{const r=await fetch('https://api.linkpreview.net/?q='+encodeURIComponent(u),{headers:{'X-Linkpreview-Api-Key':S.lpKey}});const j=await r.json();if(j&&j.image)return {title:j.title||'',image:j.image}}catch(e){}}
  try{const r=await fetch('https://api.microlink.io/?url='+encodeURIComponent(u));if(r.status===429)return {limit:true};const j=await r.json();if(j&&j.status==='success'&&j.data){const d=j.data;return {title:d.title||'',image:(d.image&&d.image.url)||''}}}catch(e){}
  return null}
 async function grabImage(src){for(const url of ['https://wsrv.nl/?url='+encodeURIComponent(src)+'&w=1800&output=jpg',src]){try{const r=await fetch(url);if(!r.ok)continue;const b=await r.blob();if(!/^image\//.test(b.type))continue;return await readImg(b)}catch(e){}}return null}
@@ -1195,6 +1197,7 @@ function act(a,el){const d=D(),id=el.dataset.id,v=el.dataset.v;
  case 'del-combo':if(!sure(el))return;d.combos=d.combos.filter(c=>c.id!==id);['ideas','projects','yarns'].forEach(k=>d[k].forEach(x=>{if(x.combos)x.combos=x.combos.filter(c=>c!==id)}));save();closeSheet();toast('Colour combo deleted');break;
  case 'flink':{const u=el.value.trim();if(/^https?:\/\//i.test(u)&&!ui.form.img){capture();if(srcOf(u)!=='Website')ui.vals.fSrc=srcOf(u);previewForForm(u)}break}
  case 'refetch':{const i=find(d.ideas,id);if(i&&i.link)autoPicture(d,id,i.link,false);break}
+ case 'lpkey':{const k=$('#lpKey').value.trim();S.lpKey=k;save();render();toast(k?'Key saved':'Key removed');break}
  case 'backup':saveFile(`my-crafts-backup-${dayKey()}.json`,new Blob([JSON.stringify(S)],{type:'application/json'}));break;
  case 'gd-sync':if(!LS.get('user')){ui.gate=true;render();break}if(GD.needAuth||!GD.ready)GD.connect(true);else GD.push();break;
  case 'gd-copies':{const box=$('#copies');if(!box)break;box.innerHTML='<p class="small">Looking...</p>';GD.copies().then(l=>{box.innerHTML=l.length?l.map(f=>`<div class="lrow" style="cursor:default"><span><b>${esc(new Date(f.modifiedTime).toLocaleString('en-AU',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}))}</b><span class="small">${/unsynced/.test(f.name)?'Changes kept from a device that was out of date':'Daily copy'}</span></span><button class="btn small" data-act="gd-restore" data-id="${esc(f.id)}">Restore this</button></div>`).join(''):'<p class="small">No copies yet. The first one is made today.</p>'}).catch(()=>{box.innerHTML='<p class="small">Tap "Tap to sync" at the top first, then try again.</p>'});break}
