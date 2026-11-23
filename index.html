@@ -341,6 +341,7 @@ body.th-cherry .tab[aria-selected=true],body.th-cherry .btn.primary,body.th-cher
 .crow2 .grip{color:var(--soft);font-size:13px;letter-spacing:-3px;cursor:grab;padding:0 2px}.crow2 input{min-width:0;flex:1}.crow2 .mini[disabled]{opacity:.3}
 @media(max-width:600px){.crow2 .hx{display:none}}
 .mcols{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}.mc{display:flex;align-items:center;gap:4px;background:var(--card);border-radius:14px;padding:5px 6px}.mc.add{gap:8px;padding-left:8px}.mc .mini[disabled]{opacity:.3}
+.movebox{background:var(--card);border:2px solid var(--acc);border-radius:20px;padding:16px 18px;margin:0 0 16px}.movebox>b{font-size:18px;color:var(--acc)}.movebox p{margin:6px 0}
 .tip{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:2px dashed var(--acc);border-radius:18px;padding:12px 14px;margin:0 0 14px}
 .tip svg{flex:none}.tipb{flex:1}.tipb>b{font:500 18px var(--fh);color:var(--brown)}.tip li b{font-weight:700}
 .tip ol{margin:6px 0 0;padding-left:20px}.tip li{margin:4px 0;font-size:15px}
@@ -566,7 +567,9 @@ const ui={cat:'All',haveOnly:false,fam:'',type:'',vals:{},form:{},fin:{},stab:'c
 /* ---------- Saving: this device (IndexedDB) + a private, hidden app folder in your own Google Drive ----------
    Uses the same Google sign-in as the lesson planner (same website address), but its own file names
    (mycrafts...) so the two apps never touch each other's files. */
-const GOOGLE_CLIENT_ID='744170181576-ngotngduq5a2kh882pfi2dbgid03din1.apps.googleusercontent.com';
+const GOOGLE_CLIENT_ID='48011453928-5jgeukrg5j04796ign22oof6v41krlv0.apps.googleusercontent.com';
+// The old sign-in (shared with the lesson planner). Only used once, to bring things across to the new hidden folder.
+const OLD_CLIENT_ID='744170181576-ngotngduq5a2kh882pfi2dbgid03din1.apps.googleusercontent.com';
 const DATA_NAME='mycrafts.json';
 const IDB={_db:null,open(){if(this._db)return this._db;this._db=new Promise((res,rej)=>{try{const rq=indexedDB.open('my-crafts',1);rq.onupgradeneeded=()=>{rq.result.createObjectStore('kv');rq.result.createObjectStore('media')};rq.onsuccess=()=>res(rq.result);rq.onerror=()=>rej(rq.error)}catch(e){rej(e)}});return this._db},
  async get(st,k){const db=await this.open();return new Promise((res,rej)=>{const rq=db.transaction(st).objectStore(st).get(k);rq.onsuccess=()=>res(rq.result);rq.onerror=()=>rej(rq.error)})},
@@ -576,6 +579,7 @@ let saveT=null;
 function localSave(){clearTimeout(saveT);saveT=setTimeout(()=>{IDB.set('kv','state',JSON.parse(JSON.stringify(S))).catch(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast('This device is full. Your things are still safe in Google Drive.')}})},250)}
 function save(){const now=Date.now();Object.values(S.crafts).forEach(c=>['ideas','projects','yarns','combos','gallery'].forEach(k=>(c[k]||[]).forEach(x=>{if(!x.c)x.c=now})));S.savedAt=now;localSave();GD.schedule()}
 const LS={get:k=>{try{return localStorage.getItem('mc_'+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem('mc_'+k,v)}catch(e){}},del:k=>{try{localStorage.removeItem('mc_'+k)}catch(e){}}};
+if(LS.get('cid')!==GOOGLE_CLIENT_ID){if(LS.get('user')&&!LS.get('cid'))LS.set('needmove','1');['tok','fid','rmod','synced','copy'].forEach(LS.del);LS.set('cid',GOOGLE_CLIENT_ID)}
 const GD={token:'',exp:0,client:null,fileId:'',ready:false,pushing:false,again:false,timer:null,waiters:[],needAuth:false,status:'',
  setStatus(m){this.status=m;const p=$('#syncPill');if(p){p.textContent=m;p.classList.toggle('warn',this.needAuth||!LS.get('user'))}const d=$('#drvStatus');if(d)d.textContent=m},
  loadGis(){return new Promise((res,rej)=>{if(window.google&&google.accounts&&google.accounts.oauth2)return res();const sc=document.createElement('script');sc.src='https://accounts.google.com/gsi/client';sc.async=true;sc.onload=()=>res();sc.onerror=()=>rej(new Error('gis'));document.head.appendChild(sc)})},
@@ -626,8 +630,31 @@ const GD={token:'',exp:0,client:null,fileId:'',ready:false,pushing:false,again:f
    if(!this.poll){this.poll=setInterval(()=>this.syncNow(),60000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')this.syncNow();else if(this.timer){clearTimeout(this.timer);this.push()}})}}
   catch(e){if(ui.gate){ui.gateMsg=interactive?"Sign-in didn't finish. Please try again.":'';render()}else this.setStatus(this.needAuth?'Tap to sync':'Saved on this device')}},
  async syncNow(){if(!this.ready||this.pushing)return;if(!(this.token&&Date.now()<this.exp-60000)){this.needAuth=true;this.setStatus('Tap to sync');return}try{if(await this.pull())render();await MEDIA.flush();this.setStatus('Saved to Google')}catch(e){}},
- async signOut(){try{await this.push()}catch(e){}try{if(this.token&&window.google)google.accounts.oauth2.revoke(this.token,()=>{})}catch(e){}['user','tok','fid','rmod','synced','copy'].forEach(LS.del);await IDB.clear();location.reload()}};
+ async signOut(){try{await this.push()}catch(e){}try{if(this.token&&window.google)google.accounts.oauth2.revoke(this.token,()=>{})}catch(e){}['user','tok','fid','rmod','synced','copy','needmove','moved'].forEach(LS.del);await IDB.clear();location.reload()}};
 
+/* One-time move: copy everything from the old hidden Drive folder (old sign-in) into this device, then save it to the new folder */
+const MOVE={busy:false,msg:'',
+ oldToken(){return new Promise(async(res,rej)=>{try{await GD.loadGis();const c=google.accounts.oauth2.initTokenClient({client_id:OLD_CLIENT_ID,scope:'https://www.googleapis.com/auth/drive.appdata',callback:r=>r&&r.access_token?res(r.access_token):rej(new Error(r&&r.error||'auth')),error_callback:e=>rej(new Error(e&&e.type||'auth'))});c.requestAccessToken({prompt:''})}catch(e){rej(e)}})},
+ say(m){this.msg=m;const b=$('#movemsg');if(b)b.textContent=m},
+ async go(){if(this.busy)return;this.busy=true;this.say('Waiting for Google… choose your account in the window that opens.');render();
+  try{const tok=await this.oldToken(),H={Authorization:'Bearer '+tok},get=async u=>{const r=await fetch(u,{headers:H});if(!r.ok)throw new Error('drive '+r.status);return r};
+   this.say('Looking in the old folder…');
+   const files=[];let pt='';do{const j=await (await get(`https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=${encodeURIComponent("name contains 'mycrafts'")}&orderBy=modifiedTime%20desc&pageSize=1000&fields=nextPageToken,files(id,name)${pt?'&pageToken='+pt:''}`)).json();files.push(...(j.files||[]));pt=j.nextPageToken||''}while(pt);
+   const main=files.find(f=>f.name===DATA_NAME);
+   try{await IDB.set('kv','before-move',JSON.parse(JSON.stringify(S)))}catch(e){}
+   if(main){const old=await (await get(`https://www.googleapis.com/drive/v3/files/${main.id}?alt=media`)).json();if(old&&old.crafts&&(old.savedAt||0)>(S.savedAt||0)){const keep=S.tab;S=migrate(old);S.tab=keep||S.tab}}
+   const byName={};files.forEach(f=>{if(f.name.startsWith('mycrafts-media-'))byName[f.name.slice(15)]=f.id});
+   const ids=Object.keys(S.media||{});let n=0,missing=0;
+   for(const id of ids){n++;this.say(`Bringing across photos, videos and PDFs: ${n} of ${ids.length}`);let b=null;try{b=await IDB.get('media',id)}catch(e){}
+    if(!b){const fid=byName[id]||(S.media[id]||{}).d;if(fid){try{b=await (await get(`https://www.googleapis.com/drive/v3/files/${fid}?alt=media`)).blob();const t=S.media[id].t;if(t&&b.type!==t)b=new Blob([b],{type:t});await IDB.set('media',id,b)}catch(e){b=null}}}
+    if(b){S.media[id].d='';if(!(S.mq||[]).includes(id))S.mq=[...(S.mq||[]),id]}else missing++}
+   ['fid','rmod','synced'].forEach(LS.del);GD.fileId='';LS.del('needmove');LS.set('moved','1');localSave();
+   this.say(missing?`Done, but ${missing} file${missing>1?'s':''} couldn't be found. They may still be on another device.`:'All your things are on this device now.');
+  }catch(e){this.say(/popup|auth|access_denied|closed/i.test(e.message)?"Sign-in didn't finish. Please tap the button and try again.":"Something went wrong. Check your internet and try again. Nothing has been lost.")}
+  this.busy=false;render()}};
+function moveBanner(){if(ui.gate)return '';const need=LS.get('needmove'),done=LS.get('moved')==='1';if(!need&&!done)return '';
+ if(done)return `<div class="movebox"><b>Last step</b><p>Tap below and sign in with Google so everything saves to your new private folder.</p><p class="small" id="movemsg">${esc(MOVE.msg)}</p><div class="acts"><button class="btn primary" data-act="move-finish">${IC.cloud||''} Save everything to Google</button></div></div>`;
+ return `<div class="movebox"><b>One quick step: bring your things across</b><p>My Crafts now has its own sign-in, separate from the lesson planner. Tap below once to copy your crafts from the old Google folder to this device. Then you'll save them to the new one.</p><p class="small">Do this on the device you use most. Google will ask you to choose your account.</p><p class="small" id="movemsg">${esc(MOVE.msg)}</p><div class="acts"><button class="btn primary" data-act="move-go" ${MOVE.busy?'disabled':''}>${MOVE.busy?'Bringing things across…':'Bring my things across'}</button><button class="btn small" data-act="move-other">I've already done this on another device</button><button class="btn ghost small" data-act="move-skip">I'm new, I don't need this</button></div></div>`}
 /* Photos, videos and PDFs: kept on this device and copied into the same hidden Drive folder */
 const MEDIA={urls:{},blobs:{},
  async put(blob,name){const id='m'+uid()+uid();await IDB.set('media',id,blob);S.media=S.media||{};S.media[id]={n:name||'',t:blob.type||'',s:blob.size,d:''};S.mq=[...(S.mq||[]),id];return id},
@@ -808,6 +835,7 @@ function vData(){const signed=!!LS.get('user');return `<h2 class="h" style="marg
  <div class="box">${signed?`<p><b>You're signed in with Google.</b> Everything you add is saved on this device <i>and</i> in a private, hidden folder in your own Google Drive that only this app can use. When you open the app on your iPhone, iPad or MacBook, it brings in your latest changes.</p><p><b>Status:</b> <span id="drvStatus">${esc(GD.status||'')}</span></p><div class="acts" style="margin-top:0"><button class="btn primary" data-act="gd-sync">${IC.cloud} Sync now</button><button class="btn" data-act="gd-copies">See daily copies</button></div><div id="copies" style="margin-top:12px"></div><p class="small">A copy of everything is kept each day for the last 14 days, so you can go back if something goes wrong.</p>`:`<p><b>Not backed up yet.</b> Right now your things are only on this device. Sign in with Google so they're saved safely and show up on your other devices.</p><button class="btn primary" data-act="gd-sync">Sign in with Google</button>`}</div>
  <h3>Where are my photos, videos and PDFs?</h3><div class="box"><p>They live <b>inside this app</b>. Open any idea, project or finished piece to see them, or tap "Open pattern" for a PDF.</p><p><b>For a plane or no internet:</b> tap <b>"Save to my device"</b> under a picture, video or PDF. Then choose <b>Save Video</b> or <b>Save Image</b> (it goes into your Photos app), or <b>Save to Files</b> (for PDFs). Those copies are on your iPhone or iPad and open without internet.</p><p class="small">Behind the scenes, they're also kept in a hidden folder in your Google Drive. You won't see it when you open Google Drive. That's on purpose, so nothing gets deleted by accident. To see how much space it uses, open Google Drive on a computer, then Settings, then Manage apps.</p></div>
  <h3>Pictures from links</h3><div class="box"><p>When you paste a link, free helper services fetch its picture. TikTok and YouTube have no limit. Pinterest and other websites use a free service with a small daily limit.</p><p><b>Want more?</b> Get a free key from LinkPreview (it allows up to 60 links an hour for personal use):</p><ol><li>Go to <b>linkpreview.net</b> and tap <b>Sign up</b> (it's free, no card needed).</li><li>Copy the <b>API key</b> it shows you.</li><li>Paste it below and tap Save.</li></ol><div class="addrow"><input id="lpKey" value="${esc(S.lpKey||'')}" placeholder="Paste your LinkPreview key" aria-label="LinkPreview key" autocomplete="off"><button class="btn olive" data-act="lpkey">Save</button></div>${S.lpKey?'<p class="small">Key saved. Links will use LinkPreview first.</p>':''}</div>
+ <h3>Moving from the old sign-in</h3><div class="box"><p>My Crafts used to share its Google sign-in with your lesson planner. If anything is missing since the change, tap below to copy it across again. It never deletes anything.</p><div class="acts" style="margin-top:0"><button class="btn" data-act="move-again">Bring my things across again</button></div></div>
  <h3>Backup file</h3><div class="box"><p>Save a copy of all your words, lists and small pictures as a file, for extra peace of mind.</p><div class="acts" style="margin-top:0"><button class="btn" data-act="backup">${IC.download} Download a backup</button>${fileBtn('Restore from a backup',IC.file,'application/json,.json','restore','','btn')}</div><p class="err" id="formErr"></p></div>
  ${signed?`<h3>Sign out</h3><div class="box"><p class="small">Signing out removes your things from this device only. They stay safe in your Google Drive and come back when you sign in again.</p><button class="btn ghost" data-act="gd-signout">Sign out of Google</button></div>`:''}`}
 
@@ -837,7 +865,7 @@ function render(){D();applyTheme();
  if(!S.onboarded){$('#tabs').innerHTML='';$('#hleft').innerHTML='';$('#soundPanel').innerHTML='';$('#lights').innerHTML='';$('#craftName').textContent='';$('#brandBall').innerHTML='';$('#main').innerHTML=vOnboard();return}
  const vt=visTabs();if(!vt.some(t=>t[0]===S.tab))S.tab=vt[0][0];$('#craftName').textContent=craftName();header();
  $('#tabs').innerHTML=vt.map(([k,l])=>`<button class="tab" role="tab" data-act="tab" data-v="${k}" aria-selected="${S.tab===k}">${TABICON[k]}<span>${esc(l)}</span></button>`).join('');
- $('#main').innerHTML=({ideas:vIdeas,projects:vProjects,stash:vStash,combos:vCombos,gallery:vGallery,settings:vSettings}[S.tab])();hydrate($('#main'))}
+ $('#main').innerHTML=moveBanner()+({ideas:vIdeas,projects:vProjects,stash:vStash,combos:vCombos,gallery:vGallery,settings:vSettings}[S.tab])();hydrate($('#main'))}
 
 let sheetFn=null,stack=[];
 function capture(){$('#sheet').querySelectorAll('input[id]:not([type=checkbox]):not([type=file]),select[id],textarea[id]').forEach(e=>ui.vals[e.id]=e.value)}
@@ -1318,8 +1346,13 @@ function act(a,el){const d=D(),id=el.dataset.id,v=el.dataset.v;
  case 'ymulti2':{const y=find(d.yarns,id);if(el.checked){y.cols=[y.hex||'#b88896']}else{y.cols=null;y.fam=guessFam(y.hex);y.fams=[y.fam]}save();drawSheet(false,true);break}
  case 'yeadd':{const y=find(d.yarns,id);y.cols.push($('#yepick').value.toLowerCase());y.hex=y.cols[0];y.fam='multi';y.fams=multiFams(y.cols);save();drawSheet(false,true);toast('Colour added');break}
  case 'yedel':{const y=find(d.yarns,id);y.cols.splice(+el.dataset.k,1);y.hex=y.cols[0];y.fams=y.cols.length>1?multiFams(y.cols):[guessFam(y.hex)];y.fam=y.fams[0];save();drawSheet(false,true);break}
+ case 'move-go':MOVE.go();break;
+ case 'move-other':LS.del('needmove');LS.del('moved');MOVE.msg='';GD.connect(true);render();break;
+ case 'move-skip':if(!sure(el))return;LS.del('needmove');render();break;
+ case 'move-finish':LS.del('moved');MOVE.msg='';GD.connect(true);render();break;
+ case 'move-again':LS.set('needmove','1');LS.del('moved');MOVE.msg='';S.tab='ideas';render();break;
  case 'backup':saveFile(`my-crafts-backup-${dayKey()}.json`,new Blob([JSON.stringify(S)],{type:'application/json'}));break;
- case 'gd-sync':if(!LS.get('user')){ui.gate=true;render();break}if(GD.needAuth||!GD.ready)GD.connect(true);else GD.push();break;
+ case 'gd-sync':if(!LS.get('user')){ui.gate=true;render();break}if(LS.get('needmove')){MOVE.go();break}if(LS.get('moved')){LS.del('moved');MOVE.msg='';GD.connect(true);render();break}if(GD.needAuth||!GD.ready)GD.connect(true);else GD.push();break;
  case 'gd-copies':{const box=$('#copies');if(!box)break;box.innerHTML='<p class="small">Looking...</p>';GD.copies().then(l=>{box.innerHTML=l.length?l.map(f=>`<div class="lrow" style="cursor:default"><span><b>${esc(new Date(f.modifiedTime).toLocaleString('en-AU',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}))}</b><span class="small">${/unsynced/.test(f.name)?'Changes kept from a device that was out of date':'Daily copy'}</span></span><button class="btn small" data-act="gd-restore" data-id="${esc(f.id)}">Restore this</button></div>`).join(''):'<p class="small">No copies yet. The first one is made today.</p>'}).catch(()=>{box.innerHTML='<p class="small">Tap "Tap to sync" at the top first, then try again.</p>'});break}
  case 'gd-restore':if(!sure(el))return;GD.restore(id).catch(()=>toast("That copy couldn't be opened"));break;
  case 'gd-signout':if(!sure(el))return;GD.signOut();break;
@@ -1356,7 +1389,8 @@ try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{ap
 (async()=>{let st=null;try{st=await IDB.get('kv','state')}catch(e){}
  if(!st){try{st=JSON.parse(localStorage.getItem(KEY))}catch(e){}}
  if(st&&st.crafts)S=migrate(st);
- if(LS.get('user')&&st&&st.crafts){render();GD.connect(false)}
+ if(LS.get('needmove'))GD.loadGis().catch(()=>{});
+ if(LS.get('user')&&st&&st.crafts){render();if(!LS.get('needmove')&&!LS.get('moved'))GD.connect(false);else GD.setStatus('Tap to sync')}
  else if(LS.get('local')&&!LS.get('user'))render();
  else{ui.gate=true;render()}
  try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
